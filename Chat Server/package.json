@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch & nodemon dist",
-    "tsc": "tsc"
+    "tsc": "tsc", 
+    "start": "tsc && node dist/index.js"
   },
   "dependencies": {
     "@types/mocha": "^5.2.6",
