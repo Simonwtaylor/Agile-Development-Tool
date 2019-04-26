@@ -1,20 +1,22 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using task_api.Models;
 using task_api.Services;
 
 namespace task_api.Controllers
 {
-    [Route("api/users")]
+    [Route("api/tasks")]
     [ApiController]
-    public class UserController : Controller
+    public class TaskItemController : Controller
     {
-        private IUserRepository _userRepository;
+        private ITaskItemRepository _taskRepository;
 
-        public UserController(IUserRepository userRepository)
+        public TaskItemController(ITaskItemRepository taskRepository)
         {
-            _userRepository = userRepository;
+            _taskRepository = taskRepository;
         }
 
         [HttpGet]
@@ -22,11 +24,11 @@ namespace task_api.Controllers
         {
             try
             {
-                var users = await _userRepository.GetUsers();
+                var tasks = await _taskRepository.GetTaskItems();
 
-                if (users.Count > 0) return NotFound();
+                if (tasks.Count > 0) return NotFound();
 
-                return Ok(users);
+                return Ok(tasks);
             }
             catch (Exception ex)
             {
@@ -39,11 +41,11 @@ namespace task_api.Controllers
         {
             try
             {
-                var user = await _userRepository.GetUser(id);
+                var task = await _taskRepository.GetTaskItem(id);
 
-                if (user == null) return NotFound();
+                if (task == null) return NotFound();
 
-                return Ok(user);
+                return Ok(task);
             }
             catch (Exception ex)
             {
@@ -52,12 +54,12 @@ namespace task_api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] User user)
+        public async Task<IActionResult> Post([FromBody] TaskItem task)
         {
             try
             {
-                await _userRepository.CreateUser(user);
-
+                await _taskRepository.CreateTaskItem(task);
+               
                 return Ok();
             }
             catch (Exception ex)
@@ -67,11 +69,11 @@ namespace task_api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(string id, [FromBody] User user)
+        public async Task<IActionResult> Put(string id, [FromBody] TaskItem task)
         {
             try
             {
-                await _userRepository.UpdateUser(id, user);
+                await _taskRepository.UpdateTaskItem(id, task);
 
                 return Ok();
             }
@@ -86,7 +88,7 @@ namespace task_api.Controllers
         {
             try
             {
-                await _userRepository.DeleteUser(id);
+                await _taskRepository.DeleteTaskItem(id);
 
                 return Ok();
             }
