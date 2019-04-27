@@ -8,9 +8,9 @@ using task_api.Services;
 
 namespace task_api.Controllers
 {
-    [Route("api/tasks")]
+    [Route("api/[controller]")]
     [ApiController]
-    public class TaskItemController : Controller
+    public class TaskItemController : ControllerBase
     {
         private ITaskItemRepository _taskRepository;
 
@@ -26,7 +26,7 @@ namespace task_api.Controllers
             {
                 var tasks = await _taskRepository.GetTaskItems();
 
-                if (tasks.Count > 0) return NotFound();
+                if (tasks.Count == 0) return NotFound();
 
                 return Ok(tasks);
             }

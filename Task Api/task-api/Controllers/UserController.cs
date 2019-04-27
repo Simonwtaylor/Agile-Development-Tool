@@ -6,7 +6,7 @@ using task_api.Services;
 
 namespace task_api.Controllers
 {
-    [Route("api/users")]
+    [Route("api/[controller]")]
     [ApiController]
     public class UserController : Controller
     {
@@ -24,7 +24,7 @@ namespace task_api.Controllers
             {
                 var users = await _userRepository.GetUsers();
 
-                if (users.Count > 0) return NotFound();
+                if (users.Count == 0) return NotFound();
 
                 return Ok(users);
             }
