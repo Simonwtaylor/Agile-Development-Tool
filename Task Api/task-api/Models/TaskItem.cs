@@ -11,21 +11,18 @@ namespace task_api.Models
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public String _id { get; set; }
+        public string Id { get; set; }
 
         [BsonElement("title")]
-        public String title { get; set; }
-
-        [BsonElement("assignee")]
-        public String assignee { get; set; }
+        public string Title { get; set; }
 
         [BsonElement("storyPoints")]
-        public int storyPoints { get; set; }
+        public int StoryPoints { get; set; }
 
         [BsonElement("assignedColumn")]
-        public int assignedColumn { get; set; }
+        public int AssignedColumn { get; set; }
         [BsonElement("user")]
-        public User assignedUser { get; set; }
+        public User AssignedUser { get; set; }
 
     }
 }

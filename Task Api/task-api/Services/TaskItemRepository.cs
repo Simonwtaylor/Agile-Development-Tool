@@ -27,13 +27,13 @@ namespace task_api.Services
 
         public async Task DeleteTaskItem(string id)
         {
-            await _tasks.DeleteOneAsync(t => t._id == id);
+            await _tasks.DeleteOneAsync(t => t.Id == id);
             return;
         }
 
         public async Task<TaskItem> GetTaskItem(string id)
         {
-            return await _tasks.Find(t => t._id == id).FirstOrDefaultAsync();
+            return await _tasks.Find(t => t.Id == id).FirstOrDefaultAsync();
         }
 
         public async Task<List<TaskItem>> GetTaskItems()
@@ -43,7 +43,7 @@ namespace task_api.Services
 
         public async Task<TaskItem> UpdateTaskItem(string id, TaskItem taskItem)
         {
-            await _tasks.ReplaceOneAsync(t => t._id == id, taskItem);
+            await _tasks.ReplaceOneAsync(t => t.Id == id, taskItem);
             return taskItem;
         }
     }
