@@ -1,6 +1,6 @@
 # Agile Development Tool
 
-This tool has been created to enable developers to work and collaborate in an agile, real-time environment. 
+This tool has been created to enable developers to work and collaborate in an agile, real-time environment. Users will be able to chat and plan sprints with a focus on clarity and communication. 
 
 ## Task API:
 ### Task Items:
