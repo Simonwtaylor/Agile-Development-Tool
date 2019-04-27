@@ -41,7 +41,7 @@ This tool has been created to enable developers to work and collaborate in an ag
 - [ ] Create Board component
 - [ ] Create Task Component and children components (Add, Edit and Delete)
 
-### General:
+## General:
 - [ ] Add Firebase Authentication
 - [ ] Add Google Container Services
 - [ ] Add Sentry for advanced logging, breadcrumbs and metrics
