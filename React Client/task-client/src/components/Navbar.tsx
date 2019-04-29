@@ -22,6 +22,9 @@ const Navbar: React.SFC<NavbarProps> = () => {
                             <NavLink className="nav-link" to="/board">Board</NavLink>
                         </li>
                         <li className="nav-item">
+                            <NavLink className="nav-link" to="/chat">Chat</NavLink>
+                        </li>
+                        <li className="nav-item">
                             <NavLink className="nav-link" to="/login">Login / Register</NavLink>
                         </li>
                     </ul>
