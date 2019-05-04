@@ -31,7 +31,6 @@ class App extends React.Component<AppProps, AppState> {
   }
 
   attachEvents = () => {
-    console.log(`SOCKET URL ${process.env.SOCKET_URL}`);
     const socket = openSocket('http://localhost:8080/');
     socket.on('allMessages', (data: any) => {
       this.setState({messages: data})
