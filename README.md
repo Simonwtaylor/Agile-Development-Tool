@@ -2,8 +2,9 @@
 
 This tool has been created to enable developers to work and collaborate in an agile, real-time environment. Users will be able to chat and plan sprints with a focus on clarity and communication. 
 
-[Chat Server](https://github.com/Simonwtaylor/Chat-Server) <br/>
-[Task API](https://github.com/Simonwtaylor/Task-API)
+**Related Projects**:
+[Task API](https://github.com/Simonwtaylor/Task-API)<br/>
+[Chat Server](https://github.com/Simonwtaylor/Chat-Server) 
 
 ## Task API:
 ### Task Items:
