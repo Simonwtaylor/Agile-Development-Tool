@@ -44,6 +44,11 @@ This tool has been created to enable developers to work and collaborate in an ag
 - [ ] Create Board component
 - [ ] Create Task Component and children components (Add, Edit and Delete)
 
+## Chat Server:
+### Sockets
+
+### Messages:
+
 ## General:
 - [ ] Add Firebase Authentication
 - [ ] Add Google Container Services
