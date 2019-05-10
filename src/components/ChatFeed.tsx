@@ -20,12 +20,12 @@ class ChatFeed extends React.Component<ChatFeedProps, ChatFeedState> {
         return (
             <React.Fragment>
                 <ul>
-                    { this.props.messages.map(message => {
+                    { this.props.messages.map((message, i) => {
                         const { message: msg, user, _id } = message;
 
                         return (
-                            <li>
-                                <ChatMessage key={_id} message={msg} user={user} />
+                            <li key={_id+i}>
+                                <ChatMessage  message={msg} user={user} />
                             </li>
                             )
                         })

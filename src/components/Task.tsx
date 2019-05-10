@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
+
 
 export interface TaskProps {
     Id: string, 
@@ -16,7 +18,7 @@ const Task: React.SFC<TaskProps> = ({ Id, Title, StoryPoints, AssignedColumn, As
             </div>
             <div className="card-body">
                 <h5 className="card-title">{StoryPoints}</h5>
-                <a href="#" className="btn btn-primary">Go somewhere</a>
+                <Link to="#" className="btn btn-primary">Go somewhere</Link>
             </div>
         </div>
     );

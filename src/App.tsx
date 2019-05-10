@@ -7,15 +7,6 @@ import Navbar from './components/Navbar';
 import { Socket } from 'socket.io-client';
 import  openSocket from 'socket.io-client';
 import ChatFeed from './components/ChatFeed';
-import firebase from "firebase";
-
-
-const config = {
-    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-    databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
-    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN
-};
 
 export interface AppProps {
   
@@ -23,8 +14,9 @@ export interface AppProps {
  
 export interface AppState {
   socket?: SocketIOClient.Socket,
-  messages: any[], 
-  user: firebase.User | null;
+  messages: any[];
+  user: any;
+  users: any[];
 }
  
 class App extends React.Component<AppProps, AppState> {
@@ -32,19 +24,9 @@ class App extends React.Component<AppProps, AppState> {
     super(props);
     this.state = {
       messages: [], 
-      user: null
+      user: null, 
+      users: []
     };
-    
-    firebase.initializeApp(config);
-    
-    firebase.auth().onAuthStateChanged((user) => {
-      this.setState({user: user});
-      if (user) {
-        // login
-      } else {
-        // logout
-      }
-    })
   }
 
   componentDidMount() {
@@ -53,6 +35,9 @@ class App extends React.Component<AppProps, AppState> {
 
   attachEvents = () => {
     const socket = openSocket('http://localhost:8080/');
+
+    socket.emit('login', { username: 'Simon Taylor', email: 'Simonwtaylor93@gmail.com'});
+
     socket.on('allMessages', (data: any) => {
       this.setState({messages: data})
     });
@@ -63,14 +48,18 @@ class App extends React.Component<AppProps, AppState> {
       this.setState({messages})
     });
 
+    socket.on('users', (data: any) => {
+      console.log(data);
+      this.setState({users:data.users});
+    });
+
     this.setState({socket});
   }
 
   handleNewMessage = (message: any) => {
-    if(this.state.socket)
+    const { socket } = this.state;
+    if(socket)
     {
-      const socket = {...this.state.socket};
-
       socket.emit('sendMessage', message);
     }
   }
