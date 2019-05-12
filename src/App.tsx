@@ -72,7 +72,7 @@ class App extends React.Component<AppProps, AppState> {
           <Route path="/register" component={LoginForm} />   
           <Route path="/login" component={LoginForm} />
           <Route path="/board" component={Board} />
-          <Route path="/chat" render={() => { return <ChatFeed onNewMessage={this.handleNewMessage} messages={this.state.messages} />}} />
+          <Route path="/chat" render={() => { return <ChatFeed user={this.state.user} users={this.state.users} onNewMessage={this.handleNewMessage} messages={this.state.messages} />}} />
           <Redirect from="/" exact to="/login" />
       </Switch>
     </div>

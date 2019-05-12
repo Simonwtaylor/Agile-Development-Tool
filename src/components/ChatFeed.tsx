@@ -4,7 +4,9 @@ import ChatForm from './ChatForm';
 
 export interface ChatFeedProps {
     messages: any[],
-    onNewMessage: any
+    onNewMessage: any,
+    user: any,
+    users: any[]
 }
  
 export interface ChatFeedState {
@@ -19,6 +21,12 @@ class ChatFeed extends React.Component<ChatFeedProps, ChatFeedState> {
     render() { 
         return (
             <React.Fragment>
+                <ul>
+                    { this.props.users.map((usr, i) => {
+                        return (<li key={i}>{usr}</li>)
+                    })
+                    }
+                </ul>
                 <ul>
                     { this.props.messages.map((message, i) => {
                         const { message: msg, user, _id } = message;
