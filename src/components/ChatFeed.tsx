@@ -1,6 +1,7 @@
 import * as React from 'react';
 import ChatMessage from './ChatMessage';
 import ChatForm from './ChatForm';
+import { Feed } from 'semantic-ui-react';
 
 export interface ChatFeedProps {
     messages: any[],
@@ -27,18 +28,17 @@ class ChatFeed extends React.Component<ChatFeedProps, ChatFeedState> {
                     })
                     }
                 </ul>
-                <ul>
-                    { this.props.messages.map((message, i) => {
-                        const { message: msg, user, _id } = message;
+                <div className="ui feed">
+                    {   this.props.messages.map((message, i) => {
+                            const { message: msg, user, _id } = message;
 
-                        return (
-                            <li key={_id+i}>
-                                <ChatMessage  message={msg} user={user} />
-                            </li>
+                            return (
+                                <ChatMessage key={_id+i} message={msg} user={user} />
                             )
                         })
                     }
-                </ul>
+                </div>
+                    
                 <ChatForm onNewMesssage={this.props.onNewMessage} />
             </React.Fragment>
          );

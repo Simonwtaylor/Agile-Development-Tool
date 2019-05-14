@@ -7,7 +7,7 @@ export interface ChatMessageProps {
  
 const ChatMessage: React.SFC<ChatMessageProps> = ({ user, message}) => {
     return (
-        <div className="card">
+        <div className="event">
             {user} - {message}
         </div>
     );

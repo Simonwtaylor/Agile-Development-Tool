@@ -27,19 +27,23 @@ class App extends React.Component<AppProps, AppState> {
       user: null, 
       users: []
     };
+
+    this.attachEvents();
   }
 
   componentDidMount() {
-    this.attachEvents();
+    
   }
 
   attachEvents = () => {
     const socket = openSocket('http://localhost:8080/');
 
+    console.log(socket);
+
     socket.emit('login', { username: 'Simon Taylor', email: 'Simonwtaylor93@gmail.com'});
 
-    socket.on('allMessages', (data: any) => {
-      this.setState({messages: data})
+    socket.on('allMessages', (messages: any) => {
+      this.setState({messages});
     });
 
     socket.on('newMessage', (data: any) => {
