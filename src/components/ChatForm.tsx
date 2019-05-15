@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Form, Button } from 'semantic-ui-react';
 
 export interface ChatFormProps {
     onNewMesssage: any;
@@ -27,9 +28,10 @@ class ChatForm extends React.Component<ChatFormProps, ChatFormState> {
 
     render() { 
         return (  
-            <form onSubmit={this.handleSubmit}>
-                <button type="submit">Send</button>
-            </form>
+            <Form reply>
+                <Form.TextArea />
+                <Button content='Add Reply' labelPosition='left' icon='edit' primary />
+            </Form>
         );
     }
 }
