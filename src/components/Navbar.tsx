@@ -1,36 +1,55 @@
 import * as React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { Menu } from 'semantic-ui-react';
 
 export interface NavbarProps {
-    
+    activeItem: string,
+    handleItemClick: any
 }
  
-const Navbar: React.SFC<NavbarProps> = () => {
+
+
+const Navbar: React.SFC<NavbarProps> = ({activeItem, handleItemClick}) => {
+    const onItemClick = (name: string) => {
+        handleItemClick(name);
+    }
+
+
     return (
-        <nav className="navbar navbar-light bg-light navbar-expand-lg">
-            <div className="container">
-                <Link to="/" className="navbar-brand">Collab</Link>
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                <div className="collapse navbar-collapse" id="navbarText">
-                    <ul className="navbar-nav mr-auto">
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="/">Home <span className="sr-only">(current)</span></NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="/board">Board</NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="/chat">Chat</NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="/login">Login / Register</NavLink>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+
+        <Menu stackable>
+            <Link to='/'>
+                <Menu.Item>
+                    Collab
+                </Menu.Item>
+            </Link>
+            <Menu.Item
+                as={ Link }
+                to='board'
+                name='board'
+                active={activeItem === 'board'}
+                onClick={() => onItemClick('board')}
+                >
+                Board
+            </Menu.Item>
+            <Menu.Item
+                as={ Link }
+                to='chat'
+                name='chat'
+                active={activeItem === 'chat'}
+                onClick={() => onItemClick('chat')}
+                >
+                Chat
+            </Menu.Item>
+            <Menu.Item 
+                as={ Link }
+                to='login'
+                name='sign-in' 
+                active={activeItem === 'sign-in'} 
+                onClick={() => onItemClick('sign-in')}>
+                Login
+            </Menu.Item>
+        </Menu>
     );
 }
  

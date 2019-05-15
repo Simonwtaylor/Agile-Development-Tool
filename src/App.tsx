@@ -4,12 +4,10 @@ import { Switch, Redirect, Route } from 'react-router-dom';
 import LoginForm from './components/LoginForm';
 import Board from './components/Board';
 import Navbar from './components/Navbar';
-import { Socket } from 'socket.io-client';
 import  openSocket from 'socket.io-client';
 import ChatFeed from './components/ChatFeed';
 
 export interface AppProps {
-  
 }
  
 export interface AppState {
@@ -17,6 +15,7 @@ export interface AppState {
   messages: any[];
   user: any;
   users: any[];
+  activeItem: string;
 }
  
 class App extends React.Component<AppProps, AppState> {
@@ -25,14 +24,15 @@ class App extends React.Component<AppProps, AppState> {
     this.state = {
       messages: [], 
       user: null, 
-      users: []
+      users: [],
+      activeItem: 'home'
     };
 
-    this.attachEvents();
+
   }
 
   componentDidMount() {
-    
+    this.attachEvents();
   }
 
   attachEvents = () => {
@@ -68,10 +68,14 @@ class App extends React.Component<AppProps, AppState> {
     }
   }
 
+  handleItemClick = (newPage: string) => {
+    this.setState({activeItem: newPage});
+  }
+
   render() { 
     return (  
     <div className="App">
-      <Navbar />
+      <Navbar activeItem={this.state.activeItem} handleItemClick={this.handleItemClick} />
       <Switch>
           <Route path="/register" component={LoginForm} />   
           <Route path="/login" component={LoginForm} />

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import ChatMessage from './ChatMessage';
 import ChatForm from './ChatForm';
-import { Feed } from 'semantic-ui-react';
+import { Comment, Header } from 'semantic-ui-react';
 
 export interface ChatFeedProps {
     messages: any[],
@@ -28,8 +28,12 @@ class ChatFeed extends React.Component<ChatFeedProps, ChatFeedState> {
                     })
                     }
                 </ul>
-                <div className="ui feed">
+                <Comment.Group>
+                    <Header as="h3">
+                        Discussion
+                    </Header>
                     {   this.props.messages.map((message, i) => {
+                            console.log(message);
                             const { message: msg, user, _id } = message;
 
                             return (
@@ -37,7 +41,8 @@ class ChatFeed extends React.Component<ChatFeedProps, ChatFeedState> {
                             )
                         })
                     }
-                </div>
+                </Comment.Group>
+
                     
                 <ChatForm onNewMesssage={this.props.onNewMessage} />
             </React.Fragment>
