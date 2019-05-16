@@ -19,6 +19,12 @@ class ChatFeed extends React.Component<ChatFeedProps, ChatFeedState> {
         super(props);
         this.state = { };
     }
+
+    styles = {
+        maxHeight: 700, 
+        overflowY: 'scroll'
+    }
+
     render() { 
         return (
             <React.Fragment>
@@ -28,22 +34,19 @@ class ChatFeed extends React.Component<ChatFeedProps, ChatFeedState> {
                     })
                     }
                 </ul>
-                <Comment.Group>
+                <Comment.Group style={this.styles}>
                     <Header as="h3">
                         Discussion
                     </Header>
                     {   this.props.messages.map((message, i) => {
-                            console.log(message);
-                            const { message: msg, user, _id } = message;
+                            const { message: msg, user, _id, timestamp } = message;
 
                             return (
-                                <ChatMessage key={_id+i} message={msg} user={user} />
+                                <ChatMessage key={_id+i} time={timestamp} message={msg} user={user} />
                             )
                         })
                     }
                 </Comment.Group>
-
-                    
                 <ChatForm onNewMesssage={this.props.onNewMessage} />
             </React.Fragment>
          );

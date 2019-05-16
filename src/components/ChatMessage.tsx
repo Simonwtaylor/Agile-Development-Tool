@@ -3,10 +3,11 @@ import { Comment, Icon } from 'semantic-ui-react';
 
 export interface ChatMessageProps {
     user: string, 
-    message: string
+    message: string,
+    time: Date
 }
  
-const ChatMessage: React.SFC<ChatMessageProps> = ({ user, message}) => {
+const ChatMessage: React.SFC<ChatMessageProps> = ({ user, message, time }) => {
     return (
         <Comment>
             <Comment.Avatar>
@@ -15,7 +16,7 @@ const ChatMessage: React.SFC<ChatMessageProps> = ({ user, message}) => {
             <Comment.Content>
                 <Comment.Author as='a'>{user}</Comment.Author>
                 <Comment.Metadata>
-                <div>Today at 5:42PM</div>
+                <div>{new Date(time).toLocaleString() }</div>
                 </Comment.Metadata>
                 <Comment.Text>{message}</Comment.Text>
                 <Comment.Actions>

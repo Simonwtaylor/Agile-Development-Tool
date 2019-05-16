@@ -6,22 +6,25 @@ export interface ChatFormProps {
 }
  
 export interface ChatFormState {
-    
+    message: string;
 }
  
 class ChatForm extends React.Component<ChatFormProps, ChatFormState> {
     constructor(props: ChatFormProps) {
         super(props);
-        this.state = {  };
+        this.state = { message: '' };
+    }
+
+    handleTextChange = (e: React.FormEvent<HTMLTextAreaElement>) => {
+        this.setState({
+            message: e.currentTarget.value
+        });
     }
 
     handleSubmit = (e: any) => {
         e.preventDefault();
 
-        let message = {
-            user: 'Simon', 
-            message: 'oauishduaiohsdauishd'
-        };
+        let message = {user: 'Simon', message: this.state.message};
 
         this.props.onNewMesssage(message);
     }
@@ -29,8 +32,8 @@ class ChatForm extends React.Component<ChatFormProps, ChatFormState> {
     render() { 
         return (  
             <Form reply>
-                <Form.TextArea />
-                <Button content='Add Reply' labelPosition='left' icon='edit' primary />
+                <Form.TextArea onChange={this.handleTextChange} />
+                <Button onClick={this.handleSubmit} content='Add Reply' labelPosition='left' icon='edit' primary />
             </Form>
         );
     }

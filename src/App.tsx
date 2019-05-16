@@ -6,6 +6,7 @@ import Board from './components/Board';
 import Navbar from './components/Navbar';
 import  openSocket from 'socket.io-client';
 import ChatFeed from './components/ChatFeed';
+import { Grid } from 'semantic-ui-react';
 
 export interface AppProps {
 }
@@ -76,13 +77,17 @@ class App extends React.Component<AppProps, AppState> {
     return (  
     <div className="App">
       <Navbar activeItem={this.state.activeItem} handleItemClick={this.handleItemClick} />
-      <Switch>
-          <Route path="/register" component={LoginForm} />   
-          <Route path="/login" component={LoginForm} />
-          <Route path="/board" component={Board} />
-          <Route path="/chat" render={() => { return <ChatFeed user={this.state.user} users={this.state.users} onNewMessage={this.handleNewMessage} messages={this.state.messages} />}} />
-          <Redirect from="/" exact to="/login" />
-      </Switch>
+      <Grid centered columns={2}>
+        <Grid.Column>
+          <Switch>
+            <Route path="/register" component={LoginForm} />   
+            <Route path="/login" component={LoginForm} />
+            <Route path="/board" component={Board} />
+            <Route path="/chat" render={() => { return <ChatFeed user={this.state.user} users={this.state.users} onNewMessage={this.handleNewMessage} messages={this.state.messages} />}} />
+            <Redirect from="/" exact to="/login" />
+          </Switch>
+        </Grid.Column>
+      </Grid>
     </div>
     );
   }
