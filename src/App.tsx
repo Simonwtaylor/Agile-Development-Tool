@@ -28,8 +28,6 @@ class App extends React.Component<AppProps, AppState> {
       users: [],
       activeItem: 'home'
     };
-
-
   }
 
   componentDidMount() {
@@ -37,7 +35,7 @@ class App extends React.Component<AppProps, AppState> {
   }
 
   attachEvents = () => {
-    const socket = openSocket('http://localhost:8080/');
+    const socket = openSocket('https://ancient-peak-81392.herokuapp.com/');
 
     console.log(socket);
 
