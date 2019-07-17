@@ -7,48 +7,52 @@ This tool has been created to enable developers to work and collaborate in an ag
 [Chat Server](https://github.com/Simonwtaylor/Chat-Server) 
 
 ## Task API:
+### Socket IO
+- [ ] Add Gateway
+
 ### Task Items:
 - [x] Add Controller (Get 1, Get all, Create, Update and Delete)
 - [ ] Add Authorize
 - [ ] Add Unit Tests
 
 ### Users:
-- [x] Add Repository Interface
-- [x] Add Repository implementation
-- [x] Add Controller (Get 1, Get all, Create, Update and Delete)
-- [x] Add to startup
-- [ ] Add Authorize
+- [ ] Add Module
+- [ ] Add Model
+- [ ] Add Schema
+- [ ] Add GraphQL Schema
+- [ ] Add Resolvers 
+- [ ] Add Controller (Get 1, Get all, Create, Update and Delete)
+- [ ] Add Service
 - [ ] Add Unit Testing
 
 ### Projects:
+- [ ] Add Module
 - [ ] Add Model
-- [ ] Add Repository Interface
-- [ ] Add Repository Implementation
-- [ ] Add Controller Methods (Get 1, Get all, Create, Update and Delete)
-- [ ] Add Authorize
+- [ ] Add Schema
+- [ ] Add GraphQL Schema
+- [ ] Add Resolvers 
+- [ ] Add Controller (Get 1, Get all, Create, Update and Delete)
+- [ ] Add Service
 - [ ] Add Unit Testing
 
 ### Sprints: 
+- [ ] Add Module
 - [ ] Add Model
-- [ ] Add Repository Interface
-- [ ] Add Repository Implementation
-- [ ] Add Controller Methods (Get 1, Get all, Create, Update and Delete)
-- [ ] Add Authorize
+- [ ] Add Schema
+- [ ] Add GraphQL Schema
+- [ ] Add Resolvers 
+- [ ] Add Controller (Get 1, Get all, Create, Update and Delete)
+- [ ] Add Service
 - [ ] Add Unit Testing
 
 ## React Client:
 ### Users:
-- [ ] Incorporate CSS Framework (Bootstrap or Material)
+- [ ] Incorporate CSS Framework (Semantic UI)
 - [ ] Create Common components (Tables, Forms and Controls etc)
 - [ ] Create Login Form component and children components
 - [ ] Create Registration Form component and children components
 - [ ] Create Board component
 - [ ] Create Task Component and children components (Add, Edit and Delete)
-
-## Chat Server:
-### Sockets
-
-### Messages:
 
 ## General:
 - [ ] Add Firebase Authentication
