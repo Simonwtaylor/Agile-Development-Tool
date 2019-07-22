@@ -33,7 +33,7 @@ const TaskCard: React.FC<ITaskCardProps> =
           </Label>
         </Card.Header>
         <Card.Meta>
-          
+          {assignedUser}
         </Card.Meta>
         <Card.Description>
           {description}
