@@ -35,3 +35,12 @@ jobs:
 
       # run tests!
       - run: yarn test
+  deploy:
+    docker:
+      - image: buildpack-deps:trusty
+    steps:
+      - checkout
+      - run:
+          name: Deploy Master to Heroku
+          command: |
+            git push https://heroku:77e39164-5ad0-4003-a693-b86fc1ba5c54@git.heroku.com/damp-mountain-17611.git master
