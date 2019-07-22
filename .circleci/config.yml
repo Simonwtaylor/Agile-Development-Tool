@@ -44,3 +44,14 @@ jobs:
           name: Deploy Master to Heroku
           command: |
             git push https://heroku:77e39164-5ad0-4003-a693-b86fc1ba5c54@git.heroku.com/damp-mountain-17611.git master
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
