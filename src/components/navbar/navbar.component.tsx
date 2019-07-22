@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { Menu } from 'semantic-ui-react';
+import { Menu, Icon, Label } from 'semantic-ui-react';
+import './navbar.styles.scss';
 
 export interface INavbarProps {
     activeItem: string,
@@ -23,7 +24,7 @@ const Navbar: React.FC<INavbarProps> =
     <Menu stackable>
       <Link to='/'>
         <Menu.Item>
-          Collab
+          🚀
         </Menu.Item>
       </Link>
       <Menu.Item
@@ -33,7 +34,17 @@ const Navbar: React.FC<INavbarProps> =
         active={activeItem === 'board'}
         onClick={() => onItemClick('board')}
         >
-        Board
+        📅
+        Plan it
+      </Menu.Item>
+      <Menu.Item
+        as={ Link }
+        to='team'
+        name='team'
+        active={activeItem === 'team'}
+        onClick={() => onItemClick('team')}
+        >
+        🙌 The Squad
       </Menu.Item>
       {!user && <Menu.Item 
         as={ Link }
@@ -41,20 +52,13 @@ const Navbar: React.FC<INavbarProps> =
         name='sign-in' 
         active={activeItem === 'sign-in'} 
         onClick={() => onItemClick('sign-in')}>
-        Login
-      </Menu.Item>}
-      {user && <Menu.Item 
-        as={ Link }
-        to='logout'
-        name='logout' 
-        active={activeItem === 'logout'} 
-        onClick={() => onItemClick('logout')}>
-        Logout
+        🔐 Login
       </Menu.Item>}
       {user && <Menu.Item 
         as={ Link }
         to='user'
         name='user' 
+        icon
         active={activeItem === 'user'} 
         onClick={() => onItemClick('user')}>
           <img 
@@ -63,6 +67,7 @@ const Navbar: React.FC<INavbarProps> =
             src={user.photoURL}
             style={{borderRadius: 50}} 
           />
+          <Label corner="right" circular color={'red'} empty key={'red'} />
       </Menu.Item>}
     </Menu>
   );

@@ -3,7 +3,6 @@ import ITask from '../lib/types/ITask';
 import BoardColumn from '../components/board-column/board-column.component';
 import { Grid, Card } from 'semantic-ui-react';
 
-
 export interface IBoardProps {
     
 }
@@ -14,7 +13,6 @@ export interface IBoardState {
 }
 
 class Board extends React.Component<IBoardProps, IBoardState>{
-  
   constructor(props: IBoardProps) {
     super(props);
     this.state = {
@@ -28,19 +26,23 @@ class Board extends React.Component<IBoardProps, IBoardState>{
 
     boardColumns.push({
       columnId: 1,
-      columnTitle: 'Backlog'
+      columnTitle: 'Backlog 💭',
+      color: 'blue'
     },
     {
       columnId: 2,
-      columnTitle: 'This Iteration'
+      columnTitle: 'This Iteration 💻',
+      color: 'yellow'
     },
     {
       columnId: 3,
-      columnTitle: 'In Review'
+      columnTitle: 'In Review 🍵',
+      color: 'purple'
     },
     {
       columnId: 4,
-      columnTitle: 'Completed'
+      columnTitle: 'Completed ✌',
+      color: 'green'
     });
 
     const tasks: ITask[] = [
@@ -48,6 +50,7 @@ class Board extends React.Component<IBoardProps, IBoardState>{
         id: '1', 
         assignedColumn: 1, 
         assignedUser: 'Simon Taylor', 
+        description: 'This is an example task',
         storyPoints: 2, 
         title: 'Task 1'
       },
@@ -55,6 +58,7 @@ class Board extends React.Component<IBoardProps, IBoardState>{
         id: '2', 
         assignedColumn: 1, 
         assignedUser: 'Simon Taylor', 
+        description: 'This is an example task',
         storyPoints: 2, 
         title: 'Do something cool'
       },
@@ -62,13 +66,15 @@ class Board extends React.Component<IBoardProps, IBoardState>{
         id: '3', 
         assignedColumn: 1, 
         assignedUser: 'Simon Taylor', 
+        description: 'This is an example task',
         storyPoints: 2, 
         title: 'Do something even cooler'
       },
       {
         id: '3', 
         assignedColumn: 2, 
-        assignedUser: 'Simon Taylor', 
+        assignedUser: 'Simon Taylor',
+        description: 'This is an example task', 
         storyPoints: 2, 
         title: 'Do something even cooler'
       }
@@ -81,8 +87,8 @@ class Board extends React.Component<IBoardProps, IBoardState>{
     
     return(
       <>
-        <h1>This Sprint</h1>
-        <Grid columns={4}>
+        <h1>This Sprint 🚀</h1>
+        <Grid columns={4} padded>
           <Grid.Row>
           {
             this.state.boardColumns.map(boardcol => {
@@ -94,6 +100,7 @@ class Board extends React.Component<IBoardProps, IBoardState>{
                       tasks={this.state.tasks.filter(t => t.assignedColumn === boardcol.columnId)} 
                       columnId={boardcol.columnId} 
                       columnTitle={boardcol.columnTitle} 
+                      color={boardcol.color}
                     />
                   </Card>
                 </Grid.Column>

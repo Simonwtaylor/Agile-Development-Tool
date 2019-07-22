@@ -51,7 +51,12 @@ class App extends React.Component<AppProps, AppState> {
           <Switch>  
             <Route path="/board" component={Board} />
             <Route path="/login" component={Login} />
-            <Redirect from="/" exact to="/login" />
+            {
+              (this.state.currentUser)
+              ?
+                <Redirect from="/" exact to="/login" />
+              : <Redirect from="/" exact to="/board" />
+            }
           </Switch>
         </Grid.Column>
       </Grid>

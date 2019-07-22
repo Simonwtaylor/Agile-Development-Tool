@@ -6,18 +6,20 @@ interface IBoardColumnProps {
   columnId: number;
   columnTitle: string;
   tasks: ITask[];
+  color: string;
 }
  
-const BoardColumn: React.SFC<IBoardColumnProps> = 
+const BoardColumn: React.FC<IBoardColumnProps> = 
   ({
     columnId, 
     columnTitle, 
-    tasks
+    tasks,
+    color
   }) => {
   return (
     <div className="col card">
       <div className="card-body card-container">
-        <h5>{columnTitle}</h5>
+        <h3>{columnTitle}</h3>
         {
           tasks.map(task => {
             return(
