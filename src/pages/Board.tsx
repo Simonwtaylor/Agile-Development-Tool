@@ -87,7 +87,7 @@ class Board extends React.Component<IBoardProps, IBoardState>{
     
     return(
       <>
-        <h1>This Sprint 🚀</h1>
+        <h1>This Sprint <span role="img" aria-label="rocket">🚀</span></h1>
         <Grid columns={4} padded>
           <Grid.Row>
           {

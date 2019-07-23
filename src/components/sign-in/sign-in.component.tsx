@@ -35,7 +35,7 @@ class SignIn extends React.Component<ISignInProps, ISignInState> {
 
   getUserInfo = () => {
     if(auth.currentUser && auth.currentUser.photoURL) {
-      return <img width={30} height={30} src={auth.currentUser.photoURL} />
+      return <img width={30} height={30} src={auth.currentUser.photoURL} alt="profile sign in" />
     }
     return <></>;
   }

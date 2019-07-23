@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, Icon, Label } from 'semantic-ui-react';
+import { Menu, Label } from 'semantic-ui-react';
 import './navbar.styles.scss';
+import { connect } from 'react-redux';
 
 export interface INavbarProps {
     activeItem: string,
     handleItemClick: any,
-    user: any
+    user?: any
 }
 
 const Navbar: React.FC<INavbarProps> = 
@@ -24,7 +25,7 @@ const Navbar: React.FC<INavbarProps> =
     <Menu stackable>
       <Link to='/'>
         <Menu.Item>
-          🚀
+          <span role="img" aria-label="rocket">🚀</span>
         </Menu.Item>
       </Link>
       <Menu.Item
@@ -34,7 +35,7 @@ const Navbar: React.FC<INavbarProps> =
         active={activeItem === 'board'}
         onClick={() => onItemClick('board')}
         >
-        📅
+          <span role="img" aria-label="cal">📅</span>
         Plan it
       </Menu.Item>
       <Menu.Item
@@ -44,7 +45,7 @@ const Navbar: React.FC<INavbarProps> =
         active={activeItem === 'team'}
         onClick={() => onItemClick('team')}
         >
-        🙌 The Squad
+        <span role="img" aria-label="hands">🙌</span> The Squad
       </Menu.Item>
       {!user && <Menu.Item 
         as={ Link }
@@ -52,7 +53,7 @@ const Navbar: React.FC<INavbarProps> =
         name='sign-in' 
         active={activeItem === 'sign-in'} 
         onClick={() => onItemClick('sign-in')}>
-        🔐 Login
+        <span role="img" aria-label="locks">🔐</span> Login
       </Menu.Item>}
       {user && <Menu.Item 
         as={ Link }
@@ -66,6 +67,7 @@ const Navbar: React.FC<INavbarProps> =
             height={25} 
             src={user.photoURL}
             style={{borderRadius: 50}} 
+            alt="prof"
           />
           <Label corner="right" circular color={'red'} empty key={'red'} />
       </Menu.Item>}
@@ -73,4 +75,8 @@ const Navbar: React.FC<INavbarProps> =
   );
 }
  
-export default Navbar;
+const mapStateToProps = (store: any) => ({
+  user: store.user.currentUser
+});
+ 
+export default connect(mapStateToProps)(Navbar);

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Card, Label } from 'semantic-ui-react';
-import { JSXAttribute } from '@babel/types';
 
 interface ITaskCardProps {
   id: string, 

@@ -4,33 +4,50 @@ import { Switch, Redirect, Route } from 'react-router-dom';
 import Board from './pages/Board';
 import Navbar from './components/navbar/navbar.component';
 import { Grid } from 'semantic-ui-react';
-import { auth } from './firebase/firebase.utils';
+import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import Login from './pages/Login';
+import User from './pages/User';
+import Team from './pages/Team';
+import { setCurrentUser } from './redux/user/user.action';
+import { connect } from 'react-redux';
 
 export interface AppProps {
+  currentUser?: any;
+  setCurrentUser: any;
 }
  
 export interface AppState {
   activeItem: string;
-  currentUser: any;
+  
 }
  
 class App extends React.Component<AppProps, AppState> {
   constructor(props: AppProps) {
     super(props);
     this.state = {
-      activeItem: 'home',
-      currentUser: null
+      activeItem: 'home'
     };
   }
 
   unsubscribeFromAuth: any = null;
 
   componentDidMount() {
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
-      this.setState({
-        currentUser: user
-      });
+    const { setCurrentUser } = this.props;
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (user) => {
+      if(user) {
+        const userRef = await createUserProfileDocument(user, {});
+
+        if(userRef) {
+          userRef.onSnapshot(snap => {
+            setCurrentUser({
+              id: userRef.id, 
+              ...snap.data()
+            })
+          })
+
+        }
+      }
+      setCurrentUser(user);
     });
   }
 
@@ -43,16 +60,27 @@ class App extends React.Component<AppProps, AppState> {
   }
 
   render() { 
+
+    const { currentUser } = this.props;
+
     return (  
     <div className="App">
-      <Navbar user={this.state.currentUser} activeItem={this.state.activeItem} handleItemClick={this.handleItemClick} />
+      <Navbar activeItem={this.state.activeItem} handleItemClick={this.handleItemClick} />
       <Grid>
         <Grid.Column>
           <Switch>  
             <Route path="/board" component={Board} />
             <Route path="/login" component={Login} />
+            <Route 
+              path="/user" 
+              render={() => <User />} 
+            />
+            <Route 
+              path="/team" 
+              render={() => <Team />} 
+            />
             {
-              (this.state.currentUser)
+              (currentUser)
               ?
                 <Redirect from="/" exact to="/login" />
               : <Redirect from="/" exact to="/board" />
@@ -65,4 +93,12 @@ class App extends React.Component<AppProps, AppState> {
   }
 }
 
-export default App;
+const mapStateToProps = (store: any) => ({
+  currentUser: store.user.currentUser
+});
+
+const mapDispatchToProps = (dispatch: any) => ({
+  setCurrentUser: (user: any) => dispatch(setCurrentUser(user))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
