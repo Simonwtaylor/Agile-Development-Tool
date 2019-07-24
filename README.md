@@ -1,10 +1,12 @@
+[![CircleCI](https://circleci.com/gh/Simonwtaylor/Agile-Development-Tool/tree/master.svg?style=svg)](https://circleci.com/gh/Simonwtaylor/Agile-Development-Tool/tree/master)
+
 # Agile Development Tool
 
 This tool has been created to enable developers to work and collaborate in an agile, real-time environment. Users will be able to chat and plan sprints with a focus on clarity and communication. 
 
+[Application](https://damp-mountain-17611.herokuapp.com/)
+
 **Related Projects**:
-[Task API](https://github.com/Simonwtaylor/Task-API)<br/>
-[Chat Server](https://github.com/Simonwtaylor/Chat-Server) 
 
 ## Task API:
 ### Socket IO
