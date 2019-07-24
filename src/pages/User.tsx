@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import CustomButton from '../components/custom-button/custom-button.component';
 
 export interface IUserProps {
   user: any;
@@ -28,6 +29,10 @@ class User extends React.Component<IUserProps, IUserState> {
           style={{borderRadius: 50}} 
           alt="profile"
         />
+        <br />
+        <CustomButton >
+          Log Out 
+        </CustomButton>
       </>
     );
   }
