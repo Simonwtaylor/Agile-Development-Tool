@@ -80,7 +80,7 @@ class App extends React.Component<AppProps, AppState> {
               render={() => <Team />} 
             />
             {
-              (currentUser)
+              (!currentUser)
               ?
                 <Redirect from="/" exact to="/login" />
               : <Redirect from="/" exact to="/board" />
