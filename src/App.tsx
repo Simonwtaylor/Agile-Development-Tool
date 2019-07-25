@@ -73,7 +73,7 @@ class App extends React.Component<AppProps, AppState> {
             <Route path="/login" component={Login} />
             <Route 
               path="/user" 
-              render={() => <User />} 
+              component={User} 
             />
             <Route 
               path="/team" 

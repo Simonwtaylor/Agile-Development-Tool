@@ -47,6 +47,15 @@ const Navbar: React.FC<INavbarProps> =
         >
         <span role="img" aria-label="hands">🙌</span> The Squad
       </Menu.Item>
+      <Menu.Item
+        as={ Link }
+        to='backlog'
+        name='backlog'
+        active={activeItem === 'backlog'}
+        onClick={() => onItemClick('backlog')}
+        >
+        <span role="img" aria-label="backlog">💡</span> Future Stuff
+      </Menu.Item>
       {!user && <Menu.Item 
         as={ Link }
         to='login'

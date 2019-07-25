@@ -4,21 +4,14 @@ export interface ITeamProps {
   
 }
  
-export interface ITeamState {
-  
-}
- 
-class Team extends React.Component<ITeamProps, ITeamState> {
-  constructor(props: ITeamProps) {
-    super(props);
-    this.state = { };
-  }
-  render() { 
-    return (
-      <>
-      </>
-    );
-  }
+const Team: React.FC<ITeamProps> = 
+  ({}) => {
+
+  return (
+    <>
+      <h1><span role="img" aria-label="hands">🙌</span>Your Team</h1>
+    </>
+  );
 }
  
 export default Team;

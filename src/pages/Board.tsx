@@ -1,5 +1,4 @@
 import * as React from 'react';
-import ITask from '../lib/types/ITask';
 import BoardColumn from '../components/board-column/board-column.component';
 import { Grid, Card } from 'semantic-ui-react';
 import { connect } from 'react-redux';
@@ -17,10 +16,6 @@ class Board extends React.Component<IBoardProps, IBoardState>{
     super(props);
     this.state = {
     };
-  }
-
-  async componentDidMount() {
-
   }
 
   render() {
