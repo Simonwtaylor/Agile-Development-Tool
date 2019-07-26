@@ -1,6 +1,6 @@
 import * as React from 'react';
 import './member-card.styles.scss';
-import { Card, Label } from 'semantic-ui-react';
+import { Card, Label, Button } from 'semantic-ui-react';
 
 export interface IMemberCardProps {
   id: number, 
@@ -34,6 +34,16 @@ const MemberCard: React.FC<IMemberCardProps> = ({
         <Card.Description>
           Currently On: <a href="/team">{currentlyOn}</a>
         </Card.Description>
+      </Card.Content>
+      <Card.Content extra>
+        <div className='ui two buttons'>
+          <Button basic color='blue' size='small'>
+            <span role="img" aria-label="msg">✉</span> Chat
+          </Button>
+          <Button basic color='purple' size='small'>
+            <span role="img" aria-label="activity">✨</span> Activity
+          </Button>
+        </div>
       </Card.Content>
     </Card>
   );
