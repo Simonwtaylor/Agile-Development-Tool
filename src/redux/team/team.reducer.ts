@@ -5,28 +5,32 @@ const INITIAL_STATE = {
       name: 'Example Person 1', 
       role: 'Front End Wizard',
       currentlyOn: '#1131',
-      imageUrl: ''
+      imageUrl: '',
+      color: 'green'
     },
     {
       id: 2, 
       name: 'Example Person 2', 
       role: 'Front End Wizard',
       currentlyOn: '#1132',
-      imageUrl: ''
+      imageUrl: '',
+      color: 'green'
     },
     {
       id: 3, 
       name: 'Example Person 3', 
       role: 'Front End Wizard',
       currentlyOn: '#1133',
-      imageUrl: ''
+      imageUrl: '',
+      color: 'green'
     },
     {
       id: 4, 
       name: 'Example Person 4', 
       role: 'Front End Wizard',
       currentlyOn: '#1134',
-      imageUrl: ''
+      imageUrl: '',
+      color: 'red'
     }
   ]
 };
