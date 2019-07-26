@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import MemberCard from '../components/member-card/member-card.component';
 
 export interface ITeamProps {
-  team: any[];
+  team: any;
 }
  
 const Team: React.FC<ITeamProps> = 
@@ -16,23 +16,24 @@ const Team: React.FC<ITeamProps> =
     <>
       <h1><span role="img" aria-label="hands">🙌</span>Your Team</h1>
       <Grid columns={4} padded>
-          <Grid.Row>
-          {
-            team.map((member: any) => {
-              return (
-                <Grid.Column>
-                  <Card>
-                    <MemberCard 
-                      key={member.id} 
-                      {...member}
-                    />
-                  </Card>
-                </Grid.Column>
-              )
-            })
-          }
-          </Grid.Row>
-        </Grid>
+        <h2>{team.name}</h2>
+        <Grid.Row>
+        {
+          team.members.map((member: any) => {
+            return (
+              <Grid.Column>
+                <Card>
+                  <MemberCard 
+                    key={member.id} 
+                    {...member}
+                  />
+                </Card>
+              </Grid.Column>
+            )
+          })
+        }
+        </Grid.Row>
+      </Grid>
     </>
   );
 }
