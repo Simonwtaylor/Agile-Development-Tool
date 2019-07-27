@@ -2,6 +2,8 @@ import * as React from 'react';
 import { Grid, Card } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import MemberCard from '../components/member-card/member-card.component';
+import { createStructuredSelector } from 'reselect';
+import { selectTeams } from '../redux/team/team.selector';
 
 export interface ITeamProps {
   team: any;
@@ -14,7 +16,7 @@ const Team: React.FC<ITeamProps> =
 
   return (
     <>
-      <h1><span role="img" aria-label="hands">🙌</span>Your Team</h1>
+      <h1>Your Team <span role="img" aria-label="hands">🙌</span></h1>
       <Grid columns={4} padded>
         <h2>{team.name}</h2>
         <Grid.Row>
@@ -39,8 +41,8 @@ const Team: React.FC<ITeamProps> =
 }
  
 
-const mapStateToProps = (store: any) => ({
-  team: store.team.team
+const mapStateToProps = createStructuredSelector({
+  team: selectTeams
 });
 
 export default connect(mapStateToProps)(Team);

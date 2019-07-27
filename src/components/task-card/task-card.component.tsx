@@ -6,8 +6,8 @@ interface ITaskCardProps {
   title: string,
   storyPoints: number, 
   description: string,
-  assignedColumn: number, 
-  assignedUser: any
+  assignedColumn?: number, 
+  assignedUser?: any
 }
  
 const TaskCard: React.FC<ITaskCardProps> = 

@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import CustomButton from '../components/custom-button/custom-button.component';
 import { auth } from '../firebase/firebase.utils';
 import { setCurrentUser } from '../redux/user/user.action';
+import { createStructuredSelector } from 'reselect';
+import { selectCurrentUser } from '../redux/user/user.selector';
 
 export interface IUserProps {
   user?: any;
@@ -43,8 +45,8 @@ const mapDispatchToProps = (dispatch: any) => ({
   setCurrentUser: (user: any) => dispatch(setCurrentUser(user))
 });
 
-const mapStateToProps = (store: any) => ({
-  user: store.user.currentUser
+const mapStateToProps = createStructuredSelector({
+  user: selectCurrentUser
 });
  
 export default connect(mapStateToProps, mapDispatchToProps)(User);

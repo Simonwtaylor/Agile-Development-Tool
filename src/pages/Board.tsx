@@ -2,6 +2,9 @@ import * as React from 'react';
 import BoardColumn from '../components/board-column/board-column.component';
 import { Grid, Card } from 'semantic-ui-react';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { selectTasks } from '../redux/tasks/tasks.selector';
+import { selectBoards } from '../redux/boards/boards.selector';
 
 export interface IBoardProps {
   boards: any[];
@@ -49,9 +52,9 @@ class Board extends React.Component<IBoardProps, IBoardState>{
   }
 }
 
-const mapStateToProps = (state: any) => ({
-  boards: state.boards.boards, 
-  tasks: state.tasks.tasks
+const mapStateToProps = createStructuredSelector({
+  boards: selectBoards, 
+  tasks: selectTasks
 });
 
 export default connect(mapStateToProps)(Board);

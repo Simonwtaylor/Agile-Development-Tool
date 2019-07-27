@@ -3,10 +3,12 @@ import UserReducer from './user/user.reducer';
 import BoardsReducer from './boards/boards.reducer';
 import TasksReducer from './tasks/tasks.reducer';
 import TeamReducer from './team/team.reducer';
+import BacklogReducer from './backlog/backlog.reducer';
 
 export default combineReducers({
   user: UserReducer,
   boards: BoardsReducer,
   tasks: TasksReducer,
-  team: TeamReducer
+  team: TeamReducer,
+  backlog: BacklogReducer
 });

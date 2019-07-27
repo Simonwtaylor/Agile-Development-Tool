@@ -5,7 +5,7 @@ const INITIAL_STATE = {
       {
         id: 1, 
         name: 'Example Person 1', 
-        role: 'Front End Wizard',
+        role: '🔮 Front End Wizard',
         currentlyOn: '#1131',
         imageUrl: '',
         color: 'green'
@@ -13,7 +13,7 @@ const INITIAL_STATE = {
       {
         id: 2, 
         name: 'Example Person 2', 
-        role: 'CSS God',
+        role: '⛪ CSS God',
         currentlyOn: '#1132',
         imageUrl: '',
         color: 'green'
@@ -21,7 +21,7 @@ const INITIAL_STATE = {
       {
         id: 3, 
         name: 'Example Person 3', 
-        role: 'Code Monkey',
+        role: '🐵 Code Monkey',
         currentlyOn: '#1133',
         imageUrl: '',
         color: 'green'
@@ -29,7 +29,7 @@ const INITIAL_STATE = {
       {
         id: 4, 
         name: 'Example Person 4', 
-        role: 'Coffee Fetcher',
+        role: '🍵 Coffee Fetcher',
         currentlyOn: '#1134',
         imageUrl: '',
         color: 'red'

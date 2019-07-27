@@ -1,3 +1,5 @@
-.status-label {
-  padding-left: 5px !important;
+.ui {
+  &.circular.empty.label.status-label {
+    margin-left: 5px !important;
+  }
 }
