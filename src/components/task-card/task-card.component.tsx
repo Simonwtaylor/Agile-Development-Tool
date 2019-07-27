@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Card, Label } from 'semantic-ui-react';
+import { withRouter } from 'react-router-dom';
 
 interface ITaskCardProps {
   id: string, 
@@ -8,21 +9,24 @@ interface ITaskCardProps {
   description: string,
   assignedColumn?: number, 
   assignedUser?: any
+  history?: any;
 }
  
-const TaskCard: React.FC<ITaskCardProps> = 
+const TaskCard: React.FC<any> = 
   ({
     id, 
     title, 
     storyPoints,
     description,  
     assignedColumn, 
-    assignedUser
+    assignedUser,
+    history
   }) => {
 
   return (
     <Card 
       className="task-card" 
+      onClick={() => history.push('/task')}
     >
       <Card.Content>
         <Card.Header>
@@ -42,4 +46,4 @@ const TaskCard: React.FC<ITaskCardProps> =
   );
 }
  
-export default TaskCard;
+export default withRouter(TaskCard);

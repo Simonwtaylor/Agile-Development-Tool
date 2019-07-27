@@ -11,6 +11,7 @@ import Team from './pages/Team';
 import { setCurrentUser } from './redux/user/user.action';
 import { connect } from 'react-redux';
 import Backlog from './pages/Backlog';
+import Task from './pages/Task';
 
 export interface AppProps {
   currentUser?: any;
@@ -83,6 +84,10 @@ class App extends React.Component<AppProps, AppState> {
             <Route 
               path="/team" 
               render={() => <Team />} 
+            />
+            <Route
+              path='/task'
+              component={Task}
             />
             {
               (!currentUser)
