@@ -12,6 +12,8 @@ import { setCurrentUser } from './redux/user/user.action';
 import { connect } from 'react-redux';
 import Backlog from './pages/Backlog';
 import Task from './pages/Task';
+import { createStructuredSelector } from 'reselect';
+import { selectCurrentUser } from './redux/user/user.selector';
 
 export interface AppProps {
   currentUser?: any;
@@ -103,8 +105,8 @@ class App extends React.Component<AppProps, AppState> {
   }
 }
 
-const mapStateToProps = (store: any) => ({
-  currentUser: store.user.currentUser
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
