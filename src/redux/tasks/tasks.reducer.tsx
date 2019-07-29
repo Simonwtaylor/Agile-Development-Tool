@@ -1,3 +1,4 @@
+import { TaskActionTypes } from "./tasks.types";
 
 const INITIAL_STATE = {
   tasks: [
@@ -33,11 +34,17 @@ const INITIAL_STATE = {
       storyPoints: 2, 
       title: 'Do something even cooler'
     }
-  ]
+  ], 
+  task: null
 };
 
 const TasksReducer = (state: any = INITIAL_STATE, action: any) => {
   switch(action.type) {
+    case TaskActionTypes.SET_CURRENT_TASK:
+      return {
+        ...state, 
+        task: state.tasks.find((t: any) => t.id === action.payload)
+      }
     default: 
       return state;
   }

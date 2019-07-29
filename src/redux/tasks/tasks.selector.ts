@@ -14,3 +14,8 @@ export const selectTask = (taskId: string) => createSelector(
     [selectTasks],
     (tasks: ITask[]) => tasks.find(t => t.id === taskId)
 );
+
+export const selectCurrentTask = createSelector(
+    [selectTaskReducer],
+    (_tasks: any) => {return _tasks.task}
+);

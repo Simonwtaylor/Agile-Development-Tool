@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, Label } from 'semantic-ui-react';
 import './navbar.styles.scss';
 import { connect } from 'react-redux';
+import { Menu, Label } from 'semantic-ui-react';
 
 export interface INavbarProps {
     activeItem: string,
@@ -30,7 +30,7 @@ const Navbar: React.FC<INavbarProps> =
       </Link>
       <Menu.Item
         as={ Link }
-        to='board'
+        to='/board'
         name='board'
         active={activeItem === 'board'}
         onClick={() => onItemClick('board')}
@@ -40,7 +40,7 @@ const Navbar: React.FC<INavbarProps> =
       </Menu.Item>
       <Menu.Item
         as={ Link }
-        to='team'
+        to='/team'
         name='team'
         active={activeItem === 'team'}
         onClick={() => onItemClick('team')}
@@ -49,7 +49,7 @@ const Navbar: React.FC<INavbarProps> =
       </Menu.Item>
       <Menu.Item
         as={ Link }
-        to='backlog'
+        to='/backlog'
         name='backlog'
         active={activeItem === 'backlog'}
         onClick={() => onItemClick('backlog')}
@@ -58,7 +58,7 @@ const Navbar: React.FC<INavbarProps> =
       </Menu.Item>
       {!user && <Menu.Item 
         as={ Link }
-        to='login'
+        to='/login'
         name='sign-in' 
         active={activeItem === 'sign-in'} 
         onClick={() => onItemClick('sign-in')}>
@@ -66,7 +66,7 @@ const Navbar: React.FC<INavbarProps> =
       </Menu.Item>}
       {user && <Menu.Item 
         as={ Link }
-        to='user'
+        to='/user'
         name='user' 
         icon
         active={activeItem === 'user'} 

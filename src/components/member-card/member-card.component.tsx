@@ -32,7 +32,7 @@ const MemberCard: React.FC<IMemberCardProps> = ({
           {role}
         </Card.Meta>
         <Card.Description>
-          Currently On: <a href="/team">{currentlyOn}</a>
+          Currently On: <a href={`/team`}>{currentlyOn}</a>
         </Card.Description>
       </Card.Content>
       <Card.Content extra>

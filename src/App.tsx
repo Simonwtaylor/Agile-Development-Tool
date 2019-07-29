@@ -88,7 +88,7 @@ class App extends React.Component<AppProps, AppState> {
               render={() => <Team />} 
             />
             <Route
-              path='/task'
+              path='/task/:id'
               component={Task}
             />
             {

@@ -26,7 +26,7 @@ const TaskCard: React.FC<any> =
   return (
     <Card 
       className="task-card" 
-      onClick={() => history.push('/task')}
+      onClick={() => history.push(`/task/${id}`)}
     >
       <Card.Content>
         <Card.Header>
