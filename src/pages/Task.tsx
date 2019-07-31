@@ -24,8 +24,8 @@ const Task: React.FC<any> = ({
     <>
       <h1>Task</h1>
       <Grid padded>
-        <Grid.Row>
-          <Grid.Column>
+        <Grid.Row stretched>
+          <Grid.Column  stretched>
             <TaskDetail />
           </Grid.Column>
         </Grid.Row>
