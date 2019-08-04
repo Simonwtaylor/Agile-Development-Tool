@@ -7,7 +7,6 @@ interface IBoardColumnProps {
   columnId: number;
   columnTitle: string;
   tasks: ITask[];
-  color: string;
   history?: any;
 }
  
@@ -16,7 +15,6 @@ const BoardColumn: React.FC<IBoardColumnProps> =
     columnId, 
     columnTitle, 
     tasks,
-    color,
     history
   }) => {
   return (
