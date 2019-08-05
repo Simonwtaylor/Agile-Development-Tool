@@ -4,9 +4,17 @@
 
 This tool has been created to enable developers to work and collaborate in an agile, real-time environment. Users will be able to chat and plan sprints with a focus on clarity and communication. 
 
-[Application](https://damp-mountain-17611.herokuapp.com/)
+[Application](https://adt-collab-staging.herokuapp.com)
 
 **Related Projects**:
+
+## React Client:
+### Users:
+### General:
+- [x] Incorporate CSS Framework (Semantic UI)
+- [x] Add Apollo Provider and Client integration
+- [x] Add Redux integration
+- [x] Add Redux Saga integration
 
 ## Task API:
 ### Socket IO
@@ -18,13 +26,13 @@ This tool has been created to enable developers to work and collaborate in an ag
 - [ ] Add Unit Tests
 
 ### Users:
-- [ ] Add Module
-- [ ] Add Model
-- [ ] Add Schema
-- [ ] Add GraphQL Schema
-- [ ] Add Resolvers 
-- [ ] Add Controller (Get 1, Get all, Create, Update and Delete)
-- [ ] Add Service
+- [x] Add Module
+- [x] Add Model
+- [x] Add Schema
+- [x] Add GraphQL Schema
+- [x] Add Resolvers 
+- [x] Add Controller (Get 1, Get all, Create, Update and Delete)
+- [x] Add Service
 - [ ] Add Unit Testing
 
 ### Projects:
@@ -46,15 +54,6 @@ This tool has been created to enable developers to work and collaborate in an ag
 - [ ] Add Controller (Get 1, Get all, Create, Update and Delete)
 - [ ] Add Service
 - [ ] Add Unit Testing
-
-## React Client:
-### Users:
-- [ ] Incorporate CSS Framework (Semantic UI)
-- [ ] Create Common components (Tables, Forms and Controls etc)
-- [ ] Create Login Form component and children components
-- [ ] Create Registration Form component and children components
-- [ ] Create Board component
-- [ ] Create Task Component and children components (Add, Edit and Delete)
 
 ## General:
 - [ ] Add Firebase Authentication
