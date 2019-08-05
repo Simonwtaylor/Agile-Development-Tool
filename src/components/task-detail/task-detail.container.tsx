@@ -3,6 +3,7 @@ import { useQuery }  from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 import { withRouter } from 'react-router-dom';
 import TaskDetail from './task-detail.component';
+import { Query } from 'react-apollo';
 
 export interface ITaskDetailContainerProps {
   match?: any;
@@ -12,29 +13,36 @@ const TaskDetailContainer: React.FC<ITaskDetailContainerProps> = ({
   match
 }) => {
   const GET_TASK = gql`
-    task(_id: $id) {
-      _id
-      title
-      description
-      storyPoints
-      assignedUser
-      assignedColumn
+    query getTask($id: String!){
+      task(_id: $id) {
+        _id
+        title
+        description
+        storyPoints
+        assignedUser
+        assignedColumn
+      }
     }
   `;
 
-  const { loading, error, data } = useQuery(GET_TASK, { variables: { id: match.params.id } });
+  return (
+    <Query query={GET_TASK} variables={{ id: match.params.id}}>
+    {
+      (result: any) => {
+        const { loading, error, data } = result;
 
-  let content;
-  if (loading) {
-    content = <h3>Fetching Task...</h3>;
-  } else if (error) {
-    content = <h1>Error loading task 😠</h1>;
-  } else {
-    content = (
-      <TaskDetail task={data.task} />
-    );
-  }
-  return (content);
+        if(error) return <h1>Error loading data</h1>;
+        if(loading) return <h3>Loading...</h3>
+
+        return (
+          <TaskDetail 
+            task={data.task}
+          />
+        )
+      }
+    }
+    </Query>
+  );
 }
  
 export default withRouter(TaskDetailContainer);
