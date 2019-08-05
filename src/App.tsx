@@ -14,6 +14,7 @@ import Backlog from './pages/Backlog';
 import Task from './pages/Task';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from './redux/user/user.selector';
+import { gql } from 'apollo-boost';
 
 export interface AppProps {
   currentUser?: any;
@@ -24,6 +25,18 @@ export interface AppState {
   activeItem: string;
   
 }
+
+const GET_AUTH_USER = gql`
+  mutation toggleLikedPhoto($id: String!) {
+    toggleLikedPhoto(id: $id) @client
+  }
+`;
+
+const TOGGLE_LIKED_PHOTO = gql`
+  mutation toggleLikedPhoto($id: String!) {
+    toggleLikedPhoto(id: $id) @client
+  }
+`;
  
 class App extends React.Component<AppProps, AppState> {
   constructor(props: AppProps) {
@@ -42,13 +55,10 @@ class App extends React.Component<AppProps, AppState> {
         const userRef = await createUserProfileDocument(user, {});
 
         if(userRef) {
-          userRef.onSnapshot(snap => {
-            setCurrentUser({
-              id: userRef.id, 
-              ...snap.data()
-            })
-          })
-
+          setCurrentUser({
+            id: userRef.id, 
+            ...userRef
+          });
         }
       }
       setCurrentUser(user);

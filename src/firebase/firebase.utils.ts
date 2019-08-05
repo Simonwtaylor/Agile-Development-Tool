@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
+import Axios from 'axios';
 
 const config: any = {
   apiKey: "AIzaSyDPGfYhg9WxIY1bRijCxcVUtht1KMHFpGA",
@@ -16,33 +17,34 @@ export const createUserProfileDocument =
   async (userAuth: any, additionalData: any) => {
     if(!userAuth) return;
 
-    const userRef = firestore.doc(`users/${userAuth.uid}`);
 
-    const snapShot = await userRef.get();
 
-    if(!snapShot.exists) {
+    const userRef = await Axios.get(`http://localhost:3001/user/auth/${userAuth.uid}`);
+    console.log(userRef);
+    if(!userRef.data) {
       const {
         displayName, 
         email, 
-        photoURL
+        photoURL,
+        uid
       } = userAuth;
 
-      const createdAt = new Date();
+      const newUserData = {
+        displayName, 
+        email, 
+        photoURL, 
+        uid
+      };
 
       try {
-        await userRef.set({
-          displayName, 
-          email, 
-          createdAt, 
-          photoURL,
-          ...additionalData
-        });
+       const newUser = await Axios.post('http://localhost:3001/user/', newUserData);
+       console.log(newUser);
       } catch (error) {
         console.error(error);
       }
     }
 
-    return userRef;
+    return userRef.data;
 }
 
 firebase.initializeApp(config);
