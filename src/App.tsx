@@ -25,18 +25,6 @@ export interface AppState {
   activeItem: string;
   
 }
-
-const GET_AUTH_USER = gql`
-  mutation toggleLikedPhoto($id: String!) {
-    toggleLikedPhoto(id: $id) @client
-  }
-`;
-
-const TOGGLE_LIKED_PHOTO = gql`
-  mutation toggleLikedPhoto($id: String!) {
-    toggleLikedPhoto(id: $id) @client
-  }
-`;
  
 class App extends React.Component<AppProps, AppState> {
   constructor(props: AppProps) {

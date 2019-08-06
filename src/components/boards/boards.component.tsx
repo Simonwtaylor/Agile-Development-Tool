@@ -12,9 +12,9 @@ const Boards: React.FC<IBoardsProps> = ({
   return (
     <>
     {
-      boards.map(boardcol => {
+      boards.map((boardcol, index) => {
         return (
-          <Grid.Column>
+          <Grid.Column key={`board${index}`}>
             <Card>
               <BoardColumn 
                 key={boardcol._id} 

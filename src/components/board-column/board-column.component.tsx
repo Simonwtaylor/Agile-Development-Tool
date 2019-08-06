@@ -11,23 +11,22 @@ interface IBoardColumnProps {
 }
  
 const BoardColumn: React.FC<IBoardColumnProps> = 
-  ({
-    columnId, 
+  ({ 
     columnTitle, 
     tasks,
-    history
   }) => {
   return (
     <div className="col card">
       <div className="card-body card-container">
         <h3>{columnTitle}</h3>
         {
-          tasks.map(task => {
+          tasks.map((task, index) => {
             return(
               <TaskCard 
+                key={`taskcard${index}`}
                 {...task}
               />
-            )
+            ) 
           })
         }
       </div>

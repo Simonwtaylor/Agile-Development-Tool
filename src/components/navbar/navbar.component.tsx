@@ -28,6 +28,7 @@ const Navbar: React.FC<INavbarProps> =
           <span role="img" aria-label="rocket">🚀</span>
         </Menu.Item>
       </Link>
+      {user && <>
       <Menu.Item
         as={ Link }
         to='/board'
@@ -56,6 +57,7 @@ const Navbar: React.FC<INavbarProps> =
         >
         <span role="img" aria-label="backlog">💡</span> Future Stuff
       </Menu.Item>
+      </>}
       {!user && <Menu.Item 
         as={ Link }
         to='/login'

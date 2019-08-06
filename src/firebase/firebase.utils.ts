@@ -17,11 +17,10 @@ export const createUserProfileDocument =
   async (userAuth: any, additionalData: any) => {
     if(!userAuth) return;
 
-
-
     const userRef = await Axios.get(`http://localhost:3001/user/auth/${userAuth.uid}`);
-    console.log(userRef);
-    if(!userRef.data) {
+
+    if(!userRef || !userRef.data || userRef.status !== 200) {
+
       const {
         displayName, 
         email, 
@@ -38,7 +37,7 @@ export const createUserProfileDocument =
 
       try {
        const newUser = await Axios.post('http://localhost:3001/user/', newUserData);
-       console.log(newUser);
+       return newUser.data();
       } catch (error) {
         console.error(error);
       }
