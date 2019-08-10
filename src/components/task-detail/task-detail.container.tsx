@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useQuery }  from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 import { withRouter } from 'react-router-dom';
 import TaskDetail from './task-detail.component';
@@ -12,6 +11,7 @@ export interface ITaskDetailContainerProps {
 const TaskDetailContainer: React.FC<ITaskDetailContainerProps> = ({
   match
 }) => {
+
   const GET_TASK = gql`
     query getTask($id: String!){
       task(_id: $id) {
@@ -32,13 +32,13 @@ const TaskDetailContainer: React.FC<ITaskDetailContainerProps> = ({
         const { loading, error, data } = result;
 
         if(error) return <h1>Error loading data</h1>;
-        if(loading) return <h3>Loading...</h3>
+        if(loading) return <h3>Loading...</h3>;
 
         return (
           <TaskDetail 
-            task={data.task}
+            taskDetail={data.task}
           />
-        )
+        );
       }
     }
     </Query>
