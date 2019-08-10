@@ -16,7 +16,7 @@ import firebase from 'firebase';
 import { getCurrentUser } from './firebase/firebase.utils';
 
 const httpLink = createHttpLink({
-    uri: 'http://localhost:3001/graphql'
+    uri: process.env.REACT_APP_GRAPHQL_URL
 });
 
 const cache = new InMemoryCache();
