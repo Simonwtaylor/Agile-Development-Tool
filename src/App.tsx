@@ -14,6 +14,7 @@ import Backlog from './pages/Backlog';
 import Task from './pages/Task';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from './redux/user/user.selector';
+import { gql } from 'apollo-boost';
 
 export interface AppProps {
   currentUser?: any;
@@ -42,13 +43,10 @@ class App extends React.Component<AppProps, AppState> {
         const userRef = await createUserProfileDocument(user, {});
 
         if(userRef) {
-          userRef.onSnapshot(snap => {
-            setCurrentUser({
-              id: userRef.id, 
-              ...snap.data()
-            })
-          })
-
+          setCurrentUser({
+            id: userRef.id, 
+            ...userRef
+          });
         }
       }
       setCurrentUser(user);

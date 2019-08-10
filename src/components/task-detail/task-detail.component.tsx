@@ -1,15 +1,16 @@
 import * as React from 'react';
-import { Card, Input, Form } from 'semantic-ui-react';
+import { Card, Form } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { selectCurrentTask } from '../../redux/tasks/tasks.selector';
 import { createStructuredSelector } from 'reselect';
 import { ITask } from '../../lib/types';
 
-export interface TaskProps {
-  task?: ITask;
+
+export interface ITaskDetailProps {
+  task: ITask;
 }
  
-const TaskDetail: React.FC<TaskProps> = ({
+const TaskDetail: React.FC<any> = ({
   task
 }) => {
   return (
@@ -39,8 +40,9 @@ const TaskDetail: React.FC<TaskProps> = ({
   );
 }
  
-const mapStateToProps = createStructuredSelector({
-  task: selectCurrentTask
-})
+// const mapStateToProps = createStructuredSelector({
+//   task: selectCurrentTask
+// })
 
-export default connect(mapStateToProps)(TaskDetail);
+// export default connect(mapStateToProps)(TaskDetail);
+export default TaskDetail;

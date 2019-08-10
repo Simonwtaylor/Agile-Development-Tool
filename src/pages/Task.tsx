@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setCurrentTask } from '../redux/tasks/tasks.action';
 import TaskDetail from '../components/task-detail/task-detail.component';
+import TaskDetailContainer from '../components/task-detail/task-detail.container';
 export interface ITaskProps {
   history: any, 
   match: any,
@@ -26,7 +27,7 @@ const Task: React.FC<any> = ({
       <Grid padded>
         <Grid.Row stretched>
           <Grid.Column  stretched>
-            <TaskDetail />
+            <TaskDetailContainer />
           </Grid.Column>
         </Grid.Row>
       </Grid>

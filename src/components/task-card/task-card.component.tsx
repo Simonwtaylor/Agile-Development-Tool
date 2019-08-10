@@ -3,7 +3,7 @@ import { Card, Label } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
 
 interface ITaskCardProps {
-  id: string, 
+  _id: string, 
   title: string,
   storyPoints: number, 
   description: string,
@@ -14,7 +14,7 @@ interface ITaskCardProps {
  
 const TaskCard: React.FC<any> = 
   ({
-    id, 
+    _id, 
     title, 
     storyPoints,
     description,  
@@ -26,7 +26,7 @@ const TaskCard: React.FC<any> =
   return (
     <Card 
       className="task-card" 
-      onClick={() => history.push(`/task/${id}`)}
+      onClick={() => history.push(`/task/${_id}`)}
     >
       <Card.Content>
         <Card.Header>
