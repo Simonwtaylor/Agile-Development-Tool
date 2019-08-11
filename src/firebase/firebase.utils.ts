@@ -13,8 +13,6 @@ const config: any = {
   appId: process.env.REACT_APP_FIREBASE_APPID
 };
 
-console.log(config);
-
 export const createUserProfileDocument = 
   async (userAuth: any, additionalData: any) => {
     if(!userAuth) return;

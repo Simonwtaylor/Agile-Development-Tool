@@ -18,8 +18,6 @@ class SignIn extends React.Component<ISignInProps, ISignInState> {
     super(props);
     this.state = { 
     };
-
-    console.log(auth.currentUser)
   }
 
   getUserInfo = () => {
