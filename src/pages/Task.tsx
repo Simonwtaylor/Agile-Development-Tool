@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { setCurrentTask } from '../redux/tasks/tasks.action';
 import TaskDetail from '../components/task-detail/task-detail.component';
 import TaskDetailContainer from '../components/task-detail/task-detail.container';
+import TaskAddContainer from '../components/task-detail/task-add.container';
 export interface ITaskProps {
   history: any, 
   match: any,
@@ -19,15 +20,19 @@ const Task: React.FC<any> = ({
   setCurrentTask
 }) => {
 
-  setCurrentTask(match.params.id);
-
+  setCurrentTask(match.params.id)
+  
   return (
     <>
       <h1>Task</h1>
       <Grid padded>
         <Grid.Row stretched>
-          <Grid.Column  stretched>
-            <TaskDetailContainer />
+          <Grid.Column stretched>
+            {
+              (match.params.id === 'new')
+              ? (<TaskAddContainer />)
+              : (<TaskDetailContainer />)
+            }
           </Grid.Column>
         </Grid.Row>
       </Grid>
