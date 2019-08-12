@@ -3,7 +3,6 @@ import CustomButton from '../custom-button/custom-button.component';
 import { auth } from '../../firebase/firebase.utils';
 import { Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { signInWithGoogle } from '../../redux/user/user.sagas';
 import { googleSignInStart } from '../../redux/user/user.action';
  
 export interface ISignInProps {

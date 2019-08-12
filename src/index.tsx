@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
@@ -12,7 +12,6 @@ import { setContext } from 'apollo-link-context';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloClient } from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
-import firebase from 'firebase';
 import { getCurrentUser } from './firebase/firebase.utils';
 
 const httpLink = createHttpLink({

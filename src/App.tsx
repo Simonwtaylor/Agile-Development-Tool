@@ -14,7 +14,6 @@ import Backlog from './pages/Backlog';
 import Task from './pages/Task';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from './redux/user/user.selector';
-import { gql } from 'apollo-boost';
 
 export interface AppProps {
   currentUser?: any;

@@ -2,13 +2,14 @@ import * as React from 'react';
 import { gql } from 'apollo-boost';
 import { withRouter } from 'react-router-dom';
 import TaskDetail from './task-detail.component';
-import { Query, withApollo, compose } from 'react-apollo';
+import {  withApollo, compose } from 'react-apollo';
 import { ITask } from '../../lib/types';
-import { useMutation, useApolloClient, useQuery } from '@apollo/react-hooks';
+import { useMutation, useQuery } from '@apollo/react-hooks';
 
 export interface ITaskDetailContainerProps {
   match?: any;
   client?: any;
+  history?: any;
 }
 
 const GET_TASK = gql`
@@ -39,7 +40,8 @@ const UPDATE_TASK = gql`
  
 const TaskDetailContainer: React.FC<ITaskDetailContainerProps> = ({
   match, 
-  client
+  client,
+  history, 
 }) => {
 
   // const client = use
@@ -52,6 +54,10 @@ const TaskDetailContainer: React.FC<ITaskDetailContainerProps> = ({
       t: {...task}
       }
     });
+
+    if(result) { 
+      history.push('/');
+    }
   };
 
   const { loading, error, data } = useQuery(GET_TASK, {
@@ -68,6 +74,7 @@ const TaskDetailContainer: React.FC<ITaskDetailContainerProps> = ({
     <TaskDetail 
       onTaskSave={handleTaskSave}
       taskDetail={data.task}
+      buttonText={'Update Task'}
     />
   );
 }
