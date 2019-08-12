@@ -1,17 +1,19 @@
 import * as React from 'react';
 import { gql } from 'apollo-boost';
 import TaskDetail from './task-detail.component';
-import { withApollo } from 'react-apollo';
+import { withApollo, compose } from 'react-apollo';
 import { ITask } from '../../lib/types';
 import { useMutation } from '@apollo/react-hooks';
+import { withRouter } from 'react-router-dom';
 
 export interface ITaskAddContainerProps {
   client?: any;
+  history?: any;
 }
 
 const ADD_TASK = gql`
-  mutation addTask($t: task!) {
-    updateTask(task: $t) {
+  mutation addTask($t: addTask!) {
+    addTask(addTask: $t) {
       title
       description
       storyPoints
@@ -22,7 +24,8 @@ const ADD_TASK = gql`
 `;
  
 const TaskAddContainer: React.FC<ITaskAddContainerProps> = ({
-  client
+  client,
+  history,
 }) => {
 
   // const client = use
@@ -35,14 +38,22 @@ const TaskAddContainer: React.FC<ITaskAddContainerProps> = ({
       t: {...task}
       }
     });
+
+    if(result) {
+      history.push('/');
+    }
   };
 
   return (
     <TaskDetail 
       onTaskSave={handleTaskSave}
       taskDetail={{}}
+      buttonText={'Add Task'}
     />
   );
 }
  
-export default withApollo(TaskAddContainer);
+export default compose(
+  withRouter, 
+  withApollo
+)(TaskAddContainer);

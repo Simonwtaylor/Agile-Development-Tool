@@ -7,11 +7,13 @@ import { ITask } from '../../lib/types';
 export interface ITaskDetailProps {
   taskDetail?: ITask;
   onTaskSave: (task: ITask) => void;
+  buttonText: string;
 }
  
 const TaskDetail: React.FC<any> = ({
   taskDetail,
   onTaskSave,
+  buttonText,
 }) => {
   const [task, setTask] = React.useState(taskDetail);
 
@@ -51,6 +53,15 @@ const TaskDetail: React.FC<any> = ({
       <Form>
         <Card.Content header={task.title} />
         <Card.Content>
+        <Form.Field>
+            <label>Title</label>
+            <input 
+              placeholder='Title...'
+              value={task.title}
+              name={'title'}
+              onChange={handleFormChange}
+            />
+          </Form.Field>
           <Form.Field>
             <label>Description</label>
             <input 
@@ -90,7 +101,7 @@ const TaskDetail: React.FC<any> = ({
           </Form.Field>
         </Card.Content>
         <CustomButton color={'green'} inverted onClick={handleSubmitClick}>
-          💾 Update Task
+          <span role="img" aria-label="save">💾</span> {buttonText}
         </CustomButton>
       </Form>
     </Card>

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Grid, Card } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectTasks } from '../redux/tasks/tasks.selector';
@@ -22,7 +22,6 @@ class Board extends React.Component<IBoardProps, IBoardState>{
   }
 
   render() {
-    const { boards, tasks } = this.props;
     return(
       <>
         <h1>This Sprint <span role="img" aria-label="rocket">🚀</span></h1>

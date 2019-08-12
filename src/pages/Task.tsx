@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { Grid, Card } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setCurrentTask } from '../redux/tasks/tasks.action';
-import TaskDetail from '../components/task-detail/task-detail.component';
 import TaskDetailContainer from '../components/task-detail/task-detail.container';
 import TaskAddContainer from '../components/task-detail/task-add.container';
 export interface ITaskProps {
