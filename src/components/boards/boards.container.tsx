@@ -19,8 +19,8 @@ const BoardsContainer: React.FC<IBoardsContainerProps> = () => {
           title
           description
           storyPoints
-          assignedUser
-          assignedColumn
+          userId
+          boardId
         }
       }
     }

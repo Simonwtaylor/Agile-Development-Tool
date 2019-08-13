@@ -19,8 +19,8 @@ const GET_TASK = gql`
       title
       description
       storyPoints
-      assignedUser
-      assignedColumn
+      userId
+      boardId
     }
   }
 `;
@@ -32,8 +32,8 @@ const UPDATE_TASK = gql`
       title
       description
       storyPoints
-      assignedUser
-      assignedColumn
+      userId
+      boardId
     }
   }
 `;

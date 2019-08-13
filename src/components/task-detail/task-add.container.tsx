@@ -17,8 +17,8 @@ const ADD_TASK = gql`
       title
       description
       storyPoints
-      assignedUser
-      assignedColumn
+      userId
+      boardId
     }
   }
 `;

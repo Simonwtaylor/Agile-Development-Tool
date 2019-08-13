@@ -20,7 +20,7 @@ const TaskDetail: React.FC<any> = ({
   const handleFormChange = (e:any) => {
     const taskNew = {...task};
     let value = e.target.value;
-    if(e.target.name === 'storyPoints'|| e.target.name === 'assignedColumn') {
+    if(e.target.name === 'storyPoints'|| e.target.name === 'boardId') {
       value = Number.parseFloat(value);
     }
     taskNew[e.target.name] = value;
@@ -35,16 +35,16 @@ const TaskDetail: React.FC<any> = ({
       title,
       description,
       storyPoints,
-      assignedUser,
-      assignedColumn,
+      userId,
+      boardId,
     } = task;
     onTaskSave({
       _id,
       title,
       description,
       storyPoints,
-      assignedUser,
-      assignedColumn
+      userId,
+      boardId
     });
   };
 
@@ -85,7 +85,7 @@ const TaskDetail: React.FC<any> = ({
             <label>Stage</label>
             <input 
               placeholder='Stage...' 
-              value={task!.assignedColumn} 
+              value={task!.boardId} 
               name={'assignedColumn'}
               onChange={handleFormChange}
             />
@@ -94,7 +94,7 @@ const TaskDetail: React.FC<any> = ({
             <label>User</label>
             <input 
               placeholder='User...' 
-              value={task!.assignedUser}
+              value={task!.userId}
               name={'assignedUser'}
               onChange={handleFormChange}
             />
