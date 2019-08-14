@@ -3,6 +3,8 @@ import { Card, Form } from 'semantic-ui-react';
 import CustomButton from '../custom-button/custom-button.component';
 import './task-detail.styles.scss';
 import { ITask } from '../../lib/types';
+import BoardDropdownContainer from '../dropdowns/board-dropdown.container';
+import UserDropdownContainer from '../dropdowns/user-dropdown.container';
 
 export interface ITaskDetailProps {
   taskDetail?: ITask;
@@ -18,9 +20,10 @@ const TaskDetail: React.FC<any> = ({
   const [task, setTask] = React.useState(taskDetail);
 
   const handleFormChange = (e:any) => {
-    const taskNew = {...task};
+    const taskNew = {...task}
+    console.log(e);
     let value = e.target.value;
-    if(e.target.name === 'storyPoints'|| e.target.name === 'boardId') {
+    if(e.target.name === 'storyPoints') {
       value = Number.parseFloat(value);
     }
     taskNew[e.target.name] = value;
@@ -28,6 +31,17 @@ const TaskDetail: React.FC<any> = ({
       ...taskNew
     });
   };
+
+  const handleSelectChange = (selectItem: any) => {
+    const taskNew = {...task}
+    console.log(selectItem);
+    let value = selectItem.value;
+
+    taskNew[selectItem.name] = value;
+    setTask({
+      ...taskNew
+    });
+  }
 
   const handleSubmitClick = () => {
     const {
@@ -38,6 +52,8 @@ const TaskDetail: React.FC<any> = ({
       userId,
       boardId,
     } = task;
+console.log(task);
+
     onTaskSave({
       _id,
       title,
@@ -82,21 +98,19 @@ const TaskDetail: React.FC<any> = ({
             />
           </Form.Field>
           <Form.Field>
-            <label>Stage</label>
-            <input 
-              placeholder='Stage...' 
-              value={task!.boardId} 
-              name={'assignedColumn'}
-              onChange={handleFormChange}
+            <label>Board</label>
+            <BoardDropdownContainer
+              handleBoardSelect={handleSelectChange}
+              selectedBoard={task!.boardId}
+              name={'boardId'}
             />
           </Form.Field>
           <Form.Field>
             <label>User</label>
-            <input 
-              placeholder='User...' 
-              value={task!.userId}
-              name={'assignedUser'}
-              onChange={handleFormChange}
+            <UserDropdownContainer
+              onSelectUser={handleSelectChange}
+              selectedUser={task!.userId}
+              name={'userId'}
             />
           </Form.Field>
         </Card.Content>
