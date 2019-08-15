@@ -13,17 +13,16 @@ class CustomDropdown extends React.Component<ICustomDropdownProps> {
     super(props);
   }
 
-
-  handleSelectChange = (e: any) => {
+  // @ts-ignore
+  handleSelectChange = (e: any, data: any) => {
     const {
       onSelectItem,
       name
     } = this.props;
 
-    const { value } = e;
     onSelectItem({
       name, 
-      value: value
+      value: data.value
     })
   }
 

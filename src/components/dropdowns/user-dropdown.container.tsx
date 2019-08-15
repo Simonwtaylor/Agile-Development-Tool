@@ -42,7 +42,8 @@ const UserDropdownContainer: React.FC<IUserDropdownContainerProps> = ({
             {
               key: user._id, 
               value: user._id, 
-              text: user.displayName
+              text: user.displayName,
+              image: user.photoURL
             }
           );
         });
