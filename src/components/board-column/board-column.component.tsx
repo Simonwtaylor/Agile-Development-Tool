@@ -24,9 +24,10 @@ const BoardColumn: React.FC<IBoardColumnProps> =
         <h3>{columnTitle}</h3>
         <CustomButton 
           inverted={true}
+          color={'green'}
           onClick={() => history.push(`/task/new`)}
         >
-          <span role="img" aria-label="save">🎫</span> Add New Task
+          <span role="img" aria-label="save">➕</span> Add New Task
         </CustomButton>
         {
           tasks.map((task, index) => {
