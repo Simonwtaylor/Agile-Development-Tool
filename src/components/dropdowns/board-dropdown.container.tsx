@@ -25,7 +25,6 @@ const BoardDropdownContainer: React.FC<IBoardDropdownContainerProps> = ({
   `;
 
   const onSelectBoard = (e: any) => {
-    console.log(e);
     handleBoardSelect(e);
   }
 
@@ -48,9 +47,7 @@ const BoardDropdownContainer: React.FC<IBoardDropdownContainerProps> = ({
             }
           );
         });
-
-        console.log(options);
-
+        
         return (
           <CustomDropdown 
             name={name}

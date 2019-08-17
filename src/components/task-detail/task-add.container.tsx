@@ -16,6 +16,7 @@ const ADD_TASK = gql`
     addTask(addTask: $t) {
       title
       description
+      completed
       storyPoints
       userId
       boardId
@@ -34,6 +35,7 @@ const TaskAddContainer: React.FC<ITaskAddContainerProps> = ({
   });
 
   const handleTaskSave = (task: ITask) => {
+    task.completed = false;
     addTask({ variables: {
       t: {...task}
       }

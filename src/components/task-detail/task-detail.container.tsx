@@ -6,6 +6,7 @@ import {  withApollo, compose } from 'react-apollo';
 import { ITask } from '../../lib/types';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { Loader } from 'semantic-ui-react';
+import { TaskDetailMode } from './task-detail.enum';
 
 export interface ITaskDetailContainerProps {
   match?: any;
@@ -19,6 +20,7 @@ const GET_TASK = gql`
       _id
       title
       description
+      completed
       storyPoints
       userId
       boardId
@@ -32,6 +34,7 @@ const UPDATE_TASK = gql`
       _id
       title
       description
+      completed
       storyPoints
       userId
       boardId
@@ -45,7 +48,6 @@ const TaskDetailContainer: React.FC<ITaskDetailContainerProps> = ({
   history, 
 }) => {
 
-  // const client = use
   const [updateTask, { data: result }] = useMutation(UPDATE_TASK, {
     client
   });
@@ -76,6 +78,8 @@ const TaskDetailContainer: React.FC<ITaskDetailContainerProps> = ({
       onTaskSave={handleTaskSave}
       taskDetail={data.task}
       buttonText={'Update Task'}
+      mode={TaskDetailMode.EDIT}
+      onTaskComplete={(_id: string) => console.log(_id)}
     />
   );
 }

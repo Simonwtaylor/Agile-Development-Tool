@@ -1,27 +1,32 @@
 import * as React from 'react';
-import { Card, Form } from 'semantic-ui-react';
+import { Card, Form, Icon } from 'semantic-ui-react';
 import CustomButton from '../custom-button/custom-button.component';
 import './task-detail.styles.scss';
 import { ITask } from '../../lib/types';
 import BoardDropdownContainer from '../dropdowns/board-dropdown.container';
 import UserDropdownContainer from '../dropdowns/user-dropdown.container';
+import { TaskDetailMode } from './task-detail.enum';
 
 export interface ITaskDetailProps {
   taskDetail?: ITask;
   onTaskSave: (task: ITask) => void;
   buttonText: string;
+  mode: TaskDetailMode;
+  onTaskComplete?: (task: string) => void;
 }
  
 const TaskDetail: React.FC<any> = ({
   taskDetail,
   onTaskSave,
   buttonText,
+  mode,
+  onTaskComplete,
 }) => {
   const [task, setTask] = React.useState(taskDetail);
 
   const handleFormChange = (e:any) => {
     const taskNew = {...task}
-    console.log(e);
+
     let value = e.target.value;
     if(e.target.name === 'storyPoints') {
       value = Number.parseFloat(value);
@@ -34,29 +39,37 @@ const TaskDetail: React.FC<any> = ({
 
   const handleSelectChange = (selectItem: any) => {
     const taskNew = {...task}
-    console.log(selectItem);
+
     let value = selectItem.value;
 
     taskNew[selectItem.name] = value;
     setTask({
       ...taskNew
     });
-  }
+  };
+
+  const handleCompleteClick = () => {
+    const {
+      _id,
+    } = task;
+    onTaskComplete(_id);
+  };
 
   const handleSubmitClick = () => {
     const {
       _id,
       title,
       description,
+      completed,
       storyPoints,
       userId,
       boardId,
     } = task;
-console.log(task);
 
     onTaskSave({
       _id,
       title,
+      completed,
       description,
       storyPoints,
       userId,
@@ -67,7 +80,24 @@ console.log(task);
   return (
     <Card>
       <Form>
-        <Card.Content header={task.title} />
+        <Card.Content>
+          <Card.Header>
+            {
+              (mode === TaskDetailMode.EDIT && 
+                <CustomButton
+                  color={'green'}
+                  circular
+                  inverted
+                  icon='check' 
+                  onClick={handleCompleteClick}
+                  style={{ float: 'right' }}
+                >
+                </CustomButton>
+              )
+
+            }
+          </Card.Header>
+        </Card.Content>
         <Card.Content>
           <Form.Field>
             <label>Title</label>
