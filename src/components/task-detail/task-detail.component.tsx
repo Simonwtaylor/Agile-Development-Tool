@@ -69,7 +69,7 @@ console.log(task);
       <Form>
         <Card.Content header={task.title} />
         <Card.Content>
-        <Form.Field>
+          <Form.Field>
             <label>Title</label>
             <input 
               placeholder='Title...'

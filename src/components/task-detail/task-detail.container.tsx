@@ -5,6 +5,7 @@ import TaskDetail from './task-detail.component';
 import {  withApollo, compose } from 'react-apollo';
 import { ITask } from '../../lib/types';
 import { useMutation, useQuery } from '@apollo/react-hooks';
+import { Loader } from 'semantic-ui-react';
 
 export interface ITaskDetailContainerProps {
   match?: any;
@@ -68,7 +69,7 @@ const TaskDetailContainer: React.FC<ITaskDetailContainerProps> = ({
   });
 
   if(error) return <h1>Error loading data</h1>;
-  if(loading) return <h3>Loading...</h3>;
+  if(loading) return <Loader />;
 
   return (
     <TaskDetail 
