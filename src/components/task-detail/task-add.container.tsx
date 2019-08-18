@@ -38,8 +38,7 @@ const TaskAddContainer: React.FC<ITaskAddContainerProps> = ({
     task.completed = false;
     addTask({ variables: {
       t: {...task}
-      }, 
-      fetchPolicy: 'cache-and-network'
+      }
     });
 
     history.push('/');
