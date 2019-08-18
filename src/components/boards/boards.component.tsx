@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Grid, Card } from 'semantic-ui-react';
 import BoardColumn from '../board-column/board-column.component';
+import CustomButton from '../custom-button/custom-button.component';
 
 export interface IBoardsProps {
   boards: any[];
@@ -27,6 +28,18 @@ const Boards: React.FC<IBoardsProps> = ({
         )
       })
     }
+    <div className="col card">
+      <div className="card-body card-container">
+        <h3>Add New Board</h3>
+        <CustomButton 
+          inverted={true}
+          color={'green'}
+          onClick={() => console.log('NEW BOARD')}
+        >
+          <span role="img" aria-label="save">➕</span> Add New Board
+        </CustomButton>
+      </div>
+    </div> 
     </>
   );
 }
