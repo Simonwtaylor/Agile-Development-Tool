@@ -38,12 +38,11 @@ const TaskAddContainer: React.FC<ITaskAddContainerProps> = ({
     task.completed = false;
     addTask({ variables: {
       t: {...task}
-      }
+      }, 
+      fetchPolicy: 'cache-and-network'
     });
 
-    if(result) {
-      history.push('/');
-    }
+    history.push('/');
   };
 
   return (

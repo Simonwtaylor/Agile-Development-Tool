@@ -41,6 +41,21 @@ const UPDATE_TASK = gql`
     }
   }
 `;
+
+const COMPLETE_TASK = gql`
+  mutation completeTask($id: String!) {
+    completeTask(_id: $id) {
+      _id
+      title
+      description
+      completed
+      storyPoints
+      userId
+      boardId
+      completedDate
+    }
+  }
+`;
  
 const TaskDetailContainer: React.FC<ITaskDetailContainerProps> = ({
   match, 
@@ -48,19 +63,30 @@ const TaskDetailContainer: React.FC<ITaskDetailContainerProps> = ({
   history, 
 }) => {
 
+  const [completeTask, { data: completeResult } ] = useMutation(COMPLETE_TASK, {
+    client
+  });
+
   const [updateTask, { data: result }] = useMutation(UPDATE_TASK, {
     client
   });
 
-  const handleTaskSave = (task: ITask) => {
-    updateTask({ variables: {
+  const handleTaskComplete = async (id: string) => {
+    await completeTask({ variables: {
+      id
+    }
+    });
+
+    history.push('/board');
+  };
+
+  const handleTaskSave = async (task: ITask) => {
+    await updateTask({ variables: {
       t: {...task}
       }
     });
 
-    if(result) { 
-      history.push('/');
-    }
+    history.push('/board');
   };
 
   const { loading, error, data } = useQuery(GET_TASK, {
@@ -79,7 +105,7 @@ const TaskDetailContainer: React.FC<ITaskDetailContainerProps> = ({
       taskDetail={data.task}
       buttonText={'Update Task'}
       mode={TaskDetailMode.EDIT}
-      onTaskComplete={(_id: string) => console.log(_id)}
+      onTaskComplete={handleTaskComplete}
     />
   );
 }

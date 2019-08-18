@@ -39,7 +39,7 @@ const authLink = setContext(async (_, { headers }) => {
 
 const client = new ApolloClient({
     link: authLink.concat(httpLink), 
-    cache
+    cache,
 });
 
 ReactDOM.render(
