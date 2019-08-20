@@ -6,15 +6,22 @@ import './boards.style.scss';
 
 export interface IBoardsProps {
   boards: any[];
+  onAddNewBoard: (name: string) => void;
 }
  
 const Boards: React.FC<IBoardsProps> = ({
-  boards
+  boards,
+  onAddNewBoard, 
 }) => {
 
   // Hooks
   const [newBoard, setNewBoard] = React.useState(false);
   const [boardName, setBoardName] = React.useState('');
+
+  const handleBoardSubmit = () => {
+    onAddNewBoard(boardName);
+    setNewBoard(!newBoard);
+  };
 
   const handleBoardNameChange = (e: any) => {
     setBoardName(e.target.value);
@@ -69,7 +76,7 @@ const Boards: React.FC<IBoardsProps> = ({
                 <CustomButton 
                   inverted={true}
                   color={'green'}
-                  onClick={() => setNewBoard(!newBoard)}
+                  onClick={handleBoardSubmit}
                 >
                   <span role="img" aria-label="save">💾</span> Save New Board
                 </CustomButton>

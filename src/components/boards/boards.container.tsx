@@ -1,13 +1,19 @@
 import * as React from 'react';
-import { Query } from 'react-apollo';
+import { Query, withApollo, compose } from 'react-apollo';
 import { gql } from 'apollo-boost';
 import Boards from './boards.component';
+import { useMutation } from '@apollo/react-hooks';
+import { withRouter } from 'react-router-dom';
 
 export interface IBoardsContainerProps {
-  
+  client?: any;
+  history?: any;
 }
  
-const BoardsContainer: React.FC<IBoardsContainerProps> = () => {
+const BoardsContainer: React.FC<IBoardsContainerProps> = ({
+  client,
+  history,
+}) => {
 
   const GET_ALL_BOARDS = gql`
     {
@@ -26,7 +32,31 @@ const BoardsContainer: React.FC<IBoardsContainerProps> = () => {
       }
     }
   `;
-  
+
+  const ADD_BOARD = gql`
+  mutation addBoard($b: addBoard!) {
+    addBoard(addBoard: $b) {
+      name
+    }
+  }
+`;
+
+  const [addBoard, { data: result }] = useMutation(ADD_BOARD, {
+    client
+  });
+
+  const handleTaskSave = (name: string) => {
+
+    addBoard({ variables: {
+      b: {
+        name,
+      }
+      }
+    });
+
+    history.push('/');
+  };
+
   return (
     <Query query={GET_ALL_BOARDS}>
     {
@@ -37,7 +67,10 @@ const BoardsContainer: React.FC<IBoardsContainerProps> = () => {
         if(loading) return <h3>Loading...</h3>
 
         return (
-          <Boards boards={data.boards} />
+          <Boards 
+            boards={data.boards}
+            onAddNewBoard={handleTaskSave}
+          />
         )
       }
     }
@@ -45,4 +78,7 @@ const BoardsContainer: React.FC<IBoardsContainerProps> = () => {
   );
 }
  
-export default BoardsContainer;
+export default compose(
+  withRouter, 
+  withApollo
+)(BoardsContainer);
