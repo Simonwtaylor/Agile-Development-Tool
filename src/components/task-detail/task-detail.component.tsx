@@ -77,6 +77,13 @@ const TaskDetail: React.FC<any> = ({
     });
   };
 
+  const getButtonFill = (completed: boolean) => {
+    if (!completed) {
+      return true;
+    }
+    return false;
+  };
+
   return (
     <Card>
       <Form>
@@ -87,7 +94,7 @@ const TaskDetail: React.FC<any> = ({
                 <CustomButton
                   color={'green'}
                   circular
-                  inverted
+                  inverted={getButtonFill(task.completed)}
                   icon='check' 
                   onClick={handleCompleteClick}
                   style={{ float: 'right' }}

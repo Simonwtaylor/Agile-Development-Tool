@@ -18,15 +18,24 @@ const TaskCard: React.FC<any> =
     title, 
     storyPoints,
     description,  
-    assignedColumn, 
-    assignedUser,
+    boardId, 
+    userId,
+    completed,
     history
   }) => {
+
+  const getCardColour = (completed: boolean) => {
+    if(completed) {
+      return 'green'
+    }
+    return undefined;
+  };
 
   return (
     <Card 
       className="task-card" 
       onClick={() => history.push(`/task/${_id}`)}
+      color={getCardColour(completed)}
     >
       <Card.Content>
         <Card.Header>
@@ -35,9 +44,6 @@ const TaskCard: React.FC<any> =
             {storyPoints}
           </Label>
         </Card.Header>
-        <Card.Meta>
-          {assignedUser}
-        </Card.Meta>
         <Card.Description>
           {description}
         </Card.Description>
