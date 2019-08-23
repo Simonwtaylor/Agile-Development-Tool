@@ -1,3 +1,5 @@
+import { IUser } from "./IUser";
+
 export interface ITask {
   _id: string, 
   title: string,
@@ -6,4 +8,5 @@ export interface ITask {
   description: string,
   boardId?: string, 
   userId?: string,
+  user?: IUser;
 }

@@ -28,6 +28,11 @@ const BoardsContainer: React.FC<IBoardsContainerProps> = ({
           storyPoints
           userId
           boardId
+          user {
+            _id
+            photoURL
+            displayName
+          }
         }
       }
     }

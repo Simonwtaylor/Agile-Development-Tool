@@ -18,10 +18,9 @@ const TaskCard: React.FC<any> =
     title, 
     storyPoints,
     description,  
-    boardId, 
-    userId,
     completed,
-    history
+    history,
+    user,
   }) => {
 
   const getCardColour = (completed: boolean) => {
@@ -39,6 +38,11 @@ const TaskCard: React.FC<any> =
     >
       <Card.Content>
         <Card.Header>
+          <img 
+            src={user.photoURL}
+            width={'25'}
+            height={'25'}
+          />
           {title}
           <Label style={{ float: 'right'}} circular color={'red'} key={'red'}>
             {storyPoints}
