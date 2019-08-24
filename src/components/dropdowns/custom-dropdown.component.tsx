@@ -9,10 +9,6 @@ export interface ICustomDropdownProps {
 }
  
 class CustomDropdown extends React.Component<ICustomDropdownProps> {
-  constructor(props: any){
-    super(props);
-  }
-
   // @ts-ignore
   handleSelectChange = (e: any, data: any) => {
     const {

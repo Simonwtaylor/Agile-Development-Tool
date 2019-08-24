@@ -63,11 +63,11 @@ const TaskDetailContainer: React.FC<ITaskDetailContainerProps> = ({
   history, 
 }) => {
 
-  const [completeTask, { data: completeResult } ] = useMutation(COMPLETE_TASK, {
+  const [completeTask] = useMutation(COMPLETE_TASK, {
     client
   });
 
-  const [updateTask, { data: result }] = useMutation(UPDATE_TASK, {
+  const [updateTask] = useMutation(UPDATE_TASK, {
     client
   });
 

@@ -30,7 +30,7 @@ const TaskAddContainer: React.FC<ITaskAddContainerProps> = ({
 }) => {
 
   // const client = use
-  const [addTask, { data: result }] = useMutation(ADD_TASK, {
+  const [addTask] = useMutation(ADD_TASK, {
     client
   });
 

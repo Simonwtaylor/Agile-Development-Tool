@@ -2,16 +2,6 @@ import * as React from 'react';
 import { Card, Label } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
 
-interface ITaskCardProps {
-  _id: string, 
-  title: string,
-  storyPoints: number, 
-  description: string,
-  assignedColumn?: number, 
-  assignedUser?: any
-  history?: any;
-}
- 
 const TaskCard: React.FC<any> = 
   ({
     _id, 
@@ -38,11 +28,17 @@ const TaskCard: React.FC<any> =
     >
       <Card.Content>
         <Card.Header>
-          <img 
+          {((user) && (user.photoURL) && <img 
             src={user.photoURL}
             width={'25'}
             height={'25'}
-          />
+            alt='user'
+            style={{
+              float: 'left', 
+              borderRadius: '50%',
+            }}
+          />)
+          }
           {title}
           <Label style={{ float: 'right'}} circular color={'red'} key={'red'}>
             {storyPoints}

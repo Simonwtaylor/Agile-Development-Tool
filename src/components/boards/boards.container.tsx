@@ -46,7 +46,7 @@ const BoardsContainer: React.FC<IBoardsContainerProps> = ({
   }
 `;
 
-  const [addBoard, { data: result }] = useMutation(ADD_BOARD, {
+  const [addBoard] = useMutation(ADD_BOARD, {
     client
   });
 

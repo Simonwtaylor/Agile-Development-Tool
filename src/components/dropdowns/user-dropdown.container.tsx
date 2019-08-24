@@ -38,7 +38,7 @@ const UserDropdownContainer: React.FC<IUserDropdownContainerProps> = ({
         const options: any[] = [];
 
         data.users.map((user: any, index: number) => {
-          options.push(
+          return options.push(
             {
               key: user._id, 
               value: user._id, 

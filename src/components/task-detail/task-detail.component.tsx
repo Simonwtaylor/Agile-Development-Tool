@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Card, Form, Icon } from 'semantic-ui-react';
+import { Card, Form } from 'semantic-ui-react';
 import CustomButton from '../custom-button/custom-button.component';
 import './task-detail.styles.scss';
 import { ITask } from '../../lib/types';

@@ -38,8 +38,8 @@ const BoardDropdownContainer: React.FC<IBoardDropdownContainerProps> = ({
 
         const options: any[] = [];
 
-        data.boards.map((board: any, index: number) => {
-          options.push(
+        data.boards.map((board: any) => {
+          return options.push(
             {
               key: board._id, 
               value: board._id, 
