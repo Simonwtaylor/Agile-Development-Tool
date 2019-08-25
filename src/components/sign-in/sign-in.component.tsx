@@ -32,9 +32,6 @@ class SignIn extends React.Component<ISignInProps, ISignInState> {
         <h2>
           I already have an account
         </h2>
-        <span>
-          Sign in with your email and password.
-        </span>
         {this.getUserInfo()}
         <CustomButton inverted type="button" color="blue" onClick={this.props.signInWithGoogle}>
           <Icon name="google" />

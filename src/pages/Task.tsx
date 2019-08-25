@@ -5,17 +5,9 @@ import { connect } from 'react-redux';
 import { setCurrentTask } from '../redux/tasks/tasks.action';
 import TaskDetailContainer from '../components/task-detail/task-detail.container';
 import TaskAddContainer from '../components/task-detail/task-add.container';
-export interface ITaskProps {
-  history: any, 
-  match: any,
-  location: any,
-  setCurrentTask?: any;
-}
- 
+
 const Task: React.FC<any> = ({
-  history, 
-  match, 
-  location, 
+  match,
   setCurrentTask
 }) => {
 
@@ -23,7 +15,7 @@ const Task: React.FC<any> = ({
   
   return (
     <>
-      <h1>Task</h1>
+      <h1>Task Detail <span role="img" aria-label="star">🌠</span></h1>
       <Grid padded>
         <Grid.Row stretched>
           <Grid.Column stretched>
