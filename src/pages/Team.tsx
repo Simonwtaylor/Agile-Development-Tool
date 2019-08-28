@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { Grid, Card } from 'semantic-ui-react';
+import { Grid } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import MemberCard from '../components/member-card/member-card.component';
 import { createStructuredSelector } from 'reselect';
 import { selectTeams } from '../redux/team/team.selector';
+import TeamListContainer from '../components/team-list/team-list.container';
 
 export interface ITeamProps {
   team: any;
@@ -20,20 +20,7 @@ const Team: React.FC<ITeamProps> =
       <Grid columns={4} padded>
         <h2>{team.name}</h2>
         <Grid.Row>
-        {
-          team.members.map((member: any) => {
-            return (
-              <Grid.Column>
-                <Card>
-                  <MemberCard 
-                    key={member.id} 
-                    {...member}
-                  />
-                </Card>
-              </Grid.Column>
-            )
-          })
-        }
+          <TeamListContainer />
         </Grid.Row>
       </Grid>
     </>

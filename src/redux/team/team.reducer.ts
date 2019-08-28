@@ -1,7 +1,7 @@
 const INITIAL_STATE = {
   team: {
     name: 'User Interface',
-    members: [
+    users: [
       {
         id: 1, 
         name: 'Example Person 1', 
