@@ -10,12 +10,14 @@ export interface ITeamListContainerProps {
 }
 
 const GET_ALL_TEAMS = gql`
-  teams {
-    name
-    users {
-      _id
-      photoURL
-      displayName
+  query {
+    teams {
+      name
+      users {
+        _id
+        photoURL
+        displayName
+      }
     }
   }
 `;
