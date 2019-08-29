@@ -17,12 +17,7 @@ const Team: React.FC<ITeamProps> =
   return (
     <>
       <h1>Your Team <span role="img" aria-label="hands">🙌</span></h1>
-      <Grid columns={4} padded>
-        <h2>{team.name}</h2>
-        <Grid.Row>
-          <TeamListContainer />
-        </Grid.Row>
-      </Grid>
+      <TeamListContainer />
     </>
   );
 }
