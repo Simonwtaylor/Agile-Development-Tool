@@ -3,20 +3,24 @@ import './member-card.styles.scss';
 import { Card, Label, Button } from 'semantic-ui-react';
 
 export interface IMemberCardProps {
-  id: number, 
-  name: string, 
+  _id: string;
+  displayName: string;
+  photoURL: string;
+  email: string;
+  uid: string;
   role: string,
   currentlyOn: string, 
-  imageUrl: string, 
   color?: "red" | "orange" | "yellow" | "olive" | "green" | "teal" | "blue" | "violet" | "purple" | "pink" | "brown" | "grey" | "black" | undefined
 }
 
 const MemberCard: React.FC<IMemberCardProps> = ({
-  id, 
-  name, 
+  _id,
+  displayName,
+  photoURL,
+  email,
+  uid, 
   role, 
-  currentlyOn, 
-  imageUrl,
+  currentlyOn,
   color
 }) => {
   return (
@@ -25,7 +29,7 @@ const MemberCard: React.FC<IMemberCardProps> = ({
     >
       <Card.Content>
         <Card.Header>
-          {name}
+          {displayName}
           <Label className='status-label' circular color={color} empty />
         </Card.Header>
         <Card.Meta>

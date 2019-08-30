@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Grid } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectTeams } from '../redux/team/team.selector';
