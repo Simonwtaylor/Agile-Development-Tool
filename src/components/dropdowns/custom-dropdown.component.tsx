@@ -19,7 +19,7 @@ class CustomDropdown extends React.Component<ICustomDropdownProps> {
     onSelectItem({
       name, 
       value: data.value
-    })
+    });
   }
 
   render() {

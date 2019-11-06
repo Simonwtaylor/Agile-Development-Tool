@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 import { Menu, Label } from 'semantic-ui-react';
 
 export interface INavbarProps {
-    activeItem: string,
-    handleItemClick: any,
-    user?: any
+  activeItem: string,
+  handleItemClick: any,
+  user?: any
 }
 
 const Navbar: React.FC<INavbarProps> = 
@@ -19,7 +19,7 @@ const Navbar: React.FC<INavbarProps> =
 
   const onItemClick = (name: string) => {
     handleItemClick(name);
-  }
+  };
 
   return (
     <Menu stackable>
@@ -87,7 +87,7 @@ const Navbar: React.FC<INavbarProps> =
 }
  
 const mapStateToProps = (store: any) => ({
-  user: store.user.currentUser
+  user: store.user.currentUser,
 });
- 
+
 export default connect(mapStateToProps)(Navbar);

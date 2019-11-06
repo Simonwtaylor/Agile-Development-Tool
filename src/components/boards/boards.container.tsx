@@ -39,12 +39,12 @@ const BoardsContainer: React.FC<IBoardsContainerProps> = ({
   `;
 
   const ADD_BOARD = gql`
-  mutation addBoard($b: addBoard!) {
-    addBoard(addBoard: $b) {
-      name
+    mutation addBoard($b: addBoard!) {
+      addBoard(addBoard: $b) {
+        name
+      }
     }
-  }
-`;
+  `;
 
   const [addBoard] = useMutation(ADD_BOARD, {
     client
@@ -52,10 +52,11 @@ const BoardsContainer: React.FC<IBoardsContainerProps> = ({
 
   const handleTaskSave = (name: string) => {
 
-    addBoard({ variables: {
-      b: {
-        name,
-      }
+    addBoard({
+      variables: {
+        b: {
+          name,
+        }
       }
     });
 
@@ -82,7 +83,7 @@ const BoardsContainer: React.FC<IBoardsContainerProps> = ({
     </Query>  
   );
 }
- 
+
 export default compose(
   withRouter, 
   withApollo

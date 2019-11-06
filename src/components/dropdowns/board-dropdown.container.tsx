@@ -1,5 +1,5 @@
 import * as React from 'react';
-import CustomDropdown from './custom-dropdown.component';
+import { CustomDropdown } from './';
 import { gql } from 'apollo-boost';
 import { Query } from 'react-apollo';
 
@@ -33,7 +33,7 @@ const BoardDropdownContainer: React.FC<IBoardDropdownContainerProps> = ({
     {
       (result: any) => {
         const { error, loading, data } = result;
-        if(error) return <h1>Error loading data</h1>;
+        if(error) return <h1>Error loading boards</h1>;
         if(loading) return <h3>Loading...</h3>;
 
         const options: any[] = [];

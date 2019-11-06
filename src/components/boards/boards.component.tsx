@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Grid, Card, Form } from 'semantic-ui-react';
-import BoardColumn from '../board-column/board-column.component';
+import { BoardColumn } from '../board-column/';
 import CustomButton from '../custom-button/custom-button.component';
 import './boards.style.scss';
 
@@ -18,6 +18,7 @@ const Boards: React.FC<IBoardsProps> = ({
   const [newBoard, setNewBoard] = React.useState(false);
   const [boardName, setBoardName] = React.useState('');
 
+  // Handlers
   const handleBoardSubmit = () => {
     onAddNewBoard(boardName);
     setNewBoard(!newBoard);
@@ -35,14 +36,14 @@ const Boards: React.FC<IBoardsProps> = ({
           <Grid.Column key={`board${index}`}>
             <Card>
               <BoardColumn 
-                key={boardcol._id} 
-                tasks={boardcol.tasks} 
-                columnId={boardcol._id} 
+                key={`boardcol${boardcol._id}`}
+                tasks={boardcol.tasks}
+                columnId={boardcol._id}
                 columnTitle={boardcol.name}
               />
             </Card>
           </Grid.Column>
-        )
+        );
       })
     }
     <Grid.Column key={'addnewboard'}>
@@ -89,6 +90,6 @@ const Boards: React.FC<IBoardsProps> = ({
     </Grid.Column>
     </>
   );
-}
- 
+};
+
 export default Boards;

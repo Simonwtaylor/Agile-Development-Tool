@@ -13,7 +13,7 @@ const TaskCard: React.FC<any> =
     user,
   }) => {
 
-  const getCardColour = (completed: boolean) => {
+  const getCardColour = () => {
     if(completed) {
       return 'green'
     }
@@ -24,7 +24,7 @@ const TaskCard: React.FC<any> =
     <Card 
       className="task-card" 
       onClick={() => history.push(`/task/${_id}`)}
-      color={getCardColour(completed)}
+      color={getCardColour()}
     >
       <Card.Content>
         <Card.Header>
@@ -51,5 +51,5 @@ const TaskCard: React.FC<any> =
     </Card>
   );
 }
- 
+
 export default withRouter(TaskCard);

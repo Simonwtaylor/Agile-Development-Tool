@@ -1,5 +1,5 @@
 import * as React from 'react';
-import CustomButton from '../custom-button/custom-button.component';
+import { CustomButton } from '../custom-button/';
 import { auth } from '../../firebase/firebase.utils';
 import { Icon } from 'semantic-ui-react';
 import { connect } from 'react-redux';
@@ -41,7 +41,7 @@ class SignIn extends React.Component<ISignInProps, ISignInState> {
     );
   }
 }
- 
+
 const mapDispatchToProps = (dispatch: any) => ({
   signInWithGoogle: () => dispatch(googleSignInStart())
 });

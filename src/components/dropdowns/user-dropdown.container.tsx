@@ -1,5 +1,5 @@
 import * as React from 'react';
-import CustomDropdown from './custom-dropdown.component';
+import { CustomDropdown } from './';
 import { gql } from 'apollo-boost';
 import { Query } from 'react-apollo';
 
@@ -10,9 +10,9 @@ export interface IUserDropdownContainerProps {
 }
  
 const UserDropdownContainer: React.FC<IUserDropdownContainerProps> = ({
-    onSelectUser,
-    selectedUser,
-    name
+  onSelectUser,
+  selectedUser,
+  name
 }) => {
 
   const GET_ALL_USERS = gql`
@@ -32,12 +32,12 @@ const UserDropdownContainer: React.FC<IUserDropdownContainerProps> = ({
     {
       (result: any) => {
         const { error, loading, data } = result;
-        if(error) return <h1>Error loading data</h1>;
+        if(error) return <h1>Error loading users</h1>;
         if(loading) return <h3>Loading...</h3>;
 
         const options: any[] = [];
 
-        data.users.map((user: any, index: number) => {
+        data.users.map((user: any) => {
           return options.push(
             {
               key: user._id, 
@@ -60,6 +60,6 @@ const UserDropdownContainer: React.FC<IUserDropdownContainerProps> = ({
     }
     </Query>
   );
-}
+};
  
 export default UserDropdownContainer;

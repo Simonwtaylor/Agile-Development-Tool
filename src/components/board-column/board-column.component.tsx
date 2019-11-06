@@ -3,7 +3,7 @@ import { ITask } from '../../lib/types/';
 import TaskCard from '../task-card/task-card.component';
 import './board-column.styles.scss';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import CustomButton from '../custom-button/custom-button.component';
+import { CustomButton } from '../custom-button/';
 
 interface IBoardColumnProps extends RouteComponentProps {
   columnId: number;
@@ -42,5 +42,5 @@ const BoardColumn: React.FC<IBoardColumnProps> =
     </div> 
   );
 }
- 
+
 export default withRouter(BoardColumn);

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button } from 'semantic-ui-react';
 
-const CustomButton: React.SFC<any> = 
+const CustomButton: React.FC<any> = 
   ({
     children, 
     color,
@@ -17,5 +17,5 @@ const CustomButton: React.SFC<any> =
     </Button>
   );
 }
- 
+
 export default CustomButton;
