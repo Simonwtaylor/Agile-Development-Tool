@@ -1,12 +1,14 @@
 import * as React from 'react';
 import { gql } from 'apollo-boost';
 import { withRouter } from 'react-router-dom';
-import TaskDetail from './task-detail.component';
+import { 
+  TaskDetail,
+  TaskDetailMode,
+} from './';
 import {  withApollo, compose } from 'react-apollo';
 import { ITask } from '../../lib/types';
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { Loader } from 'semantic-ui-react';
-import { TaskDetailMode } from './task-detail.enum';
 
 export interface ITaskDetailContainerProps {
   match?: any;
@@ -64,25 +66,27 @@ const TaskDetailContainer: React.FC<ITaskDetailContainerProps> = ({
 }) => {
 
   const [completeTask] = useMutation(COMPLETE_TASK, {
-    client
+    client,
   });
 
   const [updateTask] = useMutation(UPDATE_TASK, {
-    client
+    client,
   });
 
   const handleTaskComplete = async (id: string) => {
-    await completeTask({ variables: {
-      id
-    }
+    await completeTask({
+      variables: {
+        id,
+      }
     });
 
     history.push('/board');
   };
 
   const handleTaskSave = async (task: ITask) => {
-    await updateTask({ variables: {
-      t: {...task}
+    await updateTask({
+      variables: {
+        t: {...task},
       }
     });
 
@@ -91,16 +95,16 @@ const TaskDetailContainer: React.FC<ITaskDetailContainerProps> = ({
 
   const { loading, error, data } = useQuery(GET_TASK, {
     variables: { 
-      id: match.params.id
+      id: match.params.id,
     },
-    client
+    client,
   });
 
-  if(error) return <h1>Error loading data</h1>;
+  if(error) return <h1>Error loading task 😞</h1>;
   if(loading) return <Loader />;
 
   return (
-    <TaskDetail 
+    <TaskDetail
       onTaskSave={handleTaskSave}
       taskDetail={data.task}
       buttonText={'Update Task'}
@@ -112,5 +116,5 @@ const TaskDetailContainer: React.FC<ITaskDetailContainerProps> = ({
  
 export default compose(
   withRouter, 
-  withApollo
+  withApollo,
 )(TaskDetailContainer);

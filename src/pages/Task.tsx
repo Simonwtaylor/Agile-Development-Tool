@@ -3,15 +3,17 @@ import { Grid } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setCurrentTask } from '../redux/tasks/tasks.action';
-import TaskDetailContainer from '../components/task-detail/task-detail.container';
-import TaskAddContainer from '../components/task-detail/task-add.container';
+import {
+  TaskDetailContainer,
+  TaskAddContainer,
+} from '../components/task-detail/';
 
 const Task: React.FC<any> = ({
   match,
-  setCurrentTask
+  setCurrentTask,
 }) => {
 
-  setCurrentTask(match.params.id)
+  setCurrentTask(match.params.id);
   
   return (
     <>
@@ -29,10 +31,10 @@ const Task: React.FC<any> = ({
       </Grid>
     </>
   );
-}
+};
 
 const mapDispatchToProps = (dispatch: any) => ({
-  setCurrentTask: (taskId: any) => dispatch(setCurrentTask(taskId))
+  setCurrentTask: (taskId: any) => dispatch(setCurrentTask(taskId)),
 });
 
 export default connect(null, mapDispatchToProps)(withRouter(Task));

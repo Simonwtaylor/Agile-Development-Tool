@@ -1,17 +1,17 @@
 import React from 'react';
 import './App.css';
 import { Switch, Redirect, Route } from 'react-router-dom';
-import Board from './pages/Board';
-import Navbar from './components/navbar/navbar.component';
+import { Navbar } from './components/navbar';
 import { Grid } from 'semantic-ui-react';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
+import Board from './pages/Board';
 import Login from './pages/Login';
 import User from './pages/User';
 import Team from './pages/Team';
-import { setCurrentUser } from './redux/user/user.action';
-import { connect } from 'react-redux';
 import Backlog from './pages/Backlog';
 import Task from './pages/Task';
+import { setCurrentUser } from './redux/user/user.action';
+import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from './redux/user/user.selector';
 
@@ -22,7 +22,6 @@ export interface AppProps {
  
 export interface AppState {
   activeItem: string;
-  
 }
  
 class App extends React.Component<AppProps, AppState> {
@@ -38,13 +37,13 @@ class App extends React.Component<AppProps, AppState> {
   componentDidMount() {
     const { setCurrentUser } = this.props;
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (user) => {
-      if(user) {
+      if (user) {
         const userRef = await createUserProfileDocument(user, {});
 
-        if(userRef) {
+        if (userRef) {
           setCurrentUser({
             id: userRef.id, 
-            ...userRef
+            ...userRef,
           });
         }
       }
@@ -56,8 +55,8 @@ class App extends React.Component<AppProps, AppState> {
     this.unsubscribeFromAuth();
   }
 
-  handleItemClick = (newPage: string) => {
-    this.setState({activeItem: newPage});
+  handleItemClick = (activeItem: string) => {
+    this.setState({ activeItem } );
   }
 
   render() { 
@@ -103,11 +102,11 @@ class App extends React.Component<AppProps, AppState> {
 }
 
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser
+  currentUser: selectCurrentUser,
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-  setCurrentUser: (user: any) => dispatch(setCurrentUser(user))
+  setCurrentUser: (user: any) => dispatch(setCurrentUser(user)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

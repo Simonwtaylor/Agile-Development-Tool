@@ -1,13 +1,9 @@
 import * as React from 'react';
-import SignIn from '../components/sign-in/sign-in.component';
+import { SignIn } from '../components/sign-in/';
 
-export interface ILoginProps {
-  
-}
+export interface ILoginProps { }
  
-export interface ILoginState {
-  
-}
+export interface ILoginState { }
  
 class Login extends React.Component<ILoginProps, ILoginState> {
   

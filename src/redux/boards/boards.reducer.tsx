@@ -1,6 +1,5 @@
 import { BoardsActionTypes } from "./boards.types";
 
-
 const INITIAL_STATE = {
   boards: [{
     columnId: 1,

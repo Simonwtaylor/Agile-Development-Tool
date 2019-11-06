@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { ITask } from '../lib/types';
-import TaskCard from '../components/task-card/task-card.component';
+import { TaskCard } from '../components/task-card/';
 import { createStructuredSelector } from 'reselect';
 import { selectBacklogTasks } from '../redux/backlog/backlog.selector';
 import { Grid } from 'semantic-ui-react';
@@ -19,6 +19,7 @@ class Backlog extends React.Component<IBacklogProps, IBacklogState> {
     super(props);
     this.state = {};
   }
+
   render() { 
     const { tasks } = this.props;
 
@@ -51,7 +52,7 @@ class Backlog extends React.Component<IBacklogProps, IBacklogState> {
 }
 
 const mapStateToProps = createStructuredSelector({
-  tasks: selectBacklogTasks
+  tasks: selectBacklogTasks,
 });
 
 export default connect(mapStateToProps)(Backlog);

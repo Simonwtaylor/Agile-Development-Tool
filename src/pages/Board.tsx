@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectTasks } from '../redux/tasks/tasks.selector';
 import { selectBoards } from '../redux/boards/boards.selector';
-import BoardsContainer from '../components/boards/boards.container';
+import { BoardsContainer } from '../components/boards';
 
 export interface IBoardProps {
   boards: any[];
@@ -12,13 +12,13 @@ export interface IBoardProps {
 }
  
 export interface IBoardState {
+
 }
 
 class Board extends React.Component<IBoardProps, IBoardState>{
   constructor(props: IBoardProps) {
     super(props);
-    this.state = {
-    };
+    this.state = { };
   }
 
   render() {
@@ -37,7 +37,7 @@ class Board extends React.Component<IBoardProps, IBoardState>{
 
 const mapStateToProps = createStructuredSelector({
   boards: selectBoards, 
-  tasks: selectTasks
+  tasks: selectTasks,
 });
 
 export default connect(mapStateToProps)(Board);

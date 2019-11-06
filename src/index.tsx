@@ -15,7 +15,7 @@ import { ApolloProvider } from 'react-apollo';
 import { getCurrentUser } from './firebase/firebase.utils';
 
 const httpLink = createHttpLink({
-    uri: process.env.REACT_APP_GRAPHQL_URL
+  uri: process.env.REACT_APP_GRAPHQL_URL,
 });
 
 const cache = new InMemoryCache();
@@ -23,8 +23,6 @@ const cache = new InMemoryCache();
 const authLink = setContext(async (_, { headers }) => {
 
   const userData: any = await getCurrentUser();
-
-  console.log(userData);
 
   // get the authentication token from local storage if it exists
   let token = userData.ma;
@@ -39,8 +37,8 @@ const authLink = setContext(async (_, { headers }) => {
 });
 
 const client = new ApolloClient({
-    link: authLink.concat(httpLink), 
-    cache,
+  link: authLink.concat(httpLink), 
+  cache,
 });
 
 ReactDOM.render(

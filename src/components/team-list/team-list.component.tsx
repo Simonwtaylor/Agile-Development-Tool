@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { Grid, Card, Button } from 'semantic-ui-react';
-import MemberCard from '../member-card/member-card.component';
-import UserDropdownContainer from '../dropdowns/user-dropdown.container';
+import { MemberCard } from '../member-card/';
+import { UserDropdownContainer } from '../dropdowns';
 
 export interface ITeamListProps {
   team: any;
   onAddUserToTeam: (boardId: string, userId: string) => void;
 }
- 
+
 const TeamList: React.FC<ITeamListProps> = ({
   team,
   onAddUserToTeam,
@@ -17,18 +17,17 @@ const TeamList: React.FC<ITeamListProps> = ({
   const [newUser, setNewUser] = React.useState('');
 
   const toggleOrSubmitNewUserClick = () => {
-    if (!addUser) {
-      setAddUser(!addUser);
-    }
-    else {
+    if (addUser) {
       onAddUserToTeam(team._id, newUser);
       setAddUser(!addUser);
     }
+
+    setAddUser(!addUser);
   };
 
   const handleUserChange = (selectUser: any) => {
     setNewUser(selectUser.value);
-  }
+  };
 
   return (
     <Grid columns={4} padded>
@@ -84,6 +83,6 @@ const TeamList: React.FC<ITeamListProps> = ({
       </Grid.Row>
     </Grid>
   );
-}
+};
  
 export default TeamList;

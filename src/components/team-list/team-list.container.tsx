@@ -1,5 +1,5 @@
 import * as React from 'react';
-import TeamList from './team-list.component';
+import { TeamList } from './';
 import { gql } from 'apollo-boost';
 import { Query, withApollo } from 'react-apollo';
 import { useMutation } from '@apollo/react-hooks';
@@ -35,22 +35,19 @@ const TeamListContainer: React.FC<ITeamListContainerProps> = ({
 }) => {
 
   const [addUserToTeam] = useMutation(ADD_USER_TO_TEAM, {
-    client
+    client,
   });
 
   const handleAddUserToTeam = (boardId: string, userId: string) => {
-    console.log(`BoardId: ${boardId}`);
-    console.log(`userId: ${userId}`);
-
-    addUserToTeam({ variables: {
-      userId,
-      _id: boardId,
-      }
+    addUserToTeam({
+      variables: {
+        userId,
+        _id: boardId,
+      },
     });
   };
 
   return (
-
     <Query query={GET_ALL_TEAMS}>
     {
       (result: any) => {
@@ -74,6 +71,6 @@ const TeamListContainer: React.FC<ITeamListContainerProps> = ({
     }
     </Query>
   );
-}
+};
 
 export default withApollo(TeamListContainer);

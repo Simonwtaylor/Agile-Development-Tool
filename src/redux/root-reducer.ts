@@ -10,5 +10,5 @@ export default combineReducers({
   boards: BoardsReducer,
   tasks: TasksReducer,
   team: TeamReducer,
-  backlog: BacklogReducer
+  backlog: BacklogReducer,
 });

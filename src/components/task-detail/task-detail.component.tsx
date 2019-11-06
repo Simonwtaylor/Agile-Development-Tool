@@ -53,32 +53,11 @@ const TaskDetail: React.FC<any> = ({
   };
 
   const handleCompleteClick = () => {
-    const {
-      _id,
-    } = task;
-    onTaskComplete(_id);
+    onTaskComplete(task._id);
   };
 
   const handleSubmitClick = () => {
-    const {
-      _id,
-      title,
-      description,
-      completed,
-      storyPoints,
-      userId,
-      boardId,
-    } = task;
-
-    onTaskSave({
-      _id,
-      title,
-      completed,
-      description,
-      storyPoints,
-      userId,
-      boardId
-    });
+    onTaskSave({...task});
   };
 
   const getButtonFill = (completed: boolean): boolean => {
@@ -160,6 +139,6 @@ const TaskDetail: React.FC<any> = ({
       </Form>
     </Card>
   );
-}
+};
 
 export default TaskDetail;

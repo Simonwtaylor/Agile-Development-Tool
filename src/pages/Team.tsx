@@ -1,9 +1,7 @@
 import * as React from 'react';
-import TeamListContainer from '../components/team-list/team-list.container';
+import { TeamListContainer } from '../components/team-list/';
 
-export interface ITeamProps {
-
-}
+export interface ITeamProps { }
  
 const Team: React.FC<ITeamProps> = ({}) => {
 
