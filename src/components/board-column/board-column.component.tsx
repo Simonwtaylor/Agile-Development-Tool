@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ITask } from '../../lib/types/';
-import TaskCard from '../task-card/task-card.component';
+import { TaskCard } from '../task-card';
 import './board-column.styles.scss';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { CustomButton } from '../custom-button/';

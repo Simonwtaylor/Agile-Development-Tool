@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Query, withApollo, compose } from 'react-apollo';
 import { gql } from 'apollo-boost';
-import Boards from './boards.component';
+import { Boards } from './';
 import { useMutation } from '@apollo/react-hooks';
 import { withRouter } from 'react-router-dom';
 

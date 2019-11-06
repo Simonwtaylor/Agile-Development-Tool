@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Grid, Card, Form } from 'semantic-ui-react';
 import { BoardColumn } from '../board-column/';
-import CustomButton from '../custom-button/custom-button.component';
+import { CustomButton } from '../custom-button/';
 import './boards.style.scss';
 
 export interface IBoardsProps {
