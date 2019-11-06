@@ -4,7 +4,7 @@ import { Input } from 'semantic-ui-react';
 const CustomInput: React.FC<any> = ({
   handleChange, 
   label,
-  ...otherProps,
+  ...otherProps
 }) => {
   return (
     <div className="group">
