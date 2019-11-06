@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { gql } from 'apollo-boost';
-import TaskDetail from './task-detail.component';
+import { TaskDetail } from './';
 import { withApollo, compose } from 'react-apollo';
 import { ITask } from '../../lib/types';
 import { useMutation } from '@apollo/react-hooks';
@@ -29,15 +29,15 @@ const TaskAddContainer: React.FC<ITaskAddContainerProps> = ({
   history,
 }) => {
 
-  // const client = use
   const [addTask] = useMutation(ADD_TASK, {
-    client
+    client,
   });
 
   const handleTaskSave = (task: ITask) => {
     task.completed = false;
-    addTask({ variables: {
-      t: {...task}
+    addTask({ 
+      variables: {
+        t: {...task},
       }
     });
 
@@ -51,9 +51,9 @@ const TaskAddContainer: React.FC<ITaskAddContainerProps> = ({
       buttonText={'Add Task'}
     />
   );
-}
- 
+};
+
 export default compose(
   withRouter, 
-  withApollo
+  withApollo,
 )(TaskAddContainer);

@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { Card, Form } from 'semantic-ui-react';
-import CustomButton from '../custom-button/custom-button.component';
+import { CustomButton } from '../custom-button';
 import './task-detail.styles.scss';
 import { ITask } from '../../lib/types';
-import BoardDropdownContainer from '../dropdowns/board-dropdown.container';
-import UserDropdownContainer from '../dropdowns/user-dropdown.container';
+import {
+  BoardDropdownContainer,
+  UserDropdownContainer,
+} from '../dropdowns';
 import { TaskDetailMode } from './task-detail.enum';
 
 export interface ITaskDetailProps {
@@ -24,16 +26,18 @@ const TaskDetail: React.FC<any> = ({
 }) => {
   const [task, setTask] = React.useState(taskDetail);
 
-  const handleFormChange = (e:any) => {
-    const taskNew = {...task}
-
+  const handleFormChange = (e: any) => {
+    const taskNew = {...task};
     let value = e.target.value;
-    if(e.target.name === 'storyPoints') {
+
+    if (e.target.name === 'storyPoints') {
       value = Number.parseFloat(value);
     }
+
     taskNew[e.target.name] = value;
+
     setTask({
-      ...taskNew
+      ...taskNew,
     });
   };
 
@@ -77,7 +81,7 @@ const TaskDetail: React.FC<any> = ({
     });
   };
 
-  const getButtonFill = (completed: boolean) => {
+  const getButtonFill = (completed: boolean): boolean => {
     if (!completed) {
       return true;
     }
@@ -101,7 +105,6 @@ const TaskDetail: React.FC<any> = ({
                 >
                 </CustomButton>
               )
-
             }
           </Card.Header>
         </Card.Content>

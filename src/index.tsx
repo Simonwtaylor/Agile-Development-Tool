@@ -20,13 +20,14 @@ const httpLink = createHttpLink({
 
 const cache = new InMemoryCache();
 
-
 const authLink = setContext(async (_, { headers }) => {
 
   const userData: any = await getCurrentUser();
 
+  console.log(userData);
+
   // get the authentication token from local storage if it exists
-  let token = userData.ra;
+  let token = userData.ma;
 
   // return the headers to the context so httpLink can read them
   return {
