@@ -100,7 +100,7 @@ const TaskDetailContainer: React.FC<ITaskDetailContainerProps> = ({
     client,
   });
 
-  if(error) return <h1>Error loading task 😞</h1>;
+  if(error) return <h1>Error loading task <span role="img" aria-label="locks">😞</span></h1>;
   if(loading) return <Loader />;
 
   return (

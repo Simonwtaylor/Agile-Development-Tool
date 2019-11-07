@@ -5,6 +5,7 @@ import { withApollo, compose } from 'react-apollo';
 import { ITask } from '../../lib/types';
 import { useMutation } from '@apollo/react-hooks';
 import { withRouter } from 'react-router-dom';
+import { GET_ALL_BOARDS } from '../boards';
 
 export interface ITaskAddContainerProps {
   client?: any;
@@ -38,7 +39,12 @@ const TaskAddContainer: React.FC<ITaskAddContainerProps> = ({
     addTask({ 
       variables: {
         t: {...task},
-      }
+      },
+      refetchQueries: [
+        {
+          query: GET_ALL_BOARDS
+        }
+      ]
     });
 
     history.push('/');

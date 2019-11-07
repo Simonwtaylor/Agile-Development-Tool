@@ -9,34 +9,36 @@ export interface IBoardsContainerProps {
   client?: any;
   history?: any;
 }
- 
+
+export const GET_ALL_BOARDS = gql`
+{
+  boards {
+    _id
+    name 
+    tasks {
+      _id
+      title
+      description
+      completed
+      storyPoints
+      userId
+      boardId
+      user {
+        _id
+        photoURL
+        displayName
+      }
+    }
+  }
+}
+`;
+
 const BoardsContainer: React.FC<IBoardsContainerProps> = ({
   client,
   history,
 }) => {
 
-  const GET_ALL_BOARDS = gql`
-    {
-      boards {
-        _id
-        name 
-        tasks {
-          _id
-          title
-          description
-          completed
-          storyPoints
-          userId
-          boardId
-          user {
-            _id
-            photoURL
-            displayName
-          }
-        }
-      }
-    }
-  `;
+ 
 
   const ADD_BOARD = gql`
     mutation addBoard($b: addBoard!) {
