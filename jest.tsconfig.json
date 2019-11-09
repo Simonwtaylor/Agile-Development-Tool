@@ -1,0 +1,43 @@
+{
+  "compilerOptions": {
+    "declaration": false,
+    "noEmit": true,
+    "downlevelIteration": true,
+    "esModuleInterop": false,
+    "experimentalDecorators": true,
+    "importHelpers": false,
+    "inlineSourceMap": true,
+    "lib": [
+      "es2017",
+      "dom"
+    ],
+    "jsx": "react",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noEmitOnError": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "removeComments": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "sourceMap": false,
+    "strict": true,
+    "target": "es6",
+    "types": [
+      "jest",
+      "node"
+    ],
+    "typeRoots": [
+      "node_modules/@types"
+    ]
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

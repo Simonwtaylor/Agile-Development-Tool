@@ -8,7 +8,7 @@ export interface ITeamListContainerProps {
   client?: any;
 }
 
-const GET_ALL_TEAMS = gql`
+export const GET_ALL_TEAMS = gql`
   query {
     teams {
       _id
@@ -22,7 +22,7 @@ const GET_ALL_TEAMS = gql`
   }
 `;
 
-const ADD_USER_TO_TEAM = gql`
+export const ADD_USER_TO_TEAM = gql`
   mutation addUserToTeam($_id: String!, $userId: String!) {
     addUserToTeam(_id: $_id, userId: $userId) {
       _id
@@ -53,8 +53,8 @@ const TeamListContainer: React.FC<ITeamListContainerProps> = ({
       (result: any) => {
         const { loading, error, data } = result;
 
-        if(error) return <h1>Error loading data</h1>;
-        if(loading) return <h3>Loading...</h3>
+        if(error) return <h1>Error loading teams</h1>;
+        if(loading) return <h3>Loading teams...</h3>
 
         const teamElements = [];
 

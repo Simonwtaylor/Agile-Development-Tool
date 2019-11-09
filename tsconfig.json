@@ -17,9 +17,10 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "typeRoots": ["src/typings/*.d.ts", "node_modules/@types"]
   },
   "include": [
-    "src"
+    "src/**/*"
   ]
 }

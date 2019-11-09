@@ -1,17 +1,26 @@
 import * as React from 'react';
 import { Card, Label } from 'semantic-ui-react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 
-const TaskCard: React.FC<any> = 
-  ({
-    _id, 
-    title, 
-    storyPoints,
-    description,  
-    completed,
-    history,
-    user,
-  }) => {
+export interface ITaskCardProps extends RouteComponentProps {
+  _id: string;
+  title: string;
+  storyPoints: number;
+  description: string;
+  completed: boolean;
+  history: any;
+  user: any;
+}
+
+const TaskCard: React.FC<ITaskCardProps> = ({
+  _id, 
+  title, 
+  storyPoints,
+  description,  
+  completed,
+  history,
+  user,
+}) => {
 
   const getCardColour = () => {
     if(completed) {
