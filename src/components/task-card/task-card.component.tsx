@@ -1,15 +1,14 @@
 import * as React from 'react';
 import { Card, Label } from 'semantic-ui-react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
 
-export interface ITaskCardProps extends RouteComponentProps {
+export interface ITaskCardProps {
   _id: string;
   title: string;
   storyPoints: number;
   description: string;
   completed: boolean;
-  history: any;
-  user: any;
+  onTaskClick: (id: string) => void;
+  user?: any;
 }
 
 const TaskCard: React.FC<ITaskCardProps> = ({
@@ -18,9 +17,13 @@ const TaskCard: React.FC<ITaskCardProps> = ({
   storyPoints,
   description,  
   completed,
-  history,
+  onTaskClick,
   user,
 }) => {
+
+  const handleCardClick = () => {
+    onTaskClick(_id);
+  };
 
   const getCardColour = () => {
     if(completed) {
@@ -32,7 +35,7 @@ const TaskCard: React.FC<ITaskCardProps> = ({
   return (
     <Card 
       className="task-card" 
-      onClick={() => history.push(`/task/${_id}`)}
+      onClick={handleCardClick}
       color={getCardColour()}
     >
       <Card.Content>
@@ -61,4 +64,4 @@ const TaskCard: React.FC<ITaskCardProps> = ({
   );
 }
 
-export default withRouter(TaskCard);
+export default TaskCard;

@@ -5,8 +5,9 @@ import { TaskCard } from '../components/task-card/';
 import { createStructuredSelector } from 'reselect';
 import { selectBacklogTasks } from '../redux/backlog/backlog.selector';
 import { Grid } from 'semantic-ui-react';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 
-export interface IBacklogProps {
+export interface IBacklogProps extends RouteComponentProps {
   tasks: ITask[];
 }
  
@@ -20,8 +21,14 @@ class Backlog extends React.Component<IBacklogProps, IBacklogState> {
     this.state = {};
   }
 
+  private handleTaskClick = (id: string) => {
+    this.props.history.push(`/task/${id}`);
+  };
+
   render() { 
     const { tasks } = this.props;
+
+
 
     return (
       <>
@@ -30,16 +37,12 @@ class Backlog extends React.Component<IBacklogProps, IBacklogState> {
           <Grid.Row>
             <Grid.Column>
             {
-              tasks.map((task: any) => {
+              tasks.map((task: ITask) => {
                 return (
                   <TaskCard 
-                    assignedColumn={1}
-                    assignedUser={""}
-                    description={task.description}
-                    id={task.id}
-                    key={task.id}
-                    storyPoints={task.storyPoints}
-                    title={task.title}
+                    onTaskClick={this.handleTaskClick}
+                    key={task._id}
+                    {...task}
                   />)
               })
             }
@@ -55,4 +58,4 @@ const mapStateToProps = createStructuredSelector({
   tasks: selectBacklogTasks,
 });
 
-export default connect(mapStateToProps)(Backlog);
+export default connect(mapStateToProps)(withRouter(Backlog));

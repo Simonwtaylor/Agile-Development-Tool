@@ -11,12 +11,16 @@ interface IBoardColumnProps extends RouteComponentProps {
   tasks: ITask[];
 }
  
-const BoardColumn: React.FC<IBoardColumnProps> = 
-  ({ 
-    columnTitle, 
-    tasks,
-    history,
-  }) => {
+const BoardColumn: React.FC<IBoardColumnProps> = ({ 
+  columnTitle, 
+  tasks,
+  history,
+}) => {
+
+  const handleTaskClick = (id: string) => {
+    history.push(`/task/${id}`);
+  };
+
   return (
     <div className="col card">
       <div className="card-body card-container">
@@ -32,6 +36,7 @@ const BoardColumn: React.FC<IBoardColumnProps> =
           tasks.map((task, index) => {
             return(
               <TaskCard 
+                onTaskClick={handleTaskClick}
                 key={`taskcard${index}`}
                 {...task}
               />

@@ -8,32 +8,19 @@ describe('Task Detail - Component', () => {
   
   beforeEach(() => {
     props = {
+      onTaskClick: () => null,
       _id: '11231',
       completed: false,
       description: 'example',
-      history: null,
-      location: {
-        hash: '',
-        pathname: '',
-        search: '',
-        state: null,
-      },
-      match: {
-        isExact: true,
-        params: {},
-        path: '',
-        url: ''
-      },
       storyPoints: 5,
       title: 'Example 1',
       user: null,
-      staticContext: undefined,
     };
   });
 
   it('Should render properly', () => {
     const wrap = shallow(
-      <TaskCard.WrappedComponent
+      <TaskCard
         {...props}
       />
     );
