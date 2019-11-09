@@ -15,6 +15,9 @@ module.exports = {
       tsConfig: "jest.tsconfig.json",
     }
   },
+  moduleNameMapper: {
+    "^.+\\.(css|less|scss)$": "identity-obj-proxy"
+  },
   coveragePathIgnorePatterns: [
     "/node_modules/",
     "enzyme.js"

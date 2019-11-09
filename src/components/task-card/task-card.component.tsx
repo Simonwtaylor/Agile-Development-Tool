@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Card, Label } from 'semantic-ui-react';
+import './task-card.styles.scss';
 
 export interface ITaskCardProps {
   _id: string;
@@ -52,7 +53,11 @@ const TaskCard: React.FC<ITaskCardProps> = ({
           />)
           }
           {title}
-          <Label style={{ float: 'right'}} circular color={'red'} key={'red'}>
+          <Label
+            circular
+            color={'red'}
+            key={'red'}
+          >
             {storyPoints}
           </Label>
         </Card.Header>

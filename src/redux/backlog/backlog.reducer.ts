@@ -28,7 +28,7 @@ const INITIAL_STATE: IInitialState = {
       title: 'Do something even cooler'
     },
     {
-      _id: '3', 
+      _id: '4', 
       completed: false,
       description: 'This is an example task', 
       storyPoints: 2, 

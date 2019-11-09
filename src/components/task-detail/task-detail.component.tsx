@@ -68,7 +68,7 @@ const TaskDetail: React.FC<any> = ({
   };
 
   return (
-    <Card>
+    <Card className={'task-detail'}>
       <Form>
         <Card.Content>
           <Card.Header>
@@ -80,9 +80,7 @@ const TaskDetail: React.FC<any> = ({
                   inverted={getButtonFill(task.completed)}
                   icon='check' 
                   onClick={handleCompleteClick}
-                  style={{ float: 'right' }}
-                >
-                </CustomButton>
+                />
               )
             }
           </Card.Header>
@@ -109,7 +107,7 @@ const TaskDetail: React.FC<any> = ({
           <Form.Field>
             <label>Story Points</label>
             <input 
-              placeholder='Story Points' 
+              placeholder='Story Points...' 
               value={task!.storyPoints} 
               type='number' 
               name={'storyPoints'}
