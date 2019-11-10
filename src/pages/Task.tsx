@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Grid } from 'semantic-ui-react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setCurrentTask } from '../redux/tasks/tasks.action';
 import {
@@ -8,7 +8,11 @@ import {
   TaskAddContainer,
 } from '../components/task-detail/';
 
-const Task: React.FC<any> = ({
+export interface ITaskProps extends RouteComponentProps<any>  {
+  setCurrentTask: (id: string) => void;
+}
+
+const Task: React.FC<ITaskProps> = ({
   match,
   setCurrentTask,
 }) => {

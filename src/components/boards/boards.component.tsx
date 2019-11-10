@@ -48,7 +48,7 @@ const Boards: React.FC<IBoardsProps> = ({
       })
     }
     <Grid.Column key={'addnewboard'}>
-      <Card className={'board'}>
+      <Card className={'board add-new'}>
         <div className="col card">
           <div className="card-body card-container">
             {(!newBoard && 

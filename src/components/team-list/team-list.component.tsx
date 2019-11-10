@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Grid, Card, Button } from 'semantic-ui-react';
 import { MemberCard } from '../member-card/';
 import { UserDropdownContainer } from '../dropdowns';
+import './team-list.styles.scss';
 
 export interface ITeamListProps {
   team: any;
@@ -30,7 +31,7 @@ const TeamList: React.FC<ITeamListProps> = ({
   };
 
   return (
-    <Grid columns={4} padded>
+    <Grid columns={4} padded className={'team-list'}>
       <h2>{team.name}</h2>
       <Grid.Row>
       {
@@ -49,11 +50,7 @@ const TeamList: React.FC<ITeamListProps> = ({
       }
         <Grid.Column>
           <Card 
-            className="task-card"
-            style={{
-              border: '1px dashed darkgrey',
-              backgroundColor: 'rgba(255, 255, 255, 0.3)',
-            }}
+            className="task-card add-new"
           >
             <Card.Content>
               <Card.Header>

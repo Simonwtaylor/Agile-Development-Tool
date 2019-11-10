@@ -3,22 +3,12 @@ import { SignIn } from '../components/sign-in/';
 
 export interface ILoginProps { }
  
-export interface ILoginState { }
- 
-class Login extends React.Component<ILoginProps, ILoginState> {
-  
-  constructor(props: ILoginProps) {
-    super(props);
-    this.state = {  };
-  }
-
-  render() { 
-    return (
-      <div className=''>
-        <SignIn />
-      </div>
-    );
-  }
+const Login: React.FC<ILoginProps> = () => { 
+  return (
+    <div className='login'>
+      <SignIn />
+    </div>
+  );
 }
- 
+
 export default Login;

@@ -155,10 +155,6 @@ describe('Boards - Component', () => {
       wrap
     ).not.toBeNull();
 
-    console.log(
-      wrap.debug()
-    );
-
     expect(
       wrap
         .find(Grid.Column)
