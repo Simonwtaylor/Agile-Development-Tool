@@ -3,22 +3,14 @@ import './member-card.styles.scss';
 import { Card, Label, Button } from 'semantic-ui-react';
 
 export interface IMemberCardProps {
-  _id: string;
   displayName: string;
-  photoURL: string;
-  email: string;
-  uid: string;
   role: string,
   currentlyOn: string, 
   color?: "red" | "orange" | "yellow" | "olive" | "green" | "teal" | "blue" | "violet" | "purple" | "pink" | "brown" | "grey" | "black" | undefined
 }
 
 const MemberCard: React.FC<IMemberCardProps> = ({
-  _id,
   displayName,
-  photoURL,
-  email,
-  uid, 
   role, 
   currentlyOn,
   color
@@ -36,7 +28,7 @@ const MemberCard: React.FC<IMemberCardProps> = ({
           {role}
         </Card.Meta>
         <Card.Description>
-          Currently On: <a href={`/team`}>{currentlyOn}</a>
+          Currently On:<a href={`/team`}>{currentlyOn}</a>
         </Card.Description>
       </Card.Content>
       <Card.Content extra>

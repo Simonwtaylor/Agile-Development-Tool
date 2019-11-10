@@ -5,7 +5,7 @@ import './board-column.styles.scss';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { CustomButton } from '../custom-button/';
 
-interface IBoardColumnProps extends RouteComponentProps {
+export interface IBoardColumnProps extends RouteComponentProps<any> {
   columnId: number;
   columnTitle: string;
   tasks: ITask[];
@@ -18,7 +18,15 @@ const BoardColumn: React.FC<IBoardColumnProps> = ({
 }) => {
 
   const handleTaskClick = (id: string) => {
-    history.push(`/task/${id}`);
+    if (history instanceof History) {
+      history.push(`/task/${id}`);
+    }
+  };
+
+  const handleAddClick = () => {
+    if (history instanceof History) {
+      history.push(`/task/new`);
+    }
   };
 
   return (
@@ -28,7 +36,7 @@ const BoardColumn: React.FC<IBoardColumnProps> = ({
         <CustomButton 
           inverted={true}
           color={'green'}
-          onClick={() => history.push(`/task/new`)}
+          onClick={handleAddClick}
         >
           <span role="img" aria-label="save">➕</span> Add New Task
         </CustomButton>

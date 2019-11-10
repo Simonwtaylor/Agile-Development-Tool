@@ -3,9 +3,10 @@ import { Grid, Card, Form } from 'semantic-ui-react';
 import { BoardColumn } from '../board-column/';
 import { CustomButton } from '../custom-button/';
 import './boards.style.scss';
+import { IBoard } from '../../lib/types';
 
 export interface IBoardsProps {
-  boards: any[];
+  boards: IBoard[];
   onAddNewBoard: (name: string) => void;
 }
  

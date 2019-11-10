@@ -23,8 +23,6 @@ describe('Custom Button - Component', () => {
       wrap
     ).not.toBeNull();
 
-    console.log(wrap.debug());
-
     expect(
       wrap
         .find(Button)
