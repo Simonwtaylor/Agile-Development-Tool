@@ -28,8 +28,6 @@ class Backlog extends React.Component<IBacklogProps, IBacklogState> {
   render() { 
     const { tasks } = this.props;
 
-
-
     return (
       <>
         <h1>Backlog <span role="img" aria-label="backlog">📓</span></h1>

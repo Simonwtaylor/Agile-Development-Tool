@@ -5,18 +5,16 @@ import {
   TaskDetail,
   TaskDetailMode,
 } from './';
-import {  withApollo, compose } from 'react-apollo';
 import { ITask } from '../../lib/types';
-import { useMutation, useQuery } from '@apollo/react-hooks';
+import { useMutation, useQuery, useApolloClient } from '@apollo/react-hooks';
 import { Loader } from 'semantic-ui-react';
 
 export interface ITaskDetailContainerProps {
   match?: any;
-  client?: any;
   history?: any;
 }
 
-const GET_TASK = gql`
+export const GET_TASK = gql`
   query getTask($id: String!){
     task(_id: $id) {
       _id
@@ -30,7 +28,7 @@ const GET_TASK = gql`
   }
 `;
 
-const UPDATE_TASK = gql`
+export const UPDATE_TASK = gql`
   mutation updateTask($t: task!) {
     updateTask(task: $t) {
       _id
@@ -44,7 +42,7 @@ const UPDATE_TASK = gql`
   }
 `;
 
-const COMPLETE_TASK = gql`
+export const COMPLETE_TASK = gql`
   mutation completeTask($id: String!) {
     completeTask(_id: $id) {
       _id
@@ -61,9 +59,10 @@ const COMPLETE_TASK = gql`
  
 const TaskDetailContainer: React.FC<ITaskDetailContainerProps> = ({
   match, 
-  client,
   history, 
 }) => {
+
+  const client = useApolloClient();
 
   const [completeTask] = useMutation(COMPLETE_TASK, {
     client,
@@ -114,7 +113,4 @@ const TaskDetailContainer: React.FC<ITaskDetailContainerProps> = ({
   );
 }
  
-export default compose(
-  withRouter, 
-  withApollo,
-)(TaskDetailContainer);
+export default withRouter(TaskDetailContainer);

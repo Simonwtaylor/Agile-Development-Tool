@@ -1,12 +1,15 @@
 import * as React from 'react';
-import { Button } from 'semantic-ui-react';
+import { Button, ButtonProps } from 'semantic-ui-react';
 
-const CustomButton: React.FC<any> = 
-  ({
+export interface ICustomButtonProps extends ButtonProps {
+
+}
+
+const CustomButton: React.FC<ICustomButtonProps> = ({
     children, 
     color,
     ...otherProps
-  }) => {
+}) => {
   return (
     <Button
       className='custom-button'

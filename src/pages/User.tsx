@@ -9,7 +9,7 @@ import { selectCurrentUser } from '../redux/user/user.selector';
 export interface IUserProps {
   user?: any;
   history?: any;
-  setCurrentUser?: any;
+  setCurrentUser: (user: any|null) => void;
 }
  
 const User: React.FC<IUserProps> = ({
@@ -18,7 +18,7 @@ const User: React.FC<IUserProps> = ({
   setCurrentUser,
 }) => {
   return (
-    <>
+    <div className={'user'}>
       <h1>{user.displayName}'s Settings </h1>
       <img 
         width={25} 
@@ -36,12 +36,12 @@ const User: React.FC<IUserProps> = ({
       }>
         Log Out 
       </CustomButton>
-    </>
+    </div>
   );
 };
 
 const mapDispatchToProps = (dispatch: any) => ({
-  setCurrentUser: (user: any) => dispatch(setCurrentUser(user)),
+  setCurrentUser: (user: any|null) => dispatch(setCurrentUser(user)),
 });
 
 const mapStateToProps = createStructuredSelector({

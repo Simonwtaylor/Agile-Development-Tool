@@ -4,12 +4,14 @@ import { Switch, Redirect, Route } from 'react-router-dom';
 import { Navbar } from './components/navbar';
 import { Grid } from 'semantic-ui-react';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
-import Board from './pages/Board';
-import Login from './pages/Login';
-import User from './pages/User';
-import Team from './pages/Team';
-import Backlog from './pages/Backlog';
-import Task from './pages/Task';
+import {
+  Board,
+  Login,
+  User,
+  Team,
+  Backlog,
+  Task,
+} from './pages/';
 import { setCurrentUser } from './redux/user/user.action';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';

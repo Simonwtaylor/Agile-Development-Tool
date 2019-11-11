@@ -76,6 +76,7 @@ const TaskDetail: React.FC<any> = ({
               (mode === TaskDetailMode.EDIT && 
                 <CustomButton
                   color={'green'}
+                  className={'completed'}
                   circular
                   inverted={getButtonFill(task.completed)}
                   icon='check' 
@@ -130,10 +131,15 @@ const TaskDetail: React.FC<any> = ({
               name={'userId'}
             />
           </Form.Field>
+          <CustomButton
+            className={'submit'}
+            color={'green'}
+            inverted
+            onClick={handleSubmitClick}
+          >
+            <span role="img" aria-label="save">💾</span> {buttonText}
+          </CustomButton>
         </Card.Content>
-        <CustomButton color={'green'} inverted onClick={handleSubmitClick}>
-          <span role="img" aria-label="save">💾</span> {buttonText}
-        </CustomButton>
       </Form>
     </Card>
   );

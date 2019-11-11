@@ -1,23 +1,22 @@
 import * as React from 'react';
 import './member-card.styles.scss';
-import { Card, Label, Button } from 'semantic-ui-react';
+import { Card, Label, Button, LabelProps } from 'semantic-ui-react';
 
-export interface IMemberCardProps {
+export interface IMemberCardProps extends LabelProps {
   displayName: string;
   role: string,
   currentlyOn: string, 
-  color?: "red" | "orange" | "yellow" | "olive" | "green" | "teal" | "blue" | "violet" | "purple" | "pink" | "brown" | "grey" | "black" | undefined
 }
 
 const MemberCard: React.FC<IMemberCardProps> = ({
   displayName,
   role, 
   currentlyOn,
-  color
+  color,
 }) => {
   return (
     <Card 
-      className="task-card" 
+      className="task-card"
     >
       <Card.Content>
         <Card.Header>

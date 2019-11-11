@@ -1,64 +1,59 @@
 import * as React from 'react';
 import { CustomDropdown } from './';
 import { gql } from 'apollo-boost';
-import { Query } from 'react-apollo';
+import { useApolloClient, useQuery } from '@apollo/react-hooks';
 
 export interface IBoardDropdownContainerProps {
   handleBoardSelect: any;
   selectedBoard?: any;
   name: string;
 }
- 
+
+export const GET_ALL_BOARDS = gql`
+{
+  boards {
+    _id
+    name 
+  }
+}
+`;
+
 const BoardDropdownContainer: React.FC<IBoardDropdownContainerProps> = ({
   handleBoardSelect,
   selectedBoard,
   name
 }) => {
 
-  const GET_ALL_BOARDS = gql`
-    {
-      boards {
-        _id
-        name 
-      }
-    }
-  `;
-
   const onSelectBoard = (e: any) => {
     handleBoardSelect(e);
   }
 
-  return (
-    <Query query={GET_ALL_BOARDS}>
-    {
-      (result: any) => {
-        const { error, loading, data } = result;
-        if(error) return <h1>Error loading boards</h1>;
-        if(loading) return <h3>Loading...</h3>;
+  const client = useApolloClient();
 
-        const options: any[] = [];
+  const { error, loading, data } = useQuery(GET_ALL_BOARDS, { client });
 
-        data.boards.map((board: any) => {
-          return options.push(
-            {
-              key: board._id, 
-              value: board._id, 
-              text: board.name
-            }
-          );
-        });
-        
-        return (
-          <CustomDropdown 
-            name={name}
-            items={options}
-            onSelectItem={onSelectBoard}
-            selectedItem={selectedBoard}
-          />
-        )
+  if(error) return <h1>Error loading users</h1>;
+  if(loading) return <h3>Loading...</h3>;
+
+  const options: any[] = [];
+
+  data.boards.map((board: any) => {
+    return options.push(
+      {
+        key: board._id, 
+        value: board._id, 
+        text: board.name
       }
-    }
-    </Query>
+    );
+  });
+  
+  return (
+    <CustomDropdown 
+      name={name}
+      items={options}
+      onSelectItem={onSelectBoard}
+      selectedItem={selectedBoard}
+    />
   );
 }
  

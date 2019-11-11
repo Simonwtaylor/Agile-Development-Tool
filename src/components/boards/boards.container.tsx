@@ -1,14 +1,19 @@
 import * as React from 'react';
-import { Query, withApollo, compose } from 'react-apollo';
 import { gql } from 'apollo-boost';
 import { Boards } from './';
-import { useMutation } from '@apollo/react-hooks';
-import { withRouter } from 'react-router-dom';
+import { useMutation, useApolloClient, useQuery } from '@apollo/react-hooks';
 
 export interface IBoardsContainerProps {
-  client?: any;
   history?: any;
 }
+
+export const ADD_BOARD = gql`
+mutation addBoard($b: addBoard!) {
+  addBoard(addBoard: $b) {
+    name
+  }
+}
+`;
 
 export const GET_ALL_BOARDS = gql`
 {
@@ -34,26 +39,17 @@ export const GET_ALL_BOARDS = gql`
 `;
 
 const BoardsContainer: React.FC<IBoardsContainerProps> = ({
-  client,
-  history,
+
 }) => {
 
- 
-
-  const ADD_BOARD = gql`
-    mutation addBoard($b: addBoard!) {
-      addBoard(addBoard: $b) {
-        name
-      }
-    }
-  `;
+  const client = useApolloClient();
 
   const [addBoard] = useMutation(ADD_BOARD, {
-    client
+    client,
+    refetchQueries: [GET_ALL_BOARDS]
   });
 
   const handleTaskSave = (name: string) => {
-
     addBoard({
       variables: {
         b: {
@@ -61,32 +57,19 @@ const BoardsContainer: React.FC<IBoardsContainerProps> = ({
         }
       }
     });
-
-    history.push('/');
   };
 
+  const { loading, error, data } = useQuery(GET_ALL_BOARDS, { client });
+
+  if(error) return <h1>Error loading boards</h1>;
+  if(loading) return <h3>Loading...</h3>;
+
   return (
-    <Query query={GET_ALL_BOARDS}>
-    {
-      (result: any) => {
-        const { loading, error, data } = result;
-
-        if(error) return <h1>Error loading data</h1>;
-        if(loading) return <h3>Loading...</h3>
-
-        return (
-          <Boards 
-            boards={data.boards}
-            onAddNewBoard={handleTaskSave}
-          />
-        )
-      }
-    }
-    </Query>  
+    <Boards 
+      boards={data.boards}
+      onAddNewBoard={handleTaskSave}
+    />
   );
 }
 
-export default compose(
-  withRouter, 
-  withApollo
-)(BoardsContainer);
+export default BoardsContainer;

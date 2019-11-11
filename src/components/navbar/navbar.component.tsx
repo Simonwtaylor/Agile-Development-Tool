@@ -3,19 +3,21 @@ import { Link } from 'react-router-dom';
 import './navbar.styles.scss';
 import { connect } from 'react-redux';
 import { Menu, Label } from 'semantic-ui-react';
+import { INotificationStore } from '../../lib/types';
 
 export interface INavbarProps {
-  activeItem: string,
-  handleItemClick: any,
-  user?: any
+  activeItem: string;
+  handleItemClick: (name: string) => void;
+  user?: any;
+  notifications?: INotificationStore;
 }
 
-const Navbar: React.FC<INavbarProps> = 
-  ({
+const Navbar: React.FC<INavbarProps> = ({
     activeItem, 
     handleItemClick,
-    user
-  }) => {
+    user,
+    notifications,
+}) => {
 
   const onItemClick = (name: string) => {
     handleItemClick(name);
@@ -80,7 +82,9 @@ const Navbar: React.FC<INavbarProps> =
             style={{borderRadius: 50}} 
             alt="prof"
           />
-          <Label corner="right" circular color={'red'} empty key={'red'} />
+          {(notifications && notifications.outstandingUnread && 
+            <Label corner="right" circular color={'red'} empty key={'red'} />
+          )}
       </Menu.Item>}
     </Menu>
   );
@@ -88,6 +92,7 @@ const Navbar: React.FC<INavbarProps> =
  
 const mapStateToProps = (store: any) => ({
   user: store.user.currentUser,
+  notifications: store.notifications,
 });
 
 export default connect(mapStateToProps)(Navbar);

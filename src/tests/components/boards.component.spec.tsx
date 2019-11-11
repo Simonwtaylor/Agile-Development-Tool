@@ -38,7 +38,7 @@ describe('Boards - Component', () => {
         .find(Card)
         .at(0)
         .props()['className']
-    ).toBe('board');
+    ).toBe('board add-new');
 
     expect(
       wrap
@@ -154,10 +154,6 @@ describe('Boards - Component', () => {
     expect(
       wrap
     ).not.toBeNull();
-
-    console.log(
-      wrap.debug()
-    );
 
     expect(
       wrap

@@ -18,13 +18,13 @@ const BoardColumn: React.FC<IBoardColumnProps> = ({
 }) => {
 
   const handleTaskClick = (id: string) => {
-    if (history instanceof History) {
+    if (history) {
       history.push(`/task/${id}`);
     }
   };
 
   const handleAddClick = () => {
-    if (history instanceof History) {
+    if (history) {
       history.push(`/task/new`);
     }
   };
