@@ -6,6 +6,16 @@
 
 .task-detail {
   .button {
-    float: right;
+    &.completed {
+      float: right;
+      margin-top: 10px;
+      margin-right: 10px;
+    }
+
+    &.submit {
+      float: left;
+      margin-left: 10px;
+      margin-bottom: 10px;
+    }
   }
 }

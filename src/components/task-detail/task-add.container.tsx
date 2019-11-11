@@ -1,18 +1,16 @@
 import * as React from 'react';
 import { gql } from 'apollo-boost';
 import { TaskDetail } from './';
-import { withApollo, compose } from 'react-apollo';
 import { ITask } from '../../lib/types';
-import { useMutation } from '@apollo/react-hooks';
-import { withRouter } from 'react-router-dom';
+import { useMutation, useApolloClient } from '@apollo/react-hooks';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { GET_ALL_BOARDS } from '../boards';
 
-export interface ITaskAddContainerProps {
-  client?: any;
-  history?: any;
+export interface ITaskAddContainerProps extends RouteComponentProps {
+
 }
 
-const ADD_TASK = gql`
+export const ADD_TASK = gql`
   mutation addTask($t: addTask!) {
     addTask(addTask: $t) {
       title
@@ -26,9 +24,10 @@ const ADD_TASK = gql`
 `;
  
 const TaskAddContainer: React.FC<ITaskAddContainerProps> = ({
-  client,
   history,
 }) => {
+
+  const client = useApolloClient();
 
   const [addTask] = useMutation(ADD_TASK, {
     client,
@@ -59,7 +58,4 @@ const TaskAddContainer: React.FC<ITaskAddContainerProps> = ({
   );
 };
 
-export default compose(
-  withRouter, 
-  withApollo,
-)(TaskAddContainer);
+export default withRouter(TaskAddContainer);

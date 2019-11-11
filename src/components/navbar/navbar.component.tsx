@@ -7,7 +7,7 @@ import { INotificationStore } from '../../lib/types';
 
 export interface INavbarProps {
   activeItem: string;
-  handleItemClick: any;
+  handleItemClick: (name: string) => void;
   user?: any;
   notifications?: INotificationStore;
 }

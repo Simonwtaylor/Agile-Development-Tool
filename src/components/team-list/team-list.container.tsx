@@ -1,11 +1,10 @@
 import * as React from 'react';
 import { TeamList } from './';
 import { gql } from 'apollo-boost';
-import { Query, withApollo } from 'react-apollo';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation, useApolloClient, useQuery } from '@apollo/react-hooks';
 
 export interface ITeamListContainerProps {
-  client?: any;
+
 }
 
 export const GET_ALL_TEAMS = gql`
@@ -31,8 +30,10 @@ export const ADD_USER_TO_TEAM = gql`
 `;
 
 const TeamListContainer: React.FC<ITeamListContainerProps> = ({
-  client,
+
 }) => {
+
+  const client = useApolloClient();
 
   const [addUserToTeam] = useMutation(ADD_USER_TO_TEAM, {
     client,
@@ -47,30 +48,27 @@ const TeamListContainer: React.FC<ITeamListContainerProps> = ({
     });
   };
 
+  const { loading, error, data } = useQuery(GET_ALL_TEAMS, { client });
+
+  if(error) return <h1>Error loading teams</h1>;
+  if(loading) return <h3>Loading teams...</h3>
+
+  const teamElements = [];
+
+  for (let team of data.teams) {
+    teamElements.push(
+      <TeamList 
+        team={team}
+        onAddUserToTeam={handleAddUserToTeam}
+      />
+    )
+  }
+
   return (
-    <Query query={GET_ALL_TEAMS}>
-    {
-      (result: any) => {
-        const { loading, error, data } = result;
-
-        if(error) return <h1>Error loading teams</h1>;
-        if(loading) return <h3>Loading teams...</h3>
-
-        const teamElements = [];
-
-        for (let team of data.teams) {
-          teamElements.push(
-            <TeamList 
-              team={team}
-              onAddUserToTeam={handleAddUserToTeam}
-            />
-          )
-        }
-        return teamElements;
-      }
-    }
-    </Query>
+    <>
+      {teamElements}
+    </>
   );
 };
 
-export default withApollo(TeamListContainer);
+export default TeamListContainer;

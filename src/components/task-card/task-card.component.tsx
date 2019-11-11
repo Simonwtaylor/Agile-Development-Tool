@@ -27,7 +27,7 @@ const TaskCard: React.FC<ITaskCardProps> = ({
   };
 
   const getCardColour = () => {
-    if(completed) {
+    if (completed) {
       return 'green'
     }
     return undefined;
@@ -45,11 +45,8 @@ const TaskCard: React.FC<ITaskCardProps> = ({
             src={user.photoURL}
             width={'25'}
             height={'25'}
+            className={'user-img'}
             alt='user'
-            style={{
-              float: 'left', 
-              borderRadius: '50%',
-            }}
           />)
           }
           {title}

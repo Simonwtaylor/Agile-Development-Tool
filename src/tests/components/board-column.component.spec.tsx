@@ -87,11 +87,6 @@ describe('Board Column - Component', () => {
         .childAt(1)
         .text()
     ).toBe(' Add New Task');
-
-    wrap
-        .find(CustomButton)
-        .at(0)
-        .simulate('click');
   });
 
   it('Should render a board with tasks', () => {

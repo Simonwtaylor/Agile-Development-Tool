@@ -1,11 +1,19 @@
 import * as React from 'react';
-import { Input } from 'semantic-ui-react';
+import { Input, InputProps, InputOnChangeData } from 'semantic-ui-react';
 
-const CustomInput: React.FC<any> = ({
+export interface ICustomInputProps extends InputProps {
+  handleChange: (
+    event: React.ChangeEvent<HTMLInputElement>,
+    data: InputOnChangeData
+  ) => void;
+}
+
+const CustomInput: React.FC<ICustomInputProps> = ({
   handleChange, 
   label,
   ...otherProps
 }) => {
+
   return (
     <div className="group">
       <Input 

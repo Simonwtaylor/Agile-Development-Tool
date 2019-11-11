@@ -38,7 +38,7 @@ describe('Boards - Component', () => {
         .find(Card)
         .at(0)
         .props()['className']
-    ).toBe('board');
+    ).toBe('board add-new');
 
     expect(
       wrap

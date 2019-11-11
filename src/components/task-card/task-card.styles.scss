@@ -2,4 +2,11 @@
   .label {
     float: right;
   }
+
+  img {
+    &.user-img {
+      float: left;
+      border-radius: 50%;
+    }
+  }
 }
