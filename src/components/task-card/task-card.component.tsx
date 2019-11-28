@@ -3,17 +3,17 @@ import { Card, Label } from 'semantic-ui-react';
 import './task-card.styles.scss';
 
 export interface ITaskCardProps {
-  _id: string;
+  id: number;
   title: string;
   storyPoints: number;
   description: string;
   completed: boolean;
-  onTaskClick: (id: string) => void;
+  onTaskClick: (id: number) => void;
   user?: any;
 }
 
 const TaskCard: React.FC<ITaskCardProps> = ({
-  _id, 
+  id, 
   title, 
   storyPoints,
   description,  
@@ -23,7 +23,7 @@ const TaskCard: React.FC<ITaskCardProps> = ({
 }) => {
 
   const handleCardClick = () => {
-    onTaskClick(_id);
+    onTaskClick(id);
   };
 
   const getCardColour = () => {

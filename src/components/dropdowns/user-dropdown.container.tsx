@@ -12,7 +12,7 @@ export interface IUserDropdownContainerProps {
 export const GET_ALL_USERS = gql`
 {
   users {
-    _id
+    id
     displayName
     email
     photoURL

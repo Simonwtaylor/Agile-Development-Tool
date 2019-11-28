@@ -12,7 +12,7 @@ export interface IBoardDropdownContainerProps {
 export const GET_ALL_BOARDS = gql`
 {
   boards {
-    _id
+    id
     name 
   }
 }

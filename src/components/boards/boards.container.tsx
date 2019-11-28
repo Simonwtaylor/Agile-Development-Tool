@@ -18,20 +18,21 @@ mutation addBoard($b: addBoard!) {
 export const GET_ALL_BOARDS = gql`
 {
   boards {
-    _id
+    id
     name 
     tasks {
-      _id
+      id
       title
       description
       completed
       storyPoints
-      userId
-      boardId
       user {
-        _id
+        id
         photoURL
         displayName
+      }
+      board {
+        id
       }
     }
   }

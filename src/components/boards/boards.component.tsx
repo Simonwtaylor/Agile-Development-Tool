@@ -37,9 +37,9 @@ const Boards: React.FC<IBoardsProps> = ({
           <Grid.Column key={`board${index}`}>
             <Card>
               <BoardColumn 
-                key={`boardcol${boardcol._id}`}
+                key={`boardcol${boardcol.id}`}
                 tasks={boardcol.tasks}
-                columnId={boardcol._id}
+                columnId={boardcol.id}
                 columnTitle={boardcol.name}
               />
             </Card>

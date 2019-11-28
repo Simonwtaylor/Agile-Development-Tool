@@ -17,8 +17,6 @@ export const ADD_TASK = gql`
       description
       completed
       storyPoints
-      userId
-      boardId
     }
   }
 `;

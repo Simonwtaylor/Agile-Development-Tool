@@ -17,15 +17,19 @@ export interface ITaskDetailContainerProps {
 }
 
 export const GET_TASK = gql`
-  query getTask($id: String!){
-    task(_id: $id) {
-      _id
+  query getTask($id: Number!){
+    task(id: $id) {
+      id
       title
       description
       completed
       storyPoints
-      userId
-      boardId
+      user {
+        id
+      }
+      board {
+        id
+      }
     }
   }
 `;
@@ -33,27 +37,23 @@ export const GET_TASK = gql`
 export const UPDATE_TASK = gql`
   mutation updateTask($t: task!) {
     updateTask(task: $t) {
-      _id
+      id
       title
       description
       completed
       storyPoints
-      userId
-      boardId
     }
   }
 `;
 
 export const COMPLETE_TASK = gql`
-  mutation completeTask($id: String!) {
-    completeTask(_id: $id) {
-      _id
+  mutation completeTask($id: Number!) {
+    completeTask(id: $id) {
+      id
       title
       description
       completed
       storyPoints
-      userId
-      boardId
       completedDate
     }
   }

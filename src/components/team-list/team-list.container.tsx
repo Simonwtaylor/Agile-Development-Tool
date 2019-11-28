@@ -10,10 +10,10 @@ export interface ITeamListContainerProps {
 export const GET_ALL_TEAMS = gql`
   query {
     teams {
-      _id
+      id
       name
       users {
-        _id
+        id
         photoURL
         displayName
       }
@@ -22,9 +22,9 @@ export const GET_ALL_TEAMS = gql`
 `;
 
 export const ADD_USER_TO_TEAM = gql`
-  mutation addUserToTeam($_id: String!, $userId: String!) {
-    addUserToTeam(_id: $_id, userId: $userId) {
-      _id
+  mutation addUserToTeam($id: String!, $userId: String!) {
+    addUserToTeam(id: $id, userId: $userId) {
+      id
     }
   }
 `;

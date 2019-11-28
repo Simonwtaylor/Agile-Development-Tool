@@ -10,9 +10,9 @@ export const selectTasks = createSelector(
     }
 );
 
-export const selectTask = (taskId: string) => createSelector(
+export const selectTask = (taskId: number) => createSelector(
     [selectTasks],
-    (tasks: ITask[]) => tasks.find(t => t._id === taskId)
+    (tasks: ITask[]) => tasks.find(t => t.id === taskId)
 );
 
 export const selectCurrentTask = createSelector(

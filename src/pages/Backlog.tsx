@@ -21,7 +21,7 @@ class Backlog extends React.Component<IBacklogProps, IBacklogState> {
     this.state = {};
   }
 
-  private handleTaskClick = (id: string) => {
+  private handleTaskClick = (id: number) => {
     this.props.history.push(`/task/${id}`);
   };
 
@@ -39,7 +39,7 @@ class Backlog extends React.Component<IBacklogProps, IBacklogState> {
                 return (
                   <TaskCard 
                     onTaskClick={this.handleTaskClick}
-                    key={task._id}
+                    key={task.id}
                     {...task}
                   />)
               })
