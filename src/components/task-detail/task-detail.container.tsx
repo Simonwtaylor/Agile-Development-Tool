@@ -8,6 +8,8 @@ import {
 import { ITask } from '../../lib/types';
 import { useMutation, useQuery, useApolloClient } from '@apollo/react-hooks';
 import { Loader } from 'semantic-ui-react';
+import { GET_ALL_BOARDS } from '../boards';
+import { CustomButton } from '../custom-button';
 
 export interface ITaskDetailContainerProps {
   match?: any;
@@ -70,7 +72,16 @@ const TaskDetailContainer: React.FC<ITaskDetailContainerProps> = ({
 
   const [updateTask] = useMutation(UPDATE_TASK, {
     client,
+    refetchQueries: [
+      {
+        query: GET_ALL_BOARDS,
+      }
+    ]
   });
+
+  const handleBoardNavigation = () => {
+    history.push('/board');
+  };
 
   const handleTaskComplete = async (id: string) => {
     await completeTask({
@@ -99,7 +110,23 @@ const TaskDetailContainer: React.FC<ITaskDetailContainerProps> = ({
     client,
   });
 
-  if(error) return <h1>Error loading task <span role="img" aria-label="locks">😞</span></h1>;
+  if(error) return (
+    <div
+      style={{
+        width: '200px',
+        margin: '0px auto'
+      }}
+    >
+      <h4>Error loading task <span role="img" aria-label="locks">😞</span></h4>
+      <CustomButton
+        color={'blue'}
+        onClick={handleBoardNavigation}
+      >
+        Back to boards
+      </CustomButton>
+    </div>
+  );
+
   if(loading) return <Loader />;
 
   return (

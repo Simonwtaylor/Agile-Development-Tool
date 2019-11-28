@@ -46,7 +46,11 @@ const BoardsContainer: React.FC<IBoardsContainerProps> = ({
 
   const [addBoard] = useMutation(ADD_BOARD, {
     client,
-    refetchQueries: [GET_ALL_BOARDS]
+    refetchQueries: [
+      {
+        query: GET_ALL_BOARDS,
+      }
+    ]
   });
 
   const handleTaskSave = (name: string) => {
