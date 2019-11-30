@@ -119,7 +119,7 @@ const TaskDetail: React.FC<any> = ({
             <label>Board</label>
             <BoardDropdownContainer
               handleBoardSelect={handleSelectChange}
-              selectedBoard={task!.boardId}
+              selectedBoard={task?.board?.id}
               name={'boardId'}
             />
           </Form.Field>
@@ -127,7 +127,7 @@ const TaskDetail: React.FC<any> = ({
             <label>User</label>
             <UserDropdownContainer
               onSelectUser={handleSelectChange}
-              selectedUser={task!.userId}
+              selectedUser={task?.user?.id}
               name={'userId'}
             />
           </Form.Field>

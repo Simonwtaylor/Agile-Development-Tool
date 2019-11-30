@@ -17,7 +17,7 @@ export interface ITaskDetailContainerProps {
 }
 
 export const GET_TASK = gql`
-  query getTask($id: Number!){
+  query getTask($id: Float!){
     task(id: $id) {
       id
       title
@@ -26,9 +26,14 @@ export const GET_TASK = gql`
       storyPoints
       user {
         id
+        displayName
+        email
+        photoURL
+        uid
       }
       board {
         id
+        name
       }
     }
   }
@@ -47,7 +52,7 @@ export const UPDATE_TASK = gql`
 `;
 
 export const COMPLETE_TASK = gql`
-  mutation completeTask($id: Number!) {
+  mutation completeTask($id: Float!) {
     completeTask(id: $id) {
       id
       title
@@ -83,7 +88,7 @@ const TaskDetailContainer: React.FC<ITaskDetailContainerProps> = ({
     history.push('/board');
   };
 
-  const handleTaskComplete = async (id: string) => {
+  const handleTaskComplete = async (id: number) => {
     await completeTask({
       variables: {
         id,
@@ -105,7 +110,7 @@ const TaskDetailContainer: React.FC<ITaskDetailContainerProps> = ({
 
   const { loading, error, data } = useQuery(GET_TASK, {
     variables: { 
-      id: match.params.id,
+      id: +match.params.id,
     },
     client,
   });

@@ -39,7 +39,7 @@
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.87.1",
     "socket.io-client": "^2.2.0",
-    "typescript": "3.4.5"
+    "typescript": "3.7.2"
   },
   "devDependencies": {
     "@types/dotenv": "^6.1.1",
