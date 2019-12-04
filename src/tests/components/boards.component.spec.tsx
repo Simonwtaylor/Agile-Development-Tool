@@ -130,11 +130,11 @@ describe('Boards - Component', () => {
     
     props.boards = [
       {
-        _id: 1,
+        id: 1,
         name: 'Example',
         tasks: [
           {
-            _id: '11231',
+            id: 1,
             completed: false,
             description: 'example',
             storyPoints: 5,
@@ -175,7 +175,7 @@ describe('Boards - Component', () => {
         .find(BoardColumn)
         .at(0)
         .props()['columnId']
-    ).toBe(props.boards[0]._id);
+    ).toBe(props.boards[0].id);
     
     expect(
       wrap
@@ -193,6 +193,6 @@ describe('Boards - Component', () => {
         .find(BoardColumn)
         .at(0)
         .key()
-    ).toBe(`boardcol${props.boards[0]._id}`);
+    ).toBe(`boardcol${props.boards[0].id}`);
   });
 });

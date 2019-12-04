@@ -15,7 +15,7 @@ describe('Task Detail - Component', () => {
       onTaskComplete: (task: string) => console.log(task),
       onTaskSave: (task: ITask) => console.log(task),
       taskDetail: {
-        _id: '1',
+        id: 1,
         completed: false,
         description: 'Task Description 1',
         storyPoints: 5,
