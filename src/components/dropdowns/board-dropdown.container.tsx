@@ -12,7 +12,7 @@ export interface IBoardDropdownContainerProps {
 export const GET_ALL_BOARDS = gql`
 {
   boards {
-    _id
+    id
     name 
   }
 }
@@ -40,8 +40,8 @@ const BoardDropdownContainer: React.FC<IBoardDropdownContainerProps> = ({
   data.boards.map((board: any) => {
     return options.push(
       {
-        key: board._id, 
-        value: board._id, 
+        key: board.id, 
+        value: board.id, 
         text: board.name
       }
     );

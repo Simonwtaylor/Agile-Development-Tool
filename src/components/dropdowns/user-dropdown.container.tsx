@@ -12,7 +12,7 @@ export interface IUserDropdownContainerProps {
 export const GET_ALL_USERS = gql`
 {
   users {
-    _id
+    id
     displayName
     email
     photoURL
@@ -39,8 +39,8 @@ const UserDropdownContainer: React.FC<IUserDropdownContainerProps> = ({
   data.users.map((user: any) => {
     return options.push(
       {
-        key: user._id, 
-        value: user._id, 
+        key: user.id, 
+        value: user.id, 
         text: user.displayName,
         image: user.photoURL
       }

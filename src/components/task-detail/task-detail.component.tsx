@@ -24,7 +24,16 @@ const TaskDetail: React.FC<any> = ({
   mode,
   onTaskComplete,
 }) => {
+
   const [task, setTask] = React.useState(taskDetail);
+
+  const [selectedBoard, onSelectedBoard] = React.useState(
+    (task && task.board && task.board.id) ? task.board.id : null
+  );
+
+  const [selectedUser, onSelectedUser] = React.useState(
+    (task && task.user && task.user.id) ? task.user.id : null
+  );
 
   const handleFormChange = (e: any) => {
     const taskNew = {...task};
@@ -41,19 +50,36 @@ const TaskDetail: React.FC<any> = ({
     });
   };
 
-  const handleSelectChange = (selectItem: any) => {
+  const handleUserChange = (selectItem: any) => {
     const taskNew = {...task}
 
     let value = selectItem.value;
 
-    taskNew[selectItem.name] = value;
+    taskNew.userId = +value;
+
     setTask({
       ...taskNew
     });
+
+    onSelectedUser(value);
+  };
+
+  const handleBoardChange = (selectItem: any) => {
+    const taskNew = {...task}
+
+    let value = selectItem.value;
+
+    taskNew.boardId = +value;
+
+    setTask({
+      ...taskNew
+    });
+
+    onSelectedBoard(value);
   };
 
   const handleCompleteClick = () => {
-    onTaskComplete(task._id);
+    onTaskComplete(task.id);
   };
 
   const handleSubmitClick = () => {
@@ -118,16 +144,16 @@ const TaskDetail: React.FC<any> = ({
           <Form.Field>
             <label>Board</label>
             <BoardDropdownContainer
-              handleBoardSelect={handleSelectChange}
-              selectedBoard={task!.boardId}
+              handleBoardSelect={handleBoardChange}
+              selectedBoard={selectedBoard}
               name={'boardId'}
             />
           </Form.Field>
           <Form.Field>
             <label>User</label>
             <UserDropdownContainer
-              onSelectUser={handleSelectChange}
-              selectedUser={task!.userId}
+              onSelectUser={handleUserChange}
+              selectedUser={selectedUser}
               name={'userId'}
             />
           </Form.Field>

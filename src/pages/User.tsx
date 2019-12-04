@@ -19,14 +19,24 @@ const User: React.FC<IUserProps> = ({
 }) => {
   return (
     <div className={'user'}>
-      <h1>{user.displayName}'s Settings </h1>
-      <img 
-        width={25} 
-        height={25} 
-        src={user.photoURL}
-        style={{borderRadius: 50}} 
-        alt="profile"
-      />
+      {
+        (
+          user && user.displayName && 
+          <h1>{user.displayName}'s Settings </h1>
+        )
+      }
+      {
+        (
+          user && user.photoURL &&
+          <img 
+            width={25} 
+            height={25} 
+            src={user.photoURL}
+            style={{borderRadius: 50}} 
+            alt="profile"
+          />
+        )
+      }
       <br />
       <CustomButton onClick={async () => {
         await auth.signOut();

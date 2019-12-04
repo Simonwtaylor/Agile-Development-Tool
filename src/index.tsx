@@ -18,7 +18,9 @@ const httpLink = createHttpLink({
   uri: process.env.REACT_APP_GRAPHQL_URL,
 });
 
-const cache = new InMemoryCache();
+const cache = new InMemoryCache({
+  addTypename: false,
+});
 
 const authLink = setContext(async (_, { headers }) => {
 
@@ -39,6 +41,7 @@ const authLink = setContext(async (_, { headers }) => {
 const client = new ApolloClient({
   link: authLink.concat(httpLink), 
   cache,
+
 });
 
 ReactDOM.render(

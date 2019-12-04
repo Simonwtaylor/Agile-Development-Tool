@@ -1,7 +1,7 @@
 import { ITask } from ".";
 
 export interface IBoard {
-  _id: number;
+  id: number;
   name: string;
   tasks: ITask[];
 }

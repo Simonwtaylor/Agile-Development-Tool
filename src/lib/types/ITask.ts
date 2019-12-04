@@ -1,12 +1,12 @@
 import { IUser } from "./IUser";
+import { IBoard } from "./IBoard";
 
 export interface ITask {
-  _id: string, 
-  title: string,
-  completed: boolean,
-  storyPoints: number, 
-  description: string,
-  boardId?: string, 
-  userId?: string,
+  id: number;
+  title: string;
+  completed: boolean;
+  storyPoints: number;
+  description: string;
+  board?: IBoard;
   user?: IUser;
 }

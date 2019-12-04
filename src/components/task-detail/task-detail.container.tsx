@@ -8,6 +8,8 @@ import {
 import { ITask } from '../../lib/types';
 import { useMutation, useQuery, useApolloClient } from '@apollo/react-hooks';
 import { Loader } from 'semantic-ui-react';
+import { GET_ALL_BOARDS } from '../boards';
+import { CustomButton } from '../custom-button';
 
 export interface ITaskDetailContainerProps {
   match?: any;
@@ -15,15 +17,24 @@ export interface ITaskDetailContainerProps {
 }
 
 export const GET_TASK = gql`
-  query getTask($id: String!){
-    task(_id: $id) {
-      _id
+  query getTask($id: Float!){
+    task(id: $id) {
+      id
       title
       description
       completed
       storyPoints
-      userId
-      boardId
+      user {
+        id
+        displayName
+        email
+        photoURL
+        uid
+      }
+      board {
+        id
+        name
+      }
     }
   }
 `;
@@ -31,27 +42,23 @@ export const GET_TASK = gql`
 export const UPDATE_TASK = gql`
   mutation updateTask($t: task!) {
     updateTask(task: $t) {
-      _id
+      id
       title
       description
       completed
       storyPoints
-      userId
-      boardId
     }
   }
 `;
 
 export const COMPLETE_TASK = gql`
-  mutation completeTask($id: String!) {
-    completeTask(_id: $id) {
-      _id
+  mutation completeTask($id: Float!) {
+    completeTask(id: $id) {
+      id
       title
       description
       completed
       storyPoints
-      userId
-      boardId
       completedDate
     }
   }
@@ -70,9 +77,18 @@ const TaskDetailContainer: React.FC<ITaskDetailContainerProps> = ({
 
   const [updateTask] = useMutation(UPDATE_TASK, {
     client,
+    refetchQueries: [
+      {
+        query: GET_ALL_BOARDS,
+      }
+    ]
   });
 
-  const handleTaskComplete = async (id: string) => {
+  const handleBoardNavigation = () => {
+    history.push('/board');
+  };
+
+  const handleTaskComplete = async (id: number) => {
     await completeTask({
       variables: {
         id,
@@ -94,12 +110,28 @@ const TaskDetailContainer: React.FC<ITaskDetailContainerProps> = ({
 
   const { loading, error, data } = useQuery(GET_TASK, {
     variables: { 
-      id: match.params.id,
+      id: +match.params.id,
     },
     client,
   });
 
-  if(error) return <h1>Error loading task <span role="img" aria-label="locks">😞</span></h1>;
+  if(error) return (
+    <div
+      style={{
+        width: '200px',
+        margin: '0px auto'
+      }}
+    >
+      <h4>Error loading task <span role="img" aria-label="locks">😞</span></h4>
+      <CustomButton
+        color={'blue'}
+        onClick={handleBoardNavigation}
+      >
+        Back to boards
+      </CustomButton>
+    </div>
+  );
+
   if(loading) return <Loader />;
 
   return (

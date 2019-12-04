@@ -7,28 +7,28 @@ interface IInitialState {
 const INITIAL_STATE: IInitialState = {
   tasks: [
     {
-      _id: '1',
+      id: 1,
       completed: false,
       description: 'This is an example task',
       storyPoints: 2, 
       title: 'Task 1'
     },
     {
-      _id: '2', 
+      id: 2, 
       completed: false,
       description: 'This is an example task',
       storyPoints: 2, 
       title: 'Do something cool'
     },
     {
-      _id: '3', 
+      id: 3, 
       completed: false,
       description: 'This is an example task',
       storyPoints: 2, 
       title: 'Do something even cooler'
     },
     {
-      _id: '4', 
+      id: 4, 
       completed: false,
       description: 'This is an example task', 
       storyPoints: 2, 

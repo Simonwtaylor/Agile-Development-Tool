@@ -18,20 +18,21 @@ mutation addBoard($b: addBoard!) {
 export const GET_ALL_BOARDS = gql`
 {
   boards {
-    _id
+    id
     name 
     tasks {
-      _id
+      id
       title
       description
       completed
       storyPoints
-      userId
-      boardId
       user {
-        _id
+        id
         photoURL
         displayName
+      }
+      board {
+        id
       }
     }
   }
@@ -46,7 +47,11 @@ const BoardsContainer: React.FC<IBoardsContainerProps> = ({
 
   const [addBoard] = useMutation(ADD_BOARD, {
     client,
-    refetchQueries: [GET_ALL_BOARDS]
+    refetchQueries: [
+      {
+        query: GET_ALL_BOARDS,
+      }
+    ]
   });
 
   const handleTaskSave = (name: string) => {
