@@ -6,7 +6,7 @@ import './team-list.styles.scss';
 
 export interface ITeamListProps {
   team: any;
-  onAddUserToTeam: (boardId: string, userId: string) => void;
+  onAddUserToTeam: (boardId: number, userId: number) => void;
 }
 
 const TeamList: React.FC<ITeamListProps> = ({
@@ -18,11 +18,7 @@ const TeamList: React.FC<ITeamListProps> = ({
   const [newUser, setNewUser] = React.useState('');
 
   const toggleOrSubmitNewUserClick = () => {
-    if (addUser) {
-      onAddUserToTeam(team._id, newUser);
-      setAddUser(!addUser);
-    }
-
+    onAddUserToTeam(+team.id, +newUser);
     setAddUser(!addUser);
   };
 
@@ -40,7 +36,7 @@ const TeamList: React.FC<ITeamListProps> = ({
             <Grid.Column>
               <Card>
                 <MemberCard 
-                  key={user._id} 
+                  key={user.id} 
                   {...user}
                 />
               </Card>

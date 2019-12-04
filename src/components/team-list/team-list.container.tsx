@@ -22,7 +22,7 @@ export const GET_ALL_TEAMS = gql`
 `;
 
 export const ADD_USER_TO_TEAM = gql`
-  mutation addUserToTeam($id: String!, $userId: String!) {
+  mutation addUserToTeam($id: Float!, $userId: Float!) {
     addUserToTeam(id: $id, userId: $userId) {
       id
     }
@@ -39,19 +39,24 @@ const TeamListContainer: React.FC<ITeamListContainerProps> = ({
     client,
   });
 
-  const handleAddUserToTeam = (boardId: string, userId: string) => {
+  const handleAddUserToTeam = (boardId: number, userId: number) => {
     addUserToTeam({
       variables: {
         userId,
-        _id: boardId,
+        id: boardId,
       },
+      refetchQueries: [
+        {
+          query: GET_ALL_TEAMS,
+        }
+      ],
     });
   };
 
   const { loading, error, data } = useQuery(GET_ALL_TEAMS, { client });
 
   if(error) return <h1>Error loading teams</h1>;
-  if(loading) return <h3>Loading teams...</h3>
+  if(loading) return <h3>Loading teams...</h3>;
 
   const teamElements = [];
 
