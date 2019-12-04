@@ -9,7 +9,7 @@ describe('Task Detail - Component', () => {
   beforeEach(() => {
     props = {
       onTaskClick: () => null,
-      _id: '11231',
+      id: 1,
       completed: false,
       description: 'example',
       storyPoints: 5,

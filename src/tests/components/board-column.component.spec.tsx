@@ -92,7 +92,7 @@ describe('Board Column - Component', () => {
   it('Should render a board with tasks', () => {
     props.tasks = [
       {
-        _id: '11231',
+        id: 1,
         completed: false,
         description: 'example',
         storyPoints: 5,
