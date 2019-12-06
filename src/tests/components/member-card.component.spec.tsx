@@ -9,7 +9,7 @@ describe('Member Card - Component', () => {
   beforeEach(() => {
     props = {
       color: 'red',
-      currentlyOn: 'Testing',
+      currentTask: null,
       displayName: 'Coder',
       role: 'React Dev',
     };
@@ -87,7 +87,7 @@ describe('Member Card - Component', () => {
         .at(0)
         .childAt(0)
         .text()
-    ).toBe('Currently On:');
+    ).toContain('Nothing to do');
 
     expect(
       wrap
@@ -96,7 +96,7 @@ describe('Member Card - Component', () => {
         .find('a')
         .at(0)
         .props()['href']
-    ).toBe('/team');
+    ).toBe('/board');
 
     expect(
       wrap
@@ -106,7 +106,7 @@ describe('Member Card - Component', () => {
         .at(0)
         .childAt(0)
         .text()
-    ).toBe(props.currentlyOn);
+    ).toBe('Change that');
 
     // Extra
     expect(
@@ -212,4 +212,6 @@ describe('Member Card - Component', () => {
         .text()
     ).toBe(' Activity');
   });
+
+  // TODO: Add test for a user with a current task
 });
