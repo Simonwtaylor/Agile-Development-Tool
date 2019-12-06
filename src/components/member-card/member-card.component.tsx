@@ -1,17 +1,18 @@
 import * as React from 'react';
 import './member-card.styles.scss';
 import { Card, Label, Button, LabelProps } from 'semantic-ui-react';
+import { ITask } from '../../lib/types';
 
 export interface IMemberCardProps extends LabelProps {
   displayName: string;
   role: string,
-  currentlyOn: string, 
+  currentTask: ITask, 
 }
 
 const MemberCard: React.FC<IMemberCardProps> = ({
   displayName,
   role, 
-  currentlyOn,
+  currentTask,
   color,
 }) => {
   return (
@@ -27,7 +28,26 @@ const MemberCard: React.FC<IMemberCardProps> = ({
           {role}
         </Card.Meta>
         <Card.Description>
-          Currently On:<a href={`/team`}>{currentlyOn}</a>
+          {
+            (
+              currentTask
+              ?
+              (
+                <>
+                  Currently On:<a href={`/task/${currentTask.id}`}>{currentTask.title}</a>
+                </>
+              )
+              :
+              (
+                <>
+                  Nothing to do 😲, <a href={'/board'}>Change that</a>
+                </>
+              )
+            )
+          }
+          {
+
+          }
         </Card.Description>
       </Card.Content>
       <Card.Content extra>

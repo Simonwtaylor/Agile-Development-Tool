@@ -39,9 +39,7 @@ export const GET_ALL_BOARDS = gql`
 }
 `;
 
-const BoardsContainer: React.FC<IBoardsContainerProps> = ({
-
-}) => {
+const BoardsContainer: React.FC<IBoardsContainerProps> = () => {
 
   const client = useApolloClient();
 

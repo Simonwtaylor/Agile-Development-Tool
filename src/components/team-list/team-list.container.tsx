@@ -16,6 +16,11 @@ export const GET_ALL_TEAMS = gql`
         id
         photoURL
         displayName
+        currentTask {
+          id
+          title
+          description
+        }
       }
     }
   }
@@ -29,9 +34,7 @@ export const ADD_USER_TO_TEAM = gql`
   }
 `;
 
-const TeamListContainer: React.FC<ITeamListContainerProps> = ({
-
-}) => {
+const TeamListContainer: React.FC<ITeamListContainerProps> = () => {
 
   const client = useApolloClient();
 
