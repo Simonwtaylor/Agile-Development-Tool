@@ -6,7 +6,7 @@ import { ITask } from '../../lib/types';
 export interface IMemberCardProps extends LabelProps {
   displayName: string;
   role: string,
-  currentTask: ITask, 
+  currentTask: ITask | null, 
 }
 
 const MemberCard: React.FC<IMemberCardProps> = ({
