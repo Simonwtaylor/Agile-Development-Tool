@@ -3,9 +3,7 @@ import { TeamList } from './';
 import { useApolloClient, useQuery } from '@apollo/react-hooks';
 import { GET_ALL_TEAMS } from '../../queries';
 
-export interface ITeamListContainerProps {
-
-}
+export interface ITeamListContainerProps { }
 
 const TeamListContainer: React.FC<ITeamListContainerProps> = () => {
 

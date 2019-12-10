@@ -6,3 +6,7 @@ export * from './team-item.component';
 export { default as TeamItem } from './team-item.component';
 export * from './team-item.container';
 export { default as TeamItemContainer } from './team-item.container';
+export * from './new-team.component';
+export { default as NewTeam } from './new-team.component';
+export * from './new-team.container';
+export { default as NewTeamContainer } from './new-team.container';
