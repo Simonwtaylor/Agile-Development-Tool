@@ -15,7 +15,7 @@ const NewTeamContainer: React.FC<INewTeamContainerProps> = () => {
   const client = useApolloClient();
   
   const handleNewTeamSubmit = (teamName: string) => {
-    handleTaskSave({
+    handleTeamSave({
       id: 0,
       name: teamName,
       users: [],
@@ -26,11 +26,11 @@ const NewTeamContainer: React.FC<INewTeamContainerProps> = () => {
     client,
   });
 
-  const handleTaskSave = (team: ITeam) => {
+  const handleTeamSave = (team: ITeam) => {
 
     addTeam({ 
       variables: {
-        team: {...team},
+        team: { ...team },
       },
       refetchQueries: [
         {
