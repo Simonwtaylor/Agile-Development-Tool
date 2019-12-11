@@ -115,7 +115,7 @@ const TaskDetailContainer: React.FC<ITaskDetailContainerProps> = ({
     client,
   });
 
-  if(error) return (
+  if (error) return (
     <div
       style={{
         width: '200px',
@@ -132,7 +132,7 @@ const TaskDetailContainer: React.FC<ITaskDetailContainerProps> = ({
     </div>
   );
 
-  if(loading) return <Loader />;
+  if (loading) return <Loader />;
 
   return (
     <TaskDetail
