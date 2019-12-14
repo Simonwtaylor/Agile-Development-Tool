@@ -3,6 +3,7 @@ import { Grid, Card, Button } from 'semantic-ui-react';
 import { MemberCard } from '../member-card/';
 import { UserDropdownContainer } from '../dropdowns';
 import { IUser } from '../../lib/types';
+import { CustomButton } from '../custom-button';
 
 export interface ITeamItemProps {
   id: number;
@@ -17,7 +18,7 @@ const TeamItem: React.FC<ITeamItemProps> = ({
   users,
   onAddUserToTeam,
 }) => {
-
+  const [showAddNewUser, onShowAddNewUser] = React.useState(false);
   const [addUser, setAddUser] = React.useState(false);
   const [newUser, setNewUser] = React.useState('');
 
@@ -26,28 +27,17 @@ const TeamItem: React.FC<ITeamItemProps> = ({
     setAddUser(!addUser);
   };
 
+  const toggleShowAddNewUser = () => {
+    onShowAddNewUser(!showAddNewUser);
+  };
+
   const handleUserChange = (selectUser: any) => {
     setNewUser(selectUser.value);
   };
 
-  return (
-    <Grid columns={4} padded className={'team-list'}>
-      <h2>{name}</h2>
-      <Grid.Row>
-      {
-        users.map((user: any) => {
-          return (
-            <Grid.Column key={`teamusergrid${user.id}`} >
-              <Card>
-                <MemberCard 
-                  key={`teamuser${user.id}`} 
-                  {...user}
-                />
-              </Card>
-            </Grid.Column>
-          )
-        })
-      }
+  const getAddNewUser = () => {
+    if (showAddNewUser) {
+      return (
         <Grid.Column>
           <Card 
             className="task-card add-new"
@@ -77,6 +67,41 @@ const TeamItem: React.FC<ITeamItemProps> = ({
             </Card.Content>
           </Card>
         </Grid.Column>
+      )
+    }
+
+    return <></>;
+  };
+
+  return (
+    <Grid columns={4} padded className={'team-list'}>
+      <h2>
+        {name}
+      </h2>
+      <CustomButton
+        inverted={true}
+        color={'blue'}
+        size={'tiny'}
+        onClick={toggleShowAddNewUser}
+      >
+        Add User
+      </CustomButton>
+      <Grid.Row>
+      {
+        users.map((user: any) => {
+          return (
+            <Grid.Column key={`teamusergrid${user.id}`} >
+              <Card>
+                <MemberCard 
+                  key={`teamuser${user.id}`} 
+                  {...user}
+                />
+              </Card>
+            </Grid.Column>
+          )
+        })
+      }
+      {getAddNewUser()}
       </Grid.Row>
     </Grid>
   );
