@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Grid, Card, Button } from 'semantic-ui-react';
+import { Grid, Card, Button, Icon, Popup } from 'semantic-ui-react';
 import { MemberCard } from '../member-card/';
 import { UserDropdownContainer } from '../dropdowns';
 import { IUser } from '../../lib/types';
@@ -78,14 +78,36 @@ const TeamItem: React.FC<ITeamItemProps> = ({
       <h2>
         {name}
       </h2>
-      <CustomButton
-        inverted={true}
-        color={'blue'}
-        size={'tiny'}
-        onClick={toggleShowAddNewUser}
-      >
-        Add User
-      </CustomButton>
+      <Popup
+        content={'Add new user'}
+        key={`teamsadd${id}`}
+        trigger={
+          <Icon
+            color={'blue'}
+            name={'plus circle'}
+            style={{
+              cursor: 'pointer',
+              marginTop: '5px'
+            }}
+            onClick={toggleShowAddNewUser}
+          />
+        }
+      />
+      <Popup
+        content={`Change settings for ${name}`}
+        key={`teamssettings${id}`}
+        trigger={
+          <Icon
+            color={'blue'}
+            name={'settings'}
+            style={{
+              cursor: 'pointer',
+              marginTop: '5px'
+            }}
+            onClick={toggleShowAddNewUser}
+          />
+        }
+      />
       <Grid.Row>
       {
         users.map((user: any) => {
