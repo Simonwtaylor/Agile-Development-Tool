@@ -35,7 +35,7 @@ const NewTeam: React.FC<INewTeamProps> = ({
           animated={true}
           color={'green'}
           inverted={true}
-          size={'large'}
+          size={'small'}
           onClick={handleNewTeamClick}
         >
           <Button.Content visible>

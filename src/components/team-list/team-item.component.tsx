@@ -3,13 +3,13 @@ import { Grid, Card, Button, Icon, Popup } from 'semantic-ui-react';
 import { MemberCard } from '../member-card/';
 import { UserDropdownContainer } from '../dropdowns';
 import { IUser } from '../../lib/types';
-import { CustomButton } from '../custom-button';
 
 export interface ITeamItemProps {
   id: number;
   name: string;
   users: IUser[];
   onAddUserToTeam: (boardId: number, userId: number) => void;
+  onRemoveTeam: () => void;
 }
 
 const TeamItem: React.FC<ITeamItemProps> = ({
@@ -17,6 +17,7 @@ const TeamItem: React.FC<ITeamItemProps> = ({
   name,
   users,
   onAddUserToTeam,
+  onRemoveTeam
 }) => {
   const [showAddNewUser, onShowAddNewUser] = React.useState(false);
   const [addUser, setAddUser] = React.useState(false);
@@ -83,7 +84,7 @@ const TeamItem: React.FC<ITeamItemProps> = ({
         key={`teamsadd${id}`}
         trigger={
           <Icon
-            color={'blue'}
+            color={'green'}
             name={'plus circle'}
             style={{
               cursor: 'pointer',
@@ -105,6 +106,21 @@ const TeamItem: React.FC<ITeamItemProps> = ({
               marginTop: '5px'
             }}
             onClick={toggleShowAddNewUser}
+          />
+        }
+      />
+      <Popup
+        content={`Delete ${name}`}
+        key={`teamsdelete${id}`}
+        trigger={
+          <Icon
+            color={'red'}
+            name={'trash'}
+            style={{
+              cursor: 'pointer',
+              marginTop: '5px'
+            }}
+            onClick={onRemoveTeam}
           />
         }
       />

@@ -7,3 +7,11 @@ mutation addTeam($team: team!) {
   }
 }
 `;
+
+export const REMOVE_TEAM = gql`
+  mutation removeTeam($id: Float!) {
+    removeTeam(id: $id) {
+      id
+    }
+  }
+`;

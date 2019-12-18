@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Grid, Card, Form } from 'semantic-ui-react';
+import { Grid, Card, Form, Button } from 'semantic-ui-react';
 import { BoardColumn } from '../board-column/';
 import { CustomButton } from '../custom-button/';
 import './boards.style.scss';
@@ -54,13 +54,20 @@ const Boards: React.FC<IBoardsProps> = ({
             {(!newBoard && 
             <>
               <h3>Add New Board</h3>
-              <CustomButton 
-                inverted={true}
+              <Button
+                animated={true}
                 color={'green'}
+                inverted={true}
+                size={'small'}
                 onClick={() => setNewBoard(!newBoard)}
               >
-                <span role="img" aria-label="save">➕</span> Add New Board
-              </CustomButton>
+                <Button.Content visible>
+                <span role="img" aria-label="save">➕</span>
+                </Button.Content>
+                <Button.Content hidden>
+                  Add
+                </Button.Content>
+              </Button>
             </>
             )}
             {(newBoard && 

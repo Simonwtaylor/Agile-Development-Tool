@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { IBoardsProps, Boards } from '../../components/boards';
 import { shallow } from 'enzyme';
-import { Grid, Card } from 'semantic-ui-react';
-import { CustomButton } from '../../components/custom-button';
+import { Grid, Card, Button } from 'semantic-ui-react';
 import { BoardColumn } from '../../components/board-column';
 
 describe('Boards - Component', () => {
@@ -72,7 +71,7 @@ describe('Boards - Component', () => {
       wrap
         .find(Card)
         .at(0)
-        .find(CustomButton)
+        .find(Button)
         .at(0)
         .props()['inverted']
     ).toBe(true);
@@ -81,7 +80,7 @@ describe('Boards - Component', () => {
       wrap
         .find(Card)
         .at(0)
-        .find(CustomButton)
+        .find(Button)
         .at(0)
         .props()['color']
     ).toBe('green');
@@ -90,7 +89,7 @@ describe('Boards - Component', () => {
       wrap
         .find(Card)
         .at(0)
-        .find(CustomButton)
+        .find(Button)
         .at(0)
         .find('span')
         .at(0)
@@ -101,7 +100,7 @@ describe('Boards - Component', () => {
       wrap
         .find(Card)
         .at(0)
-        .find(CustomButton)
+        .find(Button)
         .at(0)
         .find('span')
         .at(0)
@@ -112,16 +111,16 @@ describe('Boards - Component', () => {
       wrap
         .find(Card)
         .at(0)
-        .find(CustomButton)
+        .find(Button)
         .at(0)
         .childAt(1)
         .text()
-    ).toBe(' Add New Board');
+    ).toBe('<ButtonContent />');
 
     wrap
       .find(Card)
       .at(0)
-      .find(CustomButton)
+      .find(Button)
       .at(0)
       .simulate('click');
   });
