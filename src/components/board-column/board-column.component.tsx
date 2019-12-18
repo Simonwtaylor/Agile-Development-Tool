@@ -3,7 +3,7 @@ import { ITask } from '../../lib/types/';
 import { TaskCard } from '../task-card';
 import './board-column.styles.scss';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { CustomButton } from '../custom-button/';
+import { Button } from 'semantic-ui-react';
 
 export interface IBoardColumnProps extends RouteComponentProps<any> {
   columnId: number;
@@ -33,13 +33,20 @@ const BoardColumn: React.FC<IBoardColumnProps> = ({
     <div className="col card">
       <div className="card-body card-container">
         <h3>{columnTitle}</h3>
-        <CustomButton 
-          inverted={true}
+        <Button
+          animated={true}
           color={'green'}
+          inverted={true}
+          size={'small'}
           onClick={handleAddClick}
         >
-          <span role="img" aria-label="save">➕</span> Add New Task
-        </CustomButton>
+          <Button.Content visible>
+          <span role="img" aria-label="save">➕</span>
+          </Button.Content>
+          <Button.Content hidden>
+            Add
+          </Button.Content>
+        </Button>
         {
           tasks.map((task, index) => {
             return(

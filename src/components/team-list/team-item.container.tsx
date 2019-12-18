@@ -3,6 +3,7 @@ import { useMutation, useApolloClient } from '@apollo/react-hooks';
 import { ITeam } from '../../lib/types';
 import { ADD_USER_TO_TEAM, GET_ALL_TEAMS } from '../../queries';
 import { TeamItem } from './';
+import { REMOVE_TEAM } from '../../mutations';
 
 export interface ITeamItemContainerProps {
   team: ITeam;
@@ -15,6 +16,10 @@ const TeamItemContainer: React.FC<ITeamItemContainerProps> = ({
   const client = useApolloClient();
 
   const [addUserToTeam] = useMutation(ADD_USER_TO_TEAM, {
+    client,
+  });
+
+  const [removeTeam] = useMutation(REMOVE_TEAM, {
     client,
   });
 
@@ -32,11 +37,25 @@ const TeamItemContainer: React.FC<ITeamItemContainerProps> = ({
     });
   };
 
+  const handleRemoveTeam = () => {
+    removeTeam({
+      variables: {
+        id: +team.id,
+      },
+      refetchQueries: [
+        {
+          query: GET_ALL_TEAMS,
+        }
+      ]
+    })
+  }
+
   return (
     <TeamItem
       key={`teamitemcomponent${team.id}`}
       {...team}
       onAddUserToTeam={handleAddUserToTeam}
+      onRemoveTeam={handleRemoveTeam}
     />
   );
 }

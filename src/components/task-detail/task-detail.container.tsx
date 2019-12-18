@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { gql } from 'apollo-boost';
 import { withRouter } from 'react-router-dom';
 import { 
   TaskDetail,
@@ -10,60 +9,14 @@ import { useMutation, useQuery, useApolloClient } from '@apollo/react-hooks';
 import { Loader } from 'semantic-ui-react';
 import { GET_ALL_BOARDS } from '../boards';
 import { CustomButton } from '../custom-button';
+import { COMPLETE_TASK, UPDATE_TASK } from '../../mutations';
+import { GET_TASK } from '../../queries';
 
 export interface ITaskDetailContainerProps {
   match?: any;
   history?: any;
 }
 
-export const GET_TASK = gql`
-  query getTask($id: Float!){
-    task(id: $id) {
-      id
-      title
-      description
-      completed
-      storyPoints
-      user {
-        id
-        displayName
-        email
-        photoURL
-        uid
-      }
-      board {
-        id
-        name
-      }
-    }
-  }
-`;
-
-export const UPDATE_TASK = gql`
-  mutation updateTask($t: task!) {
-    updateTask(task: $t) {
-      id
-      title
-      description
-      completed
-      storyPoints
-    }
-  }
-`;
-
-export const COMPLETE_TASK = gql`
-  mutation completeTask($id: Float!) {
-    completeTask(id: $id) {
-      id
-      title
-      description
-      completed
-      storyPoints
-      completedDate
-    }
-  }
-`;
- 
 const TaskDetailContainer: React.FC<ITaskDetailContainerProps> = ({
   match, 
   history, 
@@ -91,7 +44,7 @@ const TaskDetailContainer: React.FC<ITaskDetailContainerProps> = ({
   const handleTaskComplete = async (id: number) => {
     await completeTask({
       variables: {
-        id,
+        id: +id,
       }
     });
 

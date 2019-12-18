@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { IBoardColumnProps, BoardColumn } from '../../components/board-column';
 import { shallow } from 'enzyme';
-import { CustomButton } from '../../components/custom-button';
 import { TaskCard } from '../../components/task-card';
+import { Button } from 'semantic-ui-react';
 
 describe('Board Column - Component', () => {
   let props: IBoardColumnProps;
@@ -54,14 +54,14 @@ describe('Board Column - Component', () => {
 
     expect(
       wrap
-        .find(CustomButton)
+        .find(Button)
         .at(0)
         .props()['inverted']
     ).toBe(true);
 
     expect(
       wrap
-        .find(CustomButton)
+        .find(Button)
         .at(0)
         .props()['color']
     ).toBe('green');
@@ -82,11 +82,11 @@ describe('Board Column - Component', () => {
 
     expect(
       wrap
-        .find(CustomButton)
+        .find(Button)
         .at(0)
         .childAt(1)
         .text()
-    ).toBe(' Add New Task');
+    ).toBe('<ButtonContent />');
   });
 
   it('Should render a board with tasks', () => {

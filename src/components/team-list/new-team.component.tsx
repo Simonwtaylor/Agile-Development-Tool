@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { CustomButton } from '../../components/custom-button';
-import { Input, InputOnChangeData } from 'semantic-ui-react';
+import { Input, InputOnChangeData, Button, Icon } from 'semantic-ui-react';
 
 export interface INewTeamProps {
   onNewTeamSubmit: (name: string) => void;
@@ -31,13 +31,20 @@ const NewTeam: React.FC<INewTeamProps> = ({
   const renderNewTeam = () => {
     if (!newTeam) {
       return (
-        <CustomButton
+        <Button
+          animated={true}
           color={'green'}
           inverted={true}
+          size={'small'}
           onClick={handleNewTeamClick}
         >
-          Add a new Team
-        </CustomButton>
+          <Button.Content visible>
+            <Icon name='plus' />
+          </Button.Content>
+          <Button.Content hidden>
+            Add
+          </Button.Content>
+        </Button>
       )
     }
 
