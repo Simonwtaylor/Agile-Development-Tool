@@ -4,7 +4,7 @@ import { TaskDetail } from './';
 import { ITask } from '../../lib/types';
 import { useMutation, useApolloClient } from '@apollo/react-hooks';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { GET_ALL_BOARDS } from '../boards';
+import { GET_ALL_BOARDS } from '../../queries/';
 
 export interface ITaskAddContainerProps extends RouteComponentProps {
 

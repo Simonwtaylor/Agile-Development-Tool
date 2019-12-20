@@ -8,11 +8,13 @@ import { IBoard } from '../../lib/types';
 export interface IBoardsProps {
   boards: IBoard[];
   onAddNewBoard: (name: string) => void;
+  onRemoveBoard: (id: number) => void;
 }
  
 const Boards: React.FC<IBoardsProps> = ({
   boards,
-  onAddNewBoard, 
+  onAddNewBoard,
+  onRemoveBoard,
 }) => {
 
   // Hooks
@@ -39,8 +41,9 @@ const Boards: React.FC<IBoardsProps> = ({
               <BoardColumn 
                 key={`boardcol${boardcol.id}`}
                 tasks={boardcol.tasks}
-                columnId={boardcol.id}
+                id={boardcol.id}
                 columnTitle={boardcol.name}
+                onBoardRemove={onRemoveBoard}
               />
             </Card>
           </Grid.Column>
