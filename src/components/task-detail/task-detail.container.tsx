@@ -9,7 +9,7 @@ import { useMutation, useQuery, useApolloClient } from '@apollo/react-hooks';
 import { Loader } from 'semantic-ui-react';
 import { GET_ALL_BOARDS } from '../../queries/';
 import { CustomButton } from '../custom-button';
-import { COMPLETE_TASK, UPDATE_TASK } from '../../mutations';
+import { COMPLETE_TASK, UPDATE_TASK, REMOVE_TASK } from '../../mutations';
 import { GET_TASK } from '../../queries';
 
 export interface ITaskDetailContainerProps {
@@ -37,6 +37,15 @@ const TaskDetailContainer: React.FC<ITaskDetailContainerProps> = ({
     ]
   });
 
+  const [removeTask] = useMutation(REMOVE_TASK, {
+    client,
+    refetchQueries: [
+      {
+        query: GET_ALL_BOARDS,
+      }
+    ]
+  });
+
   const handleBoardNavigation = () => {
     history.push('/board');
   };
@@ -55,6 +64,16 @@ const TaskDetailContainer: React.FC<ITaskDetailContainerProps> = ({
     await updateTask({
       variables: {
         t: {...task},
+      }
+    });
+
+    history.push('/board');
+  };
+
+  const handleTaskDelete = async (id: number) => {
+    await removeTask({
+      variables: {
+        id: +id,
       }
     });
 
@@ -94,6 +113,7 @@ const TaskDetailContainer: React.FC<ITaskDetailContainerProps> = ({
       buttonText={'Update Task'}
       mode={TaskDetailMode.EDIT}
       onTaskComplete={handleTaskComplete}
+      onTaskDelete={handleTaskDelete}
     />
   );
 }
