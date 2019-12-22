@@ -2,12 +2,12 @@ import * as React from 'react';
 import {
   IBoardsContainerProps,
   BoardsContainer,
-  GET_ALL_BOARDS,
 } from '../../components/boards';
 import * as TestRenderer from 'react-test-renderer';
 import { ApolloProvider } from "@apollo/react-hooks";
 import { wait, createClient } from "@apollo/react-testing";
 import { act } from 'react-test-renderer';
+import { GET_ALL_BOARDS } from '../../queries';
 
 describe('Boards - Container', () => {
   let props: IBoardsContainerProps;

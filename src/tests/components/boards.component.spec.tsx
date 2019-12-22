@@ -9,8 +9,9 @@ describe('Boards - Component', () => {
 
   beforeEach(() => {
     props = {
+      onRemoveBoard: (id: number) => console.log(`remove ${id}`),
       boards: [],
-      onAddNewBoard: (name: string) => console.log(name),
+      onAddNewBoard: (name: string) => console.log(`Add board ${name}`),
     };
   });
 
@@ -173,7 +174,7 @@ describe('Boards - Component', () => {
         .at(0)
         .find(BoardColumn)
         .at(0)
-        .props()['columnId']
+        .props()['id']
     ).toBe(props.boards[0].id);
     
     expect(

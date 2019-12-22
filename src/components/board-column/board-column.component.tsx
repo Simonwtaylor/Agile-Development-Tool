@@ -3,18 +3,21 @@ import { ITask } from '../../lib/types/';
 import { TaskCard } from '../task-card';
 import './board-column.styles.scss';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { Button } from 'semantic-ui-react';
+import { Popup, Icon } from 'semantic-ui-react';
 
 export interface IBoardColumnProps extends RouteComponentProps<any> {
-  columnId: number;
+  id: number;
   columnTitle: string;
   tasks: ITask[];
+  onBoardRemove: (id: number) => void;
 }
  
 const BoardColumn: React.FC<IBoardColumnProps> = ({ 
   columnTitle, 
+  id,
   tasks,
   history,
+  onBoardRemove,
 }) => {
 
   const handleTaskClick = (id: number) => {
@@ -29,24 +32,59 @@ const BoardColumn: React.FC<IBoardColumnProps> = ({
     }
   };
 
+  const handleBoardRemove = () => {
+    onBoardRemove(id);
+  };
+
   return (
     <div className="col card">
       <div className="card-body card-container">
         <h3>{columnTitle}</h3>
-        <Button
-          animated={true}
-          color={'green'}
-          inverted={true}
-          size={'small'}
-          onClick={handleAddClick}
-        >
-          <Button.Content visible>
-          <span role="img" aria-label="save">➕</span>
-          </Button.Content>
-          <Button.Content hidden>
-            Add
-          </Button.Content>
-        </Button>
+        <Popup
+          content={'Add new task'}
+          key={`boardaddtask`}
+          trigger={
+            <Icon
+              color={'green'}
+              name={'plus circle'}
+              style={{
+                cursor: 'pointer',
+                marginTop: '5px'
+              }}
+              onClick={handleAddClick}
+            />
+          }
+        />
+        <Popup
+          content={`Change settings for ${columnTitle}`}
+          key={`boardsettings`}
+          trigger={
+            <Icon
+              color={'blue'}
+              name={'settings'}
+              style={{
+                cursor: 'pointer',
+                marginTop: '5px'
+              }}
+              onClick={() => console.log('settings')}
+            />
+          }
+        />
+        <Popup
+          content={`Delete ${columnTitle}`}
+          key={`boarddelete`}
+          trigger={
+            <Icon
+              color={'red'}
+              name={'trash'}
+              style={{
+                cursor: 'pointer',
+                marginTop: '5px'
+              }}
+              onClick={handleBoardRemove}
+            />
+          }
+        />
         {
           tasks.map((task, index) => {
             return(

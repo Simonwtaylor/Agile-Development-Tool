@@ -1,49 +1,27 @@
 import * as React from 'react';
-import { gql } from 'apollo-boost';
 import { Boards } from './';
 import { useMutation, useApolloClient, useQuery } from '@apollo/react-hooks';
+import { ADD_BOARD, REMOVE_BOARD } from '../../mutations';
+import { GET_ALL_BOARDS } from '../../queries';
 
 export interface IBoardsContainerProps {
   history?: any;
 }
-
-export const ADD_BOARD = gql`
-mutation addBoard($b: addBoard!) {
-  addBoard(addBoard: $b) {
-    name
-  }
-}
-`;
-
-export const GET_ALL_BOARDS = gql`
-{
-  boards {
-    id
-    name 
-    tasks {
-      id
-      title
-      description
-      completed
-      storyPoints
-      user {
-        id
-        photoURL
-        displayName
-      }
-      board {
-        id
-      }
-    }
-  }
-}
-`;
 
 const BoardsContainer: React.FC<IBoardsContainerProps> = () => {
 
   const client = useApolloClient();
 
   const [addBoard] = useMutation(ADD_BOARD, {
+    client,
+    refetchQueries: [
+      {
+        query: GET_ALL_BOARDS,
+      }
+    ]
+  });
+
+  const [removeBoard] = useMutation(REMOVE_BOARD, {
     client,
     refetchQueries: [
       {
@@ -62,6 +40,14 @@ const BoardsContainer: React.FC<IBoardsContainerProps> = () => {
     });
   };
 
+  const handleBoardRemove = (id: number) => {
+    removeBoard({
+      variables: {
+        id: +id,
+      }
+    });
+  };
+
   const { loading, error, data } = useQuery(GET_ALL_BOARDS, { client });
 
   if(error) return <h1>Error loading boards</h1>;
@@ -71,6 +57,7 @@ const BoardsContainer: React.FC<IBoardsContainerProps> = () => {
     <Boards 
       boards={data.boards}
       onAddNewBoard={handleTaskSave}
+      onRemoveBoard={handleBoardRemove}
     />
   );
 }
