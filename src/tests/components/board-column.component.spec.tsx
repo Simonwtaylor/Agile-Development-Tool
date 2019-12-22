@@ -2,20 +2,21 @@ import * as React from 'react';
 import { IBoardColumnProps, BoardColumn } from '../../components/board-column';
 import { shallow } from 'enzyme';
 import { TaskCard } from '../../components/task-card';
-import { Button } from 'semantic-ui-react';
+import { Popup } from 'semantic-ui-react';
 
 describe('Board Column - Component', () => {
   let props: IBoardColumnProps;
   let mock: any = jest.fn();
   beforeEach(() => {
     props = {
-      columnId: 1,
+      id: 1,
       columnTitle: 'Example',
       tasks: [],
       history: mock,
       location: mock,
       match: mock,
       staticContext: undefined,
+      onBoardRemove: (id: number) => console.log(id),
     };
   });
 
@@ -54,39 +55,45 @@ describe('Board Column - Component', () => {
 
     expect(
       wrap
-        .find(Button)
+        .find(Popup)
         .at(0)
-        .props()['inverted']
-    ).toBe(true);
+        .props()['content']
+    ).toBe('Add new task');
 
     expect(
       wrap
-        .find(Button)
+        .find(Popup)
         .at(0)
-        .props()['color']
-    ).toBe('green');
+        .key()
+    ).toBe('boardaddtask');
 
     expect(
       wrap
-        .find('span')
-        .at(0)
-        .props()['role']
-    ).toBe('img');
+        .find(Popup)
+        .at(1)
+        .props()['content']
+    ).toBe(`Change settings for ${props.columnTitle}`);
 
     expect(
       wrap
-        .find('span')
-        .at(0)
-        .props()['aria-label']
-    ).toBe('save');
+        .find(Popup)
+        .at(1)
+        .key()
+    ).toBe('boardsettings');
 
     expect(
       wrap
-        .find(Button)
-        .at(0)
-        .childAt(1)
-        .text()
-    ).toBe('<ButtonContent />');
+        .find(Popup)
+        .at(2)
+        .props()['content']
+    ).toBe(`Delete ${props.columnTitle}`);
+
+    expect(
+      wrap
+        .find(Popup)
+        .at(2)
+        .key()
+    ).toBe('boarddelete');
   });
 
   it('Should render a board with tasks', () => {
