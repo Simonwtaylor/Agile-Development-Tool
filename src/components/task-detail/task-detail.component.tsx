@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Card, Form } from 'semantic-ui-react';
+import { Card, Form, Popup, Icon } from 'semantic-ui-react';
 import { CustomButton } from '../custom-button';
 import './task-detail.styles.scss';
 import { ITask } from '../../lib/types';
@@ -15,6 +15,7 @@ export interface ITaskDetailProps {
   buttonText: string;
   mode: TaskDetailMode;
   onTaskComplete?: (task: string) => void;
+  onTaskDelete?: (id: number) => void;
 }
  
 const TaskDetail: React.FC<any> = ({
@@ -23,6 +24,7 @@ const TaskDetail: React.FC<any> = ({
   buttonText,
   mode,
   onTaskComplete,
+  onTaskDelete,
 }) => {
 
   const [task, setTask] = React.useState(taskDetail);
@@ -86,11 +88,22 @@ const TaskDetail: React.FC<any> = ({
     onTaskSave({...task});
   };
 
-  const getButtonFill = (completed: boolean): boolean => {
-    if (!completed) {
-      return true;
+  const handleDeleteClick = () => {
+    onTaskDelete(task.id);
+  };
+
+  const getCompletedText = (): string => {
+    if (!task.completed) {
+      return 'Complete Task';
     }
-    return false;
+    return 'Mark as undone';
+  };
+
+  const getIconFill = (completed: boolean): 'check circle' | 'check circle outline' => {
+    if (!completed) {
+      return 'check circle outline';
+    }
+    return 'check circle';
   };
 
   return (
@@ -99,15 +112,45 @@ const TaskDetail: React.FC<any> = ({
         <Card.Content>
           <Card.Header>
             {
-              (mode === TaskDetailMode.EDIT && 
-                <CustomButton
-                  color={'green'}
-                  className={'completed'}
-                  circular
-                  inverted={getButtonFill(task.completed)}
-                  icon='check' 
-                  onClick={handleCompleteClick}
-                />
+              (mode === TaskDetailMode.EDIT &&
+                <>
+                  <Popup
+                    content={getCompletedText}
+                    key={`taskcompleteicon`}
+                    trigger={
+                      <Icon
+                        color={'green'}
+                        name={getIconFill(task.completed)}
+                        size={'large'}
+                        style={{
+                          cursor: 'pointer',
+                          marginTop: '10px',
+                          marginLeft: '10px',
+                          float: 'left'
+                        }}
+                        onClick={handleCompleteClick}
+                      />
+                    }
+                  />
+                  <Popup
+                    content={'Delete Task '}
+                    key={`taskdeleteicon`}
+                    trigger={
+                      <Icon
+                        color={'red'}
+                        name={'trash'}
+                        size={'large'}
+                        style={{
+                          cursor: 'pointer',
+                          marginTop: '10px',
+                          marginRight: '10px',
+                          float: 'right'
+                        }}
+                        onClick={handleDeleteClick}
+                      />
+                    }
+                  />
+                </>
               )
             }
           </Card.Header>

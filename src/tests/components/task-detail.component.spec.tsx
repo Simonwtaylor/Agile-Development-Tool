@@ -35,33 +35,7 @@ describe('Task Detail - Component', () => {
       wrap
     ).not.toBeNull();
 
-    expect(
-      wrap
-        .find(CustomButton)
-        .at(0)
-        .props()['color']
-    ).toBe('green');
-
-    expect(
-      wrap
-        .find(CustomButton)
-        .at(0)
-        .props()['circular']
-    ).toBe(true);
-
-    expect(
-      wrap
-        .find(CustomButton)
-        .at(0)
-        .props()['inverted']
-    ).toBe(true);
-
-    expect(
-      wrap
-        .find(CustomButton)
-        .at(0)
-        .props()['icon']
-    ).toBe('check');
+    // TODO: Add test in for new icons
 
     // Title
     expect(
@@ -189,14 +163,14 @@ describe('Task Detail - Component', () => {
     expect(
       wrap
         .find(CustomButton)
-        .at(1)
+        .at(0)
         .props()['color']
     ).toBe('green');
 
     expect(
       wrap
         .find(CustomButton)
-        .at(1)
+        .at(0)
         .props()['inverted']
     ).toBe(true);
 
@@ -217,7 +191,7 @@ describe('Task Detail - Component', () => {
     expect(
       wrap
         .find(CustomButton)
-        .at(1)
+        .at(0)
         .childAt(2)
         .text()
     ).toBe('Save');

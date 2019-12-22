@@ -24,3 +24,11 @@ export const COMPLETE_TASK = gql`
     }
   }
 `;
+
+export const REMOVE_TASK = gql`
+  mutation removeTask($id: Float!) {
+    removeTask(id: $id) {
+      id
+    }
+  }
+`;
