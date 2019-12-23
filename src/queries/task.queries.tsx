@@ -22,3 +22,26 @@ export const GET_TASK = gql`
     }
   }
 `;
+
+export const GET_ALL_TASKS = gql`
+  query {
+    tasks {
+      id
+      title
+      description
+      completed
+      storyPoints
+      user {
+        id
+        displayName
+        email
+        photoURL
+        uid
+      }
+      board {
+        id
+        name
+      }
+    }
+  }
+`;
