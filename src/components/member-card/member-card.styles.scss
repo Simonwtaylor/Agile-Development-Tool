@@ -2,4 +2,13 @@
   &.circular.empty.label.status-label {
     margin-left: 5px !important;
   }
+
+  .card {
+    .content {
+      .icon {
+        margin-left: 12px;
+        margin-right: 12px;
+      }
+    }
+  }
 }

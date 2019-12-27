@@ -10,6 +10,7 @@ export interface ITeamItemProps {
   users: IUser[];
   onAddUserToTeam: (boardId: number, userId: number) => void;
   onRemoveTeam: () => void;
+  onRemoveUserFromTeam: (teamId: number, userId: number) => void;
 }
 
 const TeamItem: React.FC<ITeamItemProps> = ({
@@ -17,7 +18,8 @@ const TeamItem: React.FC<ITeamItemProps> = ({
   name,
   users,
   onAddUserToTeam,
-  onRemoveTeam
+  onRemoveTeam,
+  onRemoveUserFromTeam,
 }) => {
   const [showAddNewUser, onShowAddNewUser] = React.useState(false);
   const [addUser, setAddUser] = React.useState(false);
@@ -34,6 +36,10 @@ const TeamItem: React.FC<ITeamItemProps> = ({
 
   const handleUserChange = (selectUser: any) => {
     setNewUser(selectUser.value);
+  };
+
+  const handleRemoveUserFromTeam = (userId: number) => {
+    onRemoveUserFromTeam(id, userId);
   };
 
   const getAddNewUser = () => {
@@ -130,7 +136,8 @@ const TeamItem: React.FC<ITeamItemProps> = ({
           return (
             <Grid.Column key={`teamusergrid${user.id}`} >
               <Card>
-                <MemberCard 
+                <MemberCard
+                  onRemoveUserFromTeam={handleRemoveUserFromTeam}
                   key={`teamuser${user.id}`} 
                   {...user}
                 />
