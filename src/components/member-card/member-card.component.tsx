@@ -1,28 +1,42 @@
 import * as React from 'react';
 import './member-card.styles.scss';
-import { Card, Label, Button, LabelProps } from 'semantic-ui-react';
+import { Card, LabelProps, Image, Popup, Icon } from 'semantic-ui-react';
 import { ITask } from '../../lib/types';
 
 export interface IMemberCardProps extends LabelProps {
+  id: number;
   displayName: string;
-  role: string,
-  currentTask: ITask | null, 
+  role: string;
+  currentTask: ITask | null;
+  photoURL?: string;
+  onRemoveUserFromTeam: (id: number) => void;
 }
 
 const MemberCard: React.FC<IMemberCardProps> = ({
+  id,
   displayName,
   role, 
   currentTask,
-  color,
+  photoURL,
+  onRemoveUserFromTeam,
 }) => {
+
+  const onUserRemoveClick = () => {
+    onRemoveUserFromTeam(id);
+  };
+
   return (
     <Card 
       className="task-card"
     >
       <Card.Content>
+        <Image
+          floated='right'
+          size='mini'
+          src={photoURL}
+        />
         <Card.Header>
           {displayName}
-          <Label className='status-label' circular color={color} empty />
         </Card.Header>
         <Card.Meta>
           {role}
@@ -51,17 +65,54 @@ const MemberCard: React.FC<IMemberCardProps> = ({
         </Card.Description>
       </Card.Content>
       <Card.Content extra>
-        <div className='ui two buttons'>
-          <Button basic color='blue' size='small'>
-            <span role="img" aria-label="msg">✉</span> Chat
-          </Button>
-          <Button basic color='purple' size='small'>
-            <span role="img" aria-label="activity">✨</span> Activity
-          </Button>
-        </div>
+        <Popup
+          content={`Chat with ${displayName}`}
+          key={`chatmember${displayName}`}
+          trigger={
+            <Icon
+              color={'green'}
+              name={'chat'}
+              style={{
+                cursor: 'pointer',
+                marginTop: '5px'
+              }}
+              onClick={() => console.log('chatting')}
+            />
+          }
+        />
+        <Popup
+          content={`Adjust preferences for ${displayName}`}
+          key={`settingsmember${displayName}`}
+          trigger={
+            <Icon
+              color={'grey'}
+              name={'settings'}
+              style={{
+                cursor: 'pointer',
+                marginTop: '5px'
+              }}
+              onClick={() => console.log('settings')}
+            />
+          }
+        />
+        <Popup
+          content={`Remove ${displayName} from team`}
+          key={`removemember${displayName}`}
+          trigger={
+            <Icon
+              color={'red'}
+              name={'trash'}
+              style={{
+                cursor: 'pointer',
+                marginTop: '5px'
+              }}
+              onClick={onUserRemoveClick}
+            />
+          }
+        />
       </Card.Content>
     </Card>
   );
 }
- 
+
 export default MemberCard;
