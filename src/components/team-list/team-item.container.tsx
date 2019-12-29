@@ -3,7 +3,7 @@ import { useMutation, useApolloClient } from '@apollo/react-hooks';
 import { ITeam } from '../../lib/types';
 import { ADD_USER_TO_TEAM, GET_ALL_TEAMS } from '../../queries';
 import { TeamItem } from './';
-import { REMOVE_TEAM, REMOVE_USER_FROM_TEAM } from '../../mutations';
+import { REMOVE_TEAM, REMOVE_USER_FROM_TEAM, SET_CURRENT_TASK } from '../../mutations';
 
 export interface ITeamItemContainerProps {
   team: ITeam;
@@ -24,6 +24,10 @@ const TeamItemContainer: React.FC<ITeamItemContainerProps> = ({
   });
 
   const [removeUserFromTeam] = useMutation(REMOVE_USER_FROM_TEAM, {
+    client,
+  });
+
+  const [setCurrentTask] = useMutation(SET_CURRENT_TASK, {
     client,
   });
 
@@ -68,6 +72,20 @@ const TeamItemContainer: React.FC<ITeamItemContainerProps> = ({
     })
   };
 
+  const handleSetCurrentTask = (userId: number, taskId: number) => {
+    setCurrentTask({
+      variables: {
+        userId,
+        taskId,
+      },
+      refetchQueries: [
+        {
+          query: GET_ALL_TEAMS,
+        }
+      ],
+    });
+  };
+
   return (
     <TeamItem
       key={`teamitemcomponent${team.id}`}
@@ -75,6 +93,7 @@ const TeamItemContainer: React.FC<ITeamItemContainerProps> = ({
       onAddUserToTeam={handleAddUserToTeam}
       onRemoveTeam={handleRemoveTeam}
       onRemoveUserFromTeam={handleRemoveUser}
+      onSetCurrentTask={handleSetCurrentTask}
     />
   );
 }

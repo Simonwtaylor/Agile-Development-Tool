@@ -1,7 +1,8 @@
 import * as React from 'react';
 import './member-card.styles.scss';
-import { Card, LabelProps, Image, Popup, Icon } from 'semantic-ui-react';
+import { Card, LabelProps, Image, Popup, Icon, Button } from 'semantic-ui-react';
 import { ITask } from '../../lib/types';
+import { TaskDropdownContainer } from '../dropdowns';
 
 export interface IMemberCardProps extends LabelProps {
   id: number;
@@ -10,6 +11,7 @@ export interface IMemberCardProps extends LabelProps {
   currentTask: ITask | null;
   photoURL?: string;
   onRemoveUserFromTeam: (id: number) => void;
+  onSetCurrentTask: (userId: number, taskId: number) => void;
 }
 
 const MemberCard: React.FC<IMemberCardProps> = ({
@@ -19,10 +21,58 @@ const MemberCard: React.FC<IMemberCardProps> = ({
   currentTask,
   photoURL,
   onRemoveUserFromTeam,
+  onSetCurrentTask,
 }) => {
+
+  const [setCurrentTaskView, onSetCurrentTaskView] = React.useState(false);
 
   const onUserRemoveClick = () => {
     onRemoveUserFromTeam(id);
+  };
+
+  const handleSetCurrentTask = (item: any) => {
+    onSetCurrentTask(+id, +item.value);
+    toggleSetCurrentTask();
+  }
+
+  const toggleSetCurrentTask = () => {
+    onSetCurrentTaskView(!setCurrentTaskView);
+  };
+
+  const getCurrentTaskAssignment = () => {
+    if (setCurrentTaskView) {
+      return (
+        <>
+          <TaskDropdownContainer
+            name={'currentTaskId'}
+            onSelectTask={handleSetCurrentTask}
+            selectedTask={currentTask}
+          />
+          <Button
+            size={'tiny'}
+            onClick={toggleSetCurrentTask}
+          > 
+            Cancel
+          </Button>
+        </>
+      )
+    }
+
+    return (
+      currentTask
+      ?
+      (
+        <>
+          Currently On:<a href={`/task/${currentTask.id}`}>{currentTask.title}</a>
+        </>
+      )
+      :
+      (
+        <>
+          Nothing to do 😲, <button onClick={toggleSetCurrentTask}>Change that</button>
+        </>
+      )
+    );
   };
 
   return (
@@ -42,26 +92,7 @@ const MemberCard: React.FC<IMemberCardProps> = ({
           {role}
         </Card.Meta>
         <Card.Description>
-          {
-            (
-              currentTask
-              ?
-              (
-                <>
-                  Currently On:<a href={`/task/${currentTask.id}`}>{currentTask.title}</a>
-                </>
-              )
-              :
-              (
-                <>
-                  Nothing to do 😲, <a href={'/board'}>Change that</a>
-                </>
-              )
-            )
-          }
-          {
-
-          }
+          {getCurrentTaskAssignment()}
         </Card.Description>
       </Card.Content>
       <Card.Content extra>
