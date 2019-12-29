@@ -11,6 +11,7 @@ export interface ITeamItemProps {
   onAddUserToTeam: (boardId: number, userId: number) => void;
   onRemoveTeam: () => void;
   onRemoveUserFromTeam: (teamId: number, userId: number) => void;
+  onSetCurrentTask: (userId: number, taskId: number) => void;
 }
 
 const TeamItem: React.FC<ITeamItemProps> = ({
@@ -20,6 +21,7 @@ const TeamItem: React.FC<ITeamItemProps> = ({
   onAddUserToTeam,
   onRemoveTeam,
   onRemoveUserFromTeam,
+  onSetCurrentTask,
 }) => {
   const [showAddNewUser, onShowAddNewUser] = React.useState(false);
   const [addUser, setAddUser] = React.useState(false);
@@ -40,6 +42,10 @@ const TeamItem: React.FC<ITeamItemProps> = ({
 
   const handleRemoveUserFromTeam = (userId: number) => {
     onRemoveUserFromTeam(id, userId);
+  };
+
+  const handleSetCurrentTask = (userId: number, taskId: number) => {
+    onSetCurrentTask(userId, taskId);
   };
 
   const getAddNewUser = () => {
@@ -139,6 +145,7 @@ const TeamItem: React.FC<ITeamItemProps> = ({
                 <MemberCard
                   onRemoveUserFromTeam={handleRemoveUserFromTeam}
                   key={`teamuser${user.id}`} 
+                  onSetCurrentTask={handleSetCurrentTask}
                   {...user}
                 />
               </Card>

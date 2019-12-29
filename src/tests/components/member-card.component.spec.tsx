@@ -14,6 +14,7 @@ describe('Member Card - Component', () => {
       displayName: 'Coder',
       role: 'React Dev',
       onRemoveUserFromTeam: (id) => console.log(id),
+      onSetCurrentTask: (id) => console.log(id)
     };
   });
 
@@ -66,16 +67,7 @@ describe('Member Card - Component', () => {
       wrap
         .find(Card.Description)
         .at(0)
-        .find('a')
-        .at(0)
-        .props()['href']
-    ).toBe('/board');
-
-    expect(
-      wrap
-        .find(Card.Description)
-        .at(0)
-        .find('a')
+        .find('button')
         .at(0)
         .childAt(0)
         .text()
