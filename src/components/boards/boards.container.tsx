@@ -2,13 +2,15 @@ import * as React from 'react';
 import { Boards } from './';
 import { useMutation, useApolloClient, useQuery } from '@apollo/react-hooks';
 import { ADD_BOARD, REMOVE_BOARD } from '../../mutations';
-import { GET_ALL_BOARDS } from '../../queries';
+import { GET_BOARDS_FOR_SPRINT } from '../../queries';
 
 export interface IBoardsContainerProps {
-  history?: any;
+  sprintId: number;
 }
 
-const BoardsContainer: React.FC<IBoardsContainerProps> = () => {
+const BoardsContainer: React.FC<IBoardsContainerProps> = ({
+  sprintId,
+}) => {
 
   const client = useApolloClient();
 
@@ -16,7 +18,7 @@ const BoardsContainer: React.FC<IBoardsContainerProps> = () => {
     client,
     refetchQueries: [
       {
-        query: GET_ALL_BOARDS,
+        query: GET_BOARDS_FOR_SPRINT,
       }
     ]
   });
@@ -25,7 +27,7 @@ const BoardsContainer: React.FC<IBoardsContainerProps> = () => {
     client,
     refetchQueries: [
       {
-        query: GET_ALL_BOARDS,
+        query: GET_BOARDS_FOR_SPRINT,
       }
     ]
   });
@@ -48,14 +50,19 @@ const BoardsContainer: React.FC<IBoardsContainerProps> = () => {
     });
   };
 
-  const { loading, error, data } = useQuery(GET_ALL_BOARDS, { client });
+  const { loading, error, data } = useQuery(GET_BOARDS_FOR_SPRINT, {
+    client,
+    variables: {
+      id: +sprintId,
+    }
+  });
 
   if(error) return <h1>Error loading boards</h1>;
   if(loading) return <h3>Loading...</h3>;
 
   return (
     <Boards 
-      boards={data.boards}
+      boards={data.sprint.boards}
       onAddNewBoard={handleTaskSave}
       onRemoveBoard={handleBoardRemove}
     />

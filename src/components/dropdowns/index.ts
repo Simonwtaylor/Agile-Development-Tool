@@ -6,3 +6,5 @@ export * from './user-dropdown.container';
 export { default as UserDropdownContainer } from './user-dropdown.container';
 export * from './task-dropdown.container';
 export { default as TaskDropdownContainer } from './task-dropdown.container';
+export * from './sprint-dropdown.container';
+export { default as SprintDropdownContainer } from './sprint-dropdown.container';

@@ -14,7 +14,7 @@ describe('Boards - Container', () => {
 
   beforeEach(() => {
     props = {
-
+      sprintId: 1,
     };
   });
   it('Should render properly', async () => {
