@@ -10,3 +10,5 @@ export * from './Team';
 export { default as Team } from './Team';
 export * from './User';
 export { default as User } from './User';
+export * from './Sprint';
+export { default as Sprint } from './Sprint';

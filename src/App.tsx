@@ -11,6 +11,7 @@ import {
   Team,
   Backlog,
   Task,
+  Sprint,
 } from './pages/';
 import { setCurrentUser } from './redux/user/user.action';
 import { connect } from 'react-redux';
@@ -70,8 +71,7 @@ class App extends React.Component<AppProps, AppState> {
       <Navbar activeItem={this.state.activeItem} handleItemClick={this.handleItemClick} />
       <Grid>
         <Grid.Column>
-          <Switch>  
-            <Route path="/board" component={Board} />
+          <Switch>
             <Route path="/login" component={Login} />
             <Route 
               path="/user" 
@@ -89,11 +89,15 @@ class App extends React.Component<AppProps, AppState> {
               path='/task/:id'
               component={Task}
             />
+            <Route
+              path='/sprint'
+              component={Sprint}
+            />
             {
               (!currentUser)
               ?
                 <Redirect from="/" exact to="/login" />
-              : <Redirect from="/" exact to="/board" />
+              : <Redirect from="/" exact to="/sprint" />
             }
           </Switch>
         </Grid.Column>

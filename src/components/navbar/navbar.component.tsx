@@ -33,10 +33,10 @@ const Navbar: React.FC<INavbarProps> = ({
       {user && <>
       <Menu.Item
         as={ Link }
-        to='/board'
-        name='board'
-        active={activeItem === 'board'}
-        onClick={() => onItemClick('board')}
+        to='/sprint'
+        name='sprint'
+        active={activeItem === 'sprint'}
+        onClick={() => onItemClick('sprint')}
         >
           <span role="img" aria-label="cal">📅</span>
         Plan it
