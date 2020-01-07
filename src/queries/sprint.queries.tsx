@@ -16,6 +16,9 @@ export const GET_BOARDS_FOR_SPRINT = gql`
     sprint(id: $id) {
       id
       name
+      startDate
+      endDate
+      completed
       boards {
         id
         name 

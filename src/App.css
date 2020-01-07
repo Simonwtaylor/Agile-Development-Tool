@@ -16,3 +16,11 @@
 body {
   background-color: #f7f7f7 !important;
 }
+
+.green {
+  color: green;
+}
+
+.red {
+  color: red;
+}
