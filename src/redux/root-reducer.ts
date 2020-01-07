@@ -5,6 +5,7 @@ import TasksReducer from './tasks/tasks.reducer';
 import TeamReducer from './team/team.reducer';
 import BacklogReducer from './backlog/backlog.reducer';
 import NotificationsReducer from './notifications/notifications.reducer';
+import SprintReducer from './sprint/sprint.reducer';
 
 export default combineReducers({
   user: UserReducer,
@@ -13,4 +14,5 @@ export default combineReducers({
   team: TeamReducer,
   backlog: BacklogReducer,
   notifications: NotificationsReducer,
+  sprint: SprintReducer,
 });

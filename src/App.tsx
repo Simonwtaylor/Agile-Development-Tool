@@ -5,7 +5,6 @@ import { Navbar } from './components/navbar';
 import { Grid } from 'semantic-ui-react';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import {
-  Board,
   Login,
   User,
   Team,
