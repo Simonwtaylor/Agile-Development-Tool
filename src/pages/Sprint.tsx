@@ -5,7 +5,7 @@ import SprintContainer from '../components/sprints/sprint.container';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentSprint } from '../redux/sprint/sprint.selector';
-import { ISprint } from '../lib/types';
+import { ISprint, IBoard, ITask } from '../lib/types';
 
 export interface ISprintProps {
   sprint: ISprint;
@@ -40,6 +40,34 @@ const Sprint: React.FC<ISprintProps> = ({
       </Grid.Row>
     )
   };
+
+  const calculatePoints = () => {
+    if (!sprint) {
+      return <></>;
+    }
+
+    let points = 0;
+
+    if (sprint.boards) {
+      sprint.boards.forEach((board: IBoard) => {
+        board.tasks
+          .filter(a => a.completed === false)
+          .forEach((task: ITask) => points += task.storyPoints);
+      });
+    }
+
+    return (
+      <span
+        style={{
+          paddingLeft: '10px',
+          paddingRight: '10px'
+        }}
+      >
+        {points} Points remaining
+      </span>
+    );
+  };
+
 
   const getDayColour = (days: number): string => {
     if (days > 0) {
@@ -89,6 +117,7 @@ const Sprint: React.FC<ISprintProps> = ({
           </Grid.Column>
           <Grid.Column>
             {getDaysLeft()}
+            {calculatePoints()}
           </Grid.Column>
         </Grid.Row>
         {renderBoardsSection()}
