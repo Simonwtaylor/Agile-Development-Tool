@@ -4,7 +4,7 @@ import { TaskDetail } from './';
 import { ITask } from '../../lib/types';
 import { useMutation, useApolloClient } from '@apollo/react-hooks';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { GET_ALL_BOARDS } from '../../queries/';
+import { GET_ALL_SPRINTS } from '../../queries/';
 
 export interface ITaskAddContainerProps extends RouteComponentProps {
 
@@ -39,7 +39,7 @@ const TaskAddContainer: React.FC<ITaskAddContainerProps> = ({
       },
       refetchQueries: [
         {
-          query: GET_ALL_BOARDS
+          query: GET_ALL_SPRINTS,
         }
       ]
     });

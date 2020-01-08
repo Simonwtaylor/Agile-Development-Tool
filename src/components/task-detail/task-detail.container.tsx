@@ -7,7 +7,7 @@ import {
 import { ITask } from '../../lib/types';
 import { useMutation, useQuery, useApolloClient } from '@apollo/react-hooks';
 import { Loader } from 'semantic-ui-react';
-import { GET_ALL_BOARDS, GET_ALL_TASKS } from '../../queries/';
+import { GET_ALL_TASKS, GET_ALL_SPRINTS } from '../../queries/';
 import { CustomButton } from '../custom-button';
 import { COMPLETE_TASK, UPDATE_TASK, REMOVE_TASK } from '../../mutations';
 import { GET_TASK } from '../../queries';
@@ -32,7 +32,7 @@ const TaskDetailContainer: React.FC<ITaskDetailContainerProps> = ({
     client,
     refetchQueries: [
       {
-        query: GET_ALL_BOARDS,
+        query: GET_ALL_SPRINTS,
       }
     ]
   });
@@ -41,7 +41,7 @@ const TaskDetailContainer: React.FC<ITaskDetailContainerProps> = ({
     client,
     refetchQueries: [
       {
-        query: GET_ALL_BOARDS,
+        query: GET_ALL_SPRINTS,
       },
       {
         query: GET_ALL_TASKS,
