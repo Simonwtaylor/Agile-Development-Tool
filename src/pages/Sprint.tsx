@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentSprint } from '../redux/sprint/sprint.selector';
 import { ISprint, IBoard, ITask } from '../lib/types';
+import { AddSprint } from '../components/add-sprint';
 
 export interface ISprintProps {
   sprint: ISprint;
@@ -112,6 +113,9 @@ const Sprint: React.FC<ISprintProps> = ({
               <SprintDropdownContainer  
                 name={'sprintId'}
                 onSelectSprint={handleSelectSprint}
+              />
+              <AddSprint
+
               />
             </div>
           </Grid.Column>
