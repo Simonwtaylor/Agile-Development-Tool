@@ -13,6 +13,8 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloClient } from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { getCurrentUser } from './firebase/firebase.utils';
+import 'react-dates/initialize';
+import 'react-dates/lib/css/_datepicker.css';
 
 const httpLink = createHttpLink({
   uri: process.env.REACT_APP_GRAPHQL_URL,

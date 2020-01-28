@@ -1,51 +1,75 @@
 import * as React from 'react';
-import { useForm, Controller } from 'react-hook-form';
-import { Input } from 'semantic-ui-react';
+import { Input, Button } from 'semantic-ui-react';
+import { DateRangePicker } from 'react-dates';
+import * as moment from 'moment';
 
 export interface IAddSprintProps {
-
+  onAddSprint: (sprint: any) => void;
 }
 
 type FormData = {
   name: string;
-  startDate: string;
-  endDate: string;
+  startDate: any;
+  endDate: any;
 };
 
-const AddSprint: React.FC<IAddSprintProps> = () => {
+const AddSprint: React.FC<IAddSprintProps> = ({
+  onAddSprint,
+}) => {
 
-  const { register, handleSubmit, control } = useForm<FormData>();
-  const onSubmit = (data: any) => { console.log(data) }
+  const [startDate, setStartDate] = React.useState<moment.Moment|null>(null);;
+  const [focusedDate, setfocusedDate] = React.useState<'startDate'|'endDate'|null>(null);
+  const [endDate, setEndDate] = React.useState<moment.Moment|null>(null);
+  const [name, setName] = React.useState('');
+  const handleSubmit = () => {
+    if (startDate && endDate) {
+      onAddSprint({
+        name,
+        startDate: startDate.toDate(),
+        endDate: endDate.toDate(),
+      });
+    }
+  };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Controller
-        name={'name'}
-        as={<Input
-          placeholder={'Sprint Name'}
-        />}
-        control={control}
+    <>
+      <Input
+        placeholder={'Sprint Name'}
+        style={{
+          paddingLeft: '5px',
+          paddingRight: '5px'
+        }}
+        value={name}
+        onChange={(e) => setName(e.target.value)}
       />
-      <Controller
-        name={'startDate'}
-        as={
-          <Input
-            placeholder={'Start Date'}
-          />
-        }
-        control={control}
+      <DateRangePicker
+        startDate={startDate}
+        startDateId={"startDate"}
+        endDate={endDate}
+        endDateId={"endDate"}
+        onDatesChange={({ startDate: startDateInput, endDate: endDateInput }) => {
+          
+          if (startDateInput) {
+            setStartDate(startDateInput);
+          }
+
+          if (endDateInput) {
+            setEndDate(endDateInput);
+          }
+        }}
+        onClose={() => {
+          setfocusedDate(null)
+        }}
+        focusedInput={focusedDate}
+        onFocusChange={(focus) => {
+          if (focus) {
+            setfocusedDate(focus)
+          }
+        }}
+
       />
-      <Controller
-        name={'endDate'}
-        as={
-          <Input
-            placeholder={'End Date'}
-          />
-        }
-        control={control}
-      />
-      <button type="submit" className="button green">Save</button>
-    </form>
+      <Button onClick={handleSubmit} className="button green">Save</Button>
+    </>
   );
 }
 
