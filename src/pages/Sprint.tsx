@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { Grid } from 'semantic-ui-react';
+import { Grid, Popup, Icon } from 'semantic-ui-react';
 import { SprintDropdownContainer } from '../components/dropdowns';
 import SprintContainer from '../components/sprints/sprint.container';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentSprint } from '../redux/sprint/sprint.selector';
 import { ISprint, IBoard, ITask } from '../lib/types';
+import { AddSprintContainer } from '../components/add-sprint';
 
 export interface ISprintProps {
   sprint: ISprint;
@@ -14,10 +15,12 @@ export interface ISprintProps {
 const Sprint: React.FC<ISprintProps> = ({
   sprint,
 }) => {
-  console.log(sprint);
+
   const [selectedSprint, onSelectedSprint] = React.useState(
     sprint ? sprint.id : ''
   );
+
+  const [addNewSprint, setAddNewSprint] = React.useState(false);
 
   const handleSelectSprint = (sprintSelected: any) => {
     onSelectedSprint(sprintSelected.value);
@@ -95,7 +98,28 @@ const Sprint: React.FC<ISprintProps> = ({
     }
 
     return <></>;
-  }
+  };
+
+  const getAddNewSprint = () => {
+    if (addNewSprint) {
+      return (
+        <Grid.Row>
+          <Grid.Column width={16}>
+            <h4>
+              New Sprint:
+            </h4>
+            <AddSprintContainer />
+          </Grid.Column>
+        </Grid.Row>
+      );
+    }
+
+    return <></>;
+  };
+
+   const handleAddNewSprintClick = () => {
+    setAddNewSprint(!addNewSprint);
+   };
 
   return (
     <>
@@ -105,14 +129,41 @@ const Sprint: React.FC<ISprintProps> = ({
           <Grid.Column>
             <div
               style={{
-                width: '200px',
+                width: '300px',
                 paddingLeft: '30px'
               }}
             >
-              <SprintDropdownContainer  
-                name={'sprintId'}
-                onSelectSprint={handleSelectSprint}
-              />
+              <Grid columns={2}>
+                <Grid.Row>
+                  <Grid.Column
+                    width={13}
+                  >
+                    <SprintDropdownContainer  
+                      name={'sprintId'}
+                      onSelectSprint={handleSelectSprint}
+                    />
+                  </Grid.Column>
+                  <Grid.Column
+                    width={3}
+                  >
+                    <Popup
+                      content={'Add new sprint'}
+                      key={`sprintaddnewsprint`}
+                      trigger={
+                        <Icon
+                          color={'green'}
+                          name={'plus circle'}
+                          style={{
+                            cursor: 'pointer',
+                            marginTop: '5px'
+                          }}
+                          onClick={handleAddNewSprintClick}
+                        />
+                      }
+                    />
+                  </Grid.Column>
+                </Grid.Row>
+              </Grid> 
             </div>
           </Grid.Column>
           <Grid.Column>
@@ -120,6 +171,7 @@ const Sprint: React.FC<ISprintProps> = ({
             {calculatePoints()}
           </Grid.Column>
         </Grid.Row>
+        {getAddNewSprint()}
         {renderBoardsSection()}
       </Grid>
     </>

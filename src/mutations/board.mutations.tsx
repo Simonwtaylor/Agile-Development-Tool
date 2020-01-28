@@ -15,3 +15,11 @@ export const REMOVE_BOARD = gql`
     }
   }
 `;
+
+export const ADD_BOARD_FOR_SPRINT = gql`
+  mutation addNewBoardToSprint($b: addBoard!, $id: Float!) {
+    addNewBoardToSprint(addBoard: $b, id: $id) {
+      name
+    }
+  }
+`;

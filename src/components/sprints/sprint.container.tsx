@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Boards } from '../boards';
 import { useMutation, useApolloClient, useQuery } from '@apollo/react-hooks';
-import { ADD_BOARD, REMOVE_BOARD } from '../../mutations';
+import { REMOVE_BOARD, ADD_BOARD_FOR_SPRINT } from '../../mutations';
 import { GET_BOARDS_FOR_SPRINT } from '../../queries';
 import { connect } from 'react-redux';
 import { setCurrentSprint } from '../../redux/sprint/sprint.action';
@@ -18,7 +18,7 @@ const SprintContainer: React.FC<ISprintContainerProps> = ({
 
   const client = useApolloClient();
 
-  const [addBoard] = useMutation(ADD_BOARD, {
+  const [addBoard] = useMutation(ADD_BOARD_FOR_SPRINT, {
     client,
     refetchQueries: [
       {
@@ -36,12 +36,13 @@ const SprintContainer: React.FC<ISprintContainerProps> = ({
     ]
   });
 
-  const handleTaskSave = (name: string) => {
+  const handleBoardSave = (name: string) => {
     addBoard({
       variables: {
         b: {
           name,
-        }
+        },
+        id: sprintId
       }
     });
   };
@@ -72,7 +73,7 @@ const SprintContainer: React.FC<ISprintContainerProps> = ({
     <>
       <Boards
         boards={data.sprint.boards}
-        onAddNewBoard={handleTaskSave}
+        onAddNewBoard={handleBoardSave}
         onRemoveBoard={handleBoardRemove}
       />
     </>
