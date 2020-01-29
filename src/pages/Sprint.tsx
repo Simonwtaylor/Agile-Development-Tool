@@ -44,6 +44,46 @@ const Sprint: React.FC<ISprintProps> = ({
     )
   };
 
+  const getSprintToggleButton = () => {
+    if (!addNewSprint) {
+      return (
+        <Popup
+          content={'Add new sprint'}
+          key={`sprintaddnewsprint`}
+          trigger={
+            <Icon
+              color={'green'}
+              name={'plus circle'}
+              style={{
+                cursor: 'pointer',
+                marginTop: '5px'
+              }}
+              onClick={handleAddNewSprintClick}
+            />
+          }
+        />
+      )
+    }
+
+    return (
+      <Popup
+        content={'Cancel add new sprint'}
+        key={`sprintaddnewsprint`}
+        trigger={
+          <Icon
+            color={'red'}
+            name={'ban'}
+            style={{
+              cursor: 'pointer',
+              marginTop: '5px'
+            }}
+            onClick={handleAddNewSprintClick}
+          />
+        }
+      />
+    );
+  };
+
   const calculatePoints = () => {
     if (!sprint) {
       return <></>;
@@ -146,21 +186,7 @@ const Sprint: React.FC<ISprintProps> = ({
                   <Grid.Column
                     width={3}
                   >
-                    <Popup
-                      content={'Add new sprint'}
-                      key={`sprintaddnewsprint`}
-                      trigger={
-                        <Icon
-                          color={'green'}
-                          name={'plus circle'}
-                          style={{
-                            cursor: 'pointer',
-                            marginTop: '5px'
-                          }}
-                          onClick={handleAddNewSprintClick}
-                        />
-                      }
-                    />
+                    {getSprintToggleButton()}
                   </Grid.Column>
                 </Grid.Row>
               </Grid> 
