@@ -7,6 +7,7 @@ import { createStructuredSelector } from 'reselect';
 import { selectCurrentSprint } from '../redux/sprint/sprint.selector';
 import { ISprint, IBoard, ITask } from '../lib/types';
 import { AddSprintContainer } from '../components/add-sprint';
+import { DateService } from '../services';
 
 export interface ISprintProps {
   sprint: ISprint;
@@ -124,11 +125,7 @@ const Sprint: React.FC<ISprintProps> = ({
       const { endDate } = sprint;
       const a = new Date();
       const b = new Date(endDate);
-      const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
-      const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
-      const _MS_PER_DAY = 1000 * 60 * 60 * 24;
-
-      const difference = Math.floor((utc2 - utc1) / _MS_PER_DAY);
+      const difference = DateService.getDaysDifference(a, b);
 
       return (
       <span className={getDayColour(difference)}>
