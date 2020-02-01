@@ -23,3 +23,12 @@ export const GET_ALL_BOARDS = gql`
     }
   }
 `;
+
+export const GET_SPRINT_BOARDS = gql`
+  query getBoardsBySprintId($sprintId: Float!) {
+    getBoardsBySprintId(sprintId: $sprintId) {
+      id
+      name
+    }
+  }
+`;

@@ -68,7 +68,16 @@ const AddSprint: React.FC<IAddSprintProps> = ({
         }}
 
       />
-      <Button onClick={handleSubmit} className="button green">Save</Button>
+      <Button
+        style={{
+          marginLeft: '5px',
+          marginRight: '5px'
+        }}
+        onClick={handleSubmit}
+        className="button green"
+      >
+        Save
+      </Button>
     </>
   );
 }

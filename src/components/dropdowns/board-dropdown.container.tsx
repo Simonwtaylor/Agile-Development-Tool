@@ -1,27 +1,21 @@
 import * as React from 'react';
 import { CustomDropdown } from './';
-import { gql } from 'apollo-boost';
 import { useApolloClient, useQuery } from '@apollo/react-hooks';
+import { GET_SPRINT_BOARDS } from '../../queries';
+import { connect } from 'react-redux';
 
 export interface IBoardDropdownContainerProps {
   handleBoardSelect: any;
   selectedBoard?: any;
   name: string;
+  sprintId: string;
 }
-
-export const GET_ALL_BOARDS = gql`
-{
-  boards {
-    id
-    name 
-  }
-}
-`;
 
 const BoardDropdownContainer: React.FC<IBoardDropdownContainerProps> = ({
   handleBoardSelect,
   selectedBoard,
-  name
+  name,
+  sprintId
 }) => {
 
   const onSelectBoard = (e: any) => {
@@ -30,23 +24,33 @@ const BoardDropdownContainer: React.FC<IBoardDropdownContainerProps> = ({
 
   const client = useApolloClient();
 
-  const { error, loading, data } = useQuery(GET_ALL_BOARDS, { client });
+  const { error, loading, data } = useQuery(GET_SPRINT_BOARDS, {
+    client,
+    variables: {
+      sprintId: +sprintId,
+    }
+  });
 
   if(error) return <h1>Error loading users</h1>;
   if(loading) return <h3>Loading...</h3>;
 
   const options: any[] = [];
 
-  data.boards.map((board: any) => {
-    return options.push(
-      {
-        key: board.id, 
-        value: board.id, 
-        text: board.name
-      }
-    );
-  });
-  
+  if (
+    data &&
+    data.getBoardsBySprintId
+  ) {
+    data.getBoardsBySprintId.map((board: any) => {
+      return options.push(
+        {
+          key: board.id, 
+          value: board.id, 
+          text: board.name
+        }
+      );
+    });
+  }
+
   return (
     <CustomDropdown 
       name={name}
@@ -56,5 +60,9 @@ const BoardDropdownContainer: React.FC<IBoardDropdownContainerProps> = ({
     />
   );
 }
- 
-export default BoardDropdownContainer;
+
+const mapStateToProps = (store: any) => ({
+  sprintId: (store.sprint) ? store.sprint.currentSprint.id : '',
+});
+
+export default connect(mapStateToProps)(BoardDropdownContainer);
