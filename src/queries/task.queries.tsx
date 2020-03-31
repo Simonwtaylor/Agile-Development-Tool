@@ -19,6 +19,15 @@ export const GET_TASK = gql`
         id
         name
       }
+      comments {
+        id
+        content
+        datePosted
+        user {
+          displayName
+          photoURL
+        }
+      }
     }
   }
 `;

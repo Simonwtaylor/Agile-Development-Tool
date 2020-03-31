@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Card, Form, Popup, Icon } from 'semantic-ui-react';
+import { Card, Form, Popup, Icon, Grid, Comment, Header, Button } from 'semantic-ui-react';
 import { CustomButton } from '../custom-button';
 import './task-detail.styles.scss';
 import { ITask } from '../../lib/types';
@@ -108,108 +108,143 @@ const TaskDetail: React.FC<any> = ({
 
   return (
     <Card className={'task-detail'}>
-      <Form>
-        <Card.Content>
-          <Card.Header>
-            {
-              (mode === TaskDetailMode.EDIT &&
-                <>
-                  <Popup
-                    content={getCompletedText}
-                    key={`taskcompleteicon`}
-                    trigger={
-                      <Icon
-                        color={'green'}
-                        name={getIconFill(task.completed)}
-                        size={'large'}
-                        style={{
-                          cursor: 'pointer',
-                          marginTop: '10px',
-                          marginLeft: '10px',
-                          float: 'left'
-                        }}
-                        onClick={handleCompleteClick}
-                      />
-                    }
+      <Grid>
+        <Grid.Row columns={2}>
+          <Grid.Column width={10}>
+            <Form>
+              <Card.Content>
+                <Card.Header>
+                  {
+                    (mode === TaskDetailMode.EDIT &&
+                      <>
+                        <Popup
+                          content={getCompletedText}
+                          key={`taskcompleteicon`}
+                          trigger={
+                            <Icon
+                              color={'green'}
+                              name={getIconFill(task.completed)}
+                              size={'large'}
+                              style={{
+                                cursor: 'pointer',
+                                marginTop: '10px',
+                                marginLeft: '10px',
+                                float: 'left'
+                              }}
+                              onClick={handleCompleteClick}
+                            />
+                          }
+                        />
+                        <Popup
+                          content={'Delete Task '}
+                          key={`taskdeleteicon`}
+                          trigger={
+                            <Icon
+                              color={'red'}
+                              name={'trash'}
+                              size={'large'}
+                              style={{
+                                cursor: 'pointer',
+                                marginTop: '10px',
+                                marginRight: '10px',
+                                float: 'right'
+                              }}
+                              onClick={handleDeleteClick}
+                            />
+                          }
+                        />
+                      </>
+                    )
+                  }
+                </Card.Header>
+              </Card.Content>
+              <Card.Content>
+                <Form.Field>
+                  <label>Title</label>
+                  <input 
+                    placeholder='Title...'
+                    value={task.title}
+                    name={'title'}
+                    onChange={handleFormChange}
                   />
-                  <Popup
-                    content={'Delete Task '}
-                    key={`taskdeleteicon`}
-                    trigger={
-                      <Icon
-                        color={'red'}
-                        name={'trash'}
-                        size={'large'}
-                        style={{
-                          cursor: 'pointer',
-                          marginTop: '10px',
-                          marginRight: '10px',
-                          float: 'right'
-                        }}
-                        onClick={handleDeleteClick}
-                      />
-                    }
+                </Form.Field>
+                <Form.Field>
+                  <label>Description</label>
+                  <input 
+                    placeholder='Description...'
+                    value={task.description}
+                    name={'description'}
+                    onChange={handleFormChange}
                   />
-                </>
-              )
-            }
-          </Card.Header>
-        </Card.Content>
-        <Card.Content>
-          <Form.Field>
-            <label>Title</label>
-            <input 
-              placeholder='Title...'
-              value={task.title}
-              name={'title'}
-              onChange={handleFormChange}
-            />
-          </Form.Field>
-          <Form.Field>
-            <label>Description</label>
-            <input 
-              placeholder='Description...'
-              value={task.description}
-              name={'description'}
-              onChange={handleFormChange}
-            />
-          </Form.Field>
-          <Form.Field>
-            <label>Story Points</label>
-            <input 
-              placeholder='Story Points...' 
-              value={task!.storyPoints} 
-              type='number' 
-              name={'storyPoints'}
-              onChange={handleFormChange}
-            />
-          </Form.Field>
-          <Form.Field>
-            <label>Board</label>
-            <BoardDropdownContainer
-              handleBoardSelect={handleBoardChange}
-              selectedBoard={selectedBoard}
-              name={'boardId'}
-            />
-          </Form.Field>
-          <Form.Field>
-            <label>User</label>
-            <UserDropdownContainer
-              onSelectUser={handleUserChange}
-              selectedUser={selectedUser}
-              name={'userId'}
-            />
-          </Form.Field>
-          <CustomButton
-            className={'submit'}
-            color={'green'}
-            inverted
-            onClick={handleSubmitClick}
-          >
-            <span role="img" aria-label="save">💾</span> {buttonText}
-          </CustomButton>
-        </Card.Content>
-      </Form>
+                </Form.Field>
+                <Form.Field>
+                  <label>Story Points</label>
+                  <input 
+                    placeholder='Story Points...' 
+                    value={task!.storyPoints} 
+                    type='number' 
+                    name={'storyPoints'}
+                    onChange={handleFormChange}
+                  />
+                </Form.Field>
+                <Form.Field>
+                  <label>Board</label>
+                  <BoardDropdownContainer
+                    handleBoardSelect={handleBoardChange}
+                    selectedBoard={selectedBoard}
+                    name={'boardId'}
+                  />
+                </Form.Field>
+                <Form.Field>
+                  <label>User</label>
+                  <UserDropdownContainer
+                    onSelectUser={handleUserChange}
+                    selectedUser={selectedUser}
+                    name={'userId'}
+                  />
+                </Form.Field>
+                <CustomButton
+                  className={'submit'}
+                  color={'green'}
+                  inverted
+                  onClick={handleSubmitClick}
+                >
+                  <span role="img" aria-label="save">💾</span> {buttonText}
+                </CustomButton>
+              </Card.Content>
+            </Form>
+          </Grid.Column>
+          <Grid.Column width={6}>
+            <Comment.Group>
+              <Header as='h3' dividing>
+                Comments
+              </Header>
+              {
+                (task.comments && task.comments.map((comment: any) => {
+                  return (
+                  <Comment>
+                    <Comment.Avatar src={comment.user.photoURL} />
+                    <Comment.Content>
+                      <Comment.Author as='a'>{comment.user.displayName}</Comment.Author>
+                      <Comment.Metadata>
+                        <div>{comment.datePosted}</div>
+                      </Comment.Metadata>
+                      <Comment.Text>{comment.content}</Comment.Text>
+                    </Comment.Content>
+                  </Comment>
+                  )
+                }))
+              }
+              
+              <Form reply>
+                <Form.TextArea />
+                <Button content='Add Reply' labelPosition='left' icon='edit' primary />
+              </Form>
+            </Comment.Group>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
+      
     </Card>
   );
 };

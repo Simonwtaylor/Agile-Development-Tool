@@ -20,7 +20,7 @@ const Task: React.FC<ITaskProps> = ({
   setCurrentTask(match.params.id);
   
   return (
-    <>
+    <div className={'task'}>
       <h1>Task Detail <span role="img" aria-label="star">🌠</span></h1>
       <Grid padded>
         <Grid.Row stretched>
@@ -33,7 +33,7 @@ const Task: React.FC<ITaskProps> = ({
           </Grid.Column>
         </Grid.Row>
       </Grid>
-    </>
+    </div>
   );
 };
 
