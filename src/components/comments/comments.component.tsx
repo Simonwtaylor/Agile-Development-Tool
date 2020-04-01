@@ -15,7 +15,7 @@ const Comments: React.FC<ICommentsProps> = ({
 
     const [content, setContent] = React.useState('');
 
-    const handleTextChange = (event: React.FormEvent<HTMLTextAreaElement>, data: TextAreaProps) => {
+    const handleTextChange = (event: React.FormEvent<HTMLTextAreaElement>, _data: TextAreaProps) => {
         setContent(event.currentTarget.value);
     };
 

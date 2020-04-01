@@ -3,7 +3,7 @@ import { ITaskDetailProps, TaskDetailMode, TaskDetail } from '../../components/t
 import { ITask } from '../../lib/types';
 import { shallow } from 'enzyme';
 import { CustomButton } from '../../components/custom-button';
-import { BoardDropdownContainer, UserDropdownContainer } from '../../components/dropdowns';
+import { BoardDropdownContainer, UserDropdownContainer, SprintDropdownContainer } from '../../components/dropdowns';
 
 describe('Task Detail - Component', () => {
   let props: ITaskDetailProps;
@@ -38,40 +38,40 @@ describe('Task Detail - Component', () => {
     // TODO: Add test in for new icons
 
     // Title
-    expect(
-      wrap
-        .find('label')
-        .at(0)
-        .childAt(0)
-        .text()
-    ).toBe('Title');
+    // expect(
+    //   wrap
+    //     .find('label')
+    //     .at(0)
+    //     .childAt(0)
+    //     .text()
+    // ).toBe('Title');
 
-    expect(
-      wrap
-        .find('input')
-        .at(0)
-        .props()['placeholder']
-    ).toBe('Title...');
+    // expect(
+    //   wrap
+    //     .find('input')
+    //     .at(0)
+    //     .props()['placeholder']
+    // ).toBe('Title...');
 
-    expect(
-      wrap
-        .find('input')
-        .at(0)
-        .props()['value']
-    ).toBe(props.taskDetail!.title);
+    // expect(
+    //   wrap
+    //     .find('input')
+    //     .at(0)
+    //     .props()['value']
+    // ).toBe(props.taskDetail!.title);
 
-    expect(
-      wrap
-        .find('input')
-        .at(0)
-        .props()['name']
-    ).toBe('title');
+    // expect(
+    //   wrap
+    //     .find('input')
+    //     .at(0)
+    //     .props()['name']
+    // ).toBe('title');
 
     // Description
     expect(
       wrap
         .find('label')
-        .at(1)
+        .at(0)
         .childAt(0)
         .text()
     ).toBe('Description');
@@ -79,21 +79,21 @@ describe('Task Detail - Component', () => {
     expect(
       wrap
         .find('input')
-        .at(1)
+        .at(0)
         .props()['placeholder']
     ).toBe('Description...');
 
     expect(
       wrap
         .find('input')
-        .at(1)
+        .at(0)
         .props()['value']
     ).toBe(props.taskDetail!.description);
 
     expect(
       wrap
         .find('input')
-        .at(1)
+        .at(0)
         .props()['name']
     ).toBe('description');
 
@@ -101,7 +101,7 @@ describe('Task Detail - Component', () => {
     expect(
       wrap
         .find('label')
-        .at(2)
+        .at(1)
         .childAt(0)
         .text()
     ).toBe('Story Points');
@@ -109,23 +109,39 @@ describe('Task Detail - Component', () => {
     expect(
       wrap
         .find('input')
-        .at(2)
+        .at(1)
         .props()['placeholder']
     ).toBe('Story Points...');
 
     expect(
       wrap
         .find('input')
-        .at(2)
+        .at(1)
         .props()['value']
     ).toBe(props.taskDetail!.storyPoints);
 
     expect(
       wrap
         .find('input')
-        .at(2)
+        .at(1)
         .props()['name']
     ).toBe('storyPoints');
+
+    // Sprint
+    expect(
+      wrap
+        .find('label')
+        .at(2)
+        .childAt(0)
+        .text()
+    ).toBe('Sprint');
+
+    expect(
+      wrap
+        .find(SprintDropdownContainer)
+        .at(0)
+        .props()['name']
+    ).toBe('sprintId');
 
     // Board
     expect(
@@ -177,14 +193,14 @@ describe('Task Detail - Component', () => {
     expect(
       wrap
         .find('span')
-        .at(0)
+        .at(1)
         .props()['role']
     ).toBe('img');
 
     expect(
       wrap
         .find('span')
-        .at(0)
+        .at(1)
         .props()['aria-label']
     ).toBe('save');
 
