@@ -12,10 +12,9 @@ import {
   Task,
   Sprint,
 } from './pages/';
-import { setCurrentUser } from './redux/user/user.action';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { selectCurrentUser } from './redux/user/user.selector';
+import { selectCurrentUser, setCurrentUser } from './redux/user';
 
 export interface AppProps {
   currentUser?: any;
@@ -82,7 +81,7 @@ class App extends React.Component<AppProps, AppState> {
             />
             <Route 
               path="/team" 
-              render={() => <Team />} 
+              component={Team}
             />
             <Route
               path='/task/:id'
