@@ -56,7 +56,7 @@ const Boards: React.FC<IBoardsProps> = ({
           <div className="card-body card-container">
             {(!newBoard && 
             <>
-              <h3>Add New Board</h3>
+              <h4>Add New Board</h4>
               <Button
                 animated={true}
                 color={'green'}

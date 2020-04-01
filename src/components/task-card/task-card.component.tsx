@@ -49,7 +49,7 @@ const TaskCard: React.FC<ITaskCardProps> = ({
             alt='user'
           />)
           }
-          {title}
+          <span>{title}</span>
           <Label
             circular
             color={'red'}

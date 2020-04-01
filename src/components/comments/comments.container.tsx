@@ -2,8 +2,8 @@ import * as React from 'react';
 import Comments from './comments.component';
 import { useQuery, useApolloClient, useMutation } from '@apollo/react-hooks';
 import { Loader } from 'semantic-ui-react';
-import { GET_COMMENTS_BY_TASK } from '../../queries/comments.queries';
-import { ADD_COMMENT } from '../../mutations/comment.mutations';
+import { getCommentsByTaskId } from '../../queries/comments.queries';
+import { addComment } from '../../mutations/comment.mutations';
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from '../../redux/user/user.selector';
 
@@ -17,7 +17,7 @@ const CommentsContainer: React.FC<ICommentsContainerProps> = ({
 
     const client = useApolloClient();
 
-    const [addComment] = useMutation(ADD_COMMENT, {
+    const [addCommentMutation] = useMutation(addComment, {
       client,
     });
 
@@ -26,7 +26,7 @@ const CommentsContainer: React.FC<ICommentsContainerProps> = ({
     console.log(user);
 
     const handleAddComment = (content: string) => {
-      addComment({
+      addCommentMutation({
         variables: {
           content,
           uid: user.uid,
@@ -34,7 +34,7 @@ const CommentsContainer: React.FC<ICommentsContainerProps> = ({
         },
         refetchQueries: [
           {
-            query: GET_COMMENTS_BY_TASK,
+            query: getCommentsByTaskId,
             variables: {
               taskId: +taskId,
             }
@@ -43,7 +43,7 @@ const CommentsContainer: React.FC<ICommentsContainerProps> = ({
       });
     };
     
-    const { loading, error, data } = useQuery(GET_COMMENTS_BY_TASK, {
+    const { loading, error, data } = useQuery(getCommentsByTaskId, {
         variables: { 
           taskId: +taskId,
         },

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Boards } from './';
 import { useMutation, useApolloClient, useQuery } from '@apollo/react-hooks';
-import { ADD_BOARD, REMOVE_BOARD } from '../../mutations';
-import { GET_BOARDS_FOR_SPRINT } from '../../queries';
+import { addBoard, removeBoard } from '../../mutations';
+import { getBoardsBySprintId } from '../../queries';
 
 export interface IBoardsContainerProps {
   sprintId: number;
@@ -14,26 +14,32 @@ const BoardsContainer: React.FC<IBoardsContainerProps> = ({
 
   const client = useApolloClient();
 
-  const [addBoard] = useMutation(ADD_BOARD, {
+  const [addBoardMutation] = useMutation(addBoard, {
     client,
     refetchQueries: [
       {
-        query: GET_BOARDS_FOR_SPRINT,
+        query: getBoardsBySprintId,
+        variables: {
+          sprintId: +sprintId,
+        }
       }
     ]
   });
 
-  const [removeBoard] = useMutation(REMOVE_BOARD, {
+  const [removeBoardMutation] = useMutation(removeBoard, {
     client,
     refetchQueries: [
       {
-        query: GET_BOARDS_FOR_SPRINT,
+        query: getBoardsBySprintId,
+        variables: {
+          sprintId: +sprintId,
+        }
       }
     ]
   });
 
   const handleTaskSave = (name: string) => {
-    addBoard({
+    addBoardMutation({
       variables: {
         b: {
           name,
@@ -43,17 +49,17 @@ const BoardsContainer: React.FC<IBoardsContainerProps> = ({
   };
 
   const handleBoardRemove = (id: number) => {
-    removeBoard({
+    removeBoardMutation({
       variables: {
         id: +id,
       }
     });
   };
 
-  const { loading, error, data } = useQuery(GET_BOARDS_FOR_SPRINT, {
+  const { loading, error, data } = useQuery(getBoardsBySprintId, {
     client,
     variables: {
-      id: +sprintId,
+      sprintId: +sprintId,
     }
   });
 

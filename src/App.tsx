@@ -16,17 +16,17 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser, setCurrentUser } from './redux/user';
 
-export interface AppProps {
+export interface IAppProps {
   currentUser?: any;
   setCurrentUser: any;
 }
  
-export interface AppState {
+export interface IAppState {
   activeItem: string;
 }
  
-class App extends React.Component<AppProps, AppState> {
-  constructor(props: AppProps) {
+class App extends React.Component<IAppProps, IAppState> {
+  constructor(props: IAppProps) {
     super(props);
     this.state = {
       activeItem: 'home'

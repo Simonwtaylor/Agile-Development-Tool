@@ -7,7 +7,7 @@ import * as TestRenderer from 'react-test-renderer';
 import { ApolloProvider } from "@apollo/react-hooks";
 import { wait, createClient } from "@apollo/react-testing";
 import { act } from 'react-test-renderer';
-import { GET_ALL_BOARDS } from '../../queries';
+import { getAllBoards } from '../../queries';
 
 describe('Boards - Container', () => {
   let props: IBoardsContainerProps;
@@ -38,7 +38,7 @@ describe('Boards - Container', () => {
             ]
           }
         ]
-      }, GET_ALL_BOARDS);
+      }, getAllBoards);
 
       const component = TestRenderer.create(
         // ts-lint:ignore-next-line

@@ -1,43 +1,48 @@
 import * as React from 'react';
 import { Boards } from '../boards';
 import { useMutation, useApolloClient, useQuery } from '@apollo/react-hooks';
-import { REMOVE_BOARD, ADD_BOARD_FOR_SPRINT } from '../../mutations';
-import { GET_BOARDS_FOR_SPRINT } from '../../queries';
-import { connect } from 'react-redux';
+import { removeBoard, addBoardForSprint } from '../../mutations';
+import { getSprintById } from '../../queries';
+import { useDispatch } from 'react-redux';
 import { setCurrentSprint } from '../../redux/sprint/sprint.action';
 
 export interface ISprintContainerProps {
   sprintId: number;
-  setCurrentSprint?: (sprint: any) => void;
 }
 
 const SprintContainer: React.FC<ISprintContainerProps> = ({
   sprintId,
-  setCurrentSprint,
 }) => {
+  const dispatch = useDispatch();
 
   const client = useApolloClient();
 
-  const [addBoard] = useMutation(ADD_BOARD_FOR_SPRINT, {
+  const [addBoardForSprintMutation] = useMutation(addBoardForSprint, {
     client,
     refetchQueries: [
       {
-        query: GET_BOARDS_FOR_SPRINT,
+        query: getSprintById,
+        variables: {
+          id: +sprintId
+        }
       }
     ]
   });
 
-  const [removeBoard] = useMutation(REMOVE_BOARD, {
+  const [removeBoardMutation] = useMutation(removeBoard, {
     client,
     refetchQueries: [
       {
-        query: GET_BOARDS_FOR_SPRINT,
+        query: getSprintById,
+        variables: {
+          id: +sprintId
+        }
       }
     ]
   });
 
   const handleBoardSave = (name: string) => {
-    addBoard({
+    addBoardForSprintMutation({
       variables: {
         b: {
           name,
@@ -48,14 +53,14 @@ const SprintContainer: React.FC<ISprintContainerProps> = ({
   };
 
   const handleBoardRemove = (id: number) => {
-    removeBoard({
+    removeBoardMutation({
       variables: {
         id: +id,
       }
     });
   };
 
-  const { loading, error, data } = useQuery(GET_BOARDS_FOR_SPRINT, {
+  const { loading, error, data } = useQuery(getSprintById, {
     client,
     variables: {
       id: +sprintId,
@@ -66,7 +71,7 @@ const SprintContainer: React.FC<ISprintContainerProps> = ({
   if(loading) return <h3>Loading...</h3>;
 
   if (setCurrentSprint) {
-    setCurrentSprint(data.sprint);
+    dispatch(setCurrentSprint(data.sprint))
   }
 
   return (
@@ -80,8 +85,4 @@ const SprintContainer: React.FC<ISprintContainerProps> = ({
   );
 }
 
-const mapDispatchToProps = (dispatch: any) => ({
-  setCurrentSprint: (sprint: any|null) => dispatch(setCurrentSprint(sprint)),
-});
-
-export default connect(null, mapDispatchToProps)(SprintContainer);
+export default SprintContainer;

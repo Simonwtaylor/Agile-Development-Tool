@@ -1,6 +1,6 @@
 import { gql } from 'apollo-boost';
 
-export const ADD_TEAM = gql`
+export const addTeam = gql`
 mutation addTeam($team: team!) {
   addTeam(team: $team) {
     id
@@ -8,7 +8,7 @@ mutation addTeam($team: team!) {
 }
 `;
 
-export const REMOVE_TEAM = gql`
+export const removeTeam = gql`
   mutation removeTeam($id: Float!) {
     removeTeam(id: $id) {
       id
@@ -16,9 +16,17 @@ export const REMOVE_TEAM = gql`
   }
 `;
 
-export const REMOVE_USER_FROM_TEAM = gql`
+export const removeUserFromTeam = gql`
   mutation removeUserFromTeam($id: Float!, $userId: Float!) {
     removeUserFromTeam(id: $id, userId: $userId) {
+      id
+    }
+  }
+`;
+
+export const addUserToTeam = gql`
+  mutation addUserToTeam($id: Float!, $userId: Float!) {
+    addUserToTeam(id: $id, userId: $userId) {
       id
     }
   }

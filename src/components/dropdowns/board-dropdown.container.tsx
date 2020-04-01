@@ -1,22 +1,23 @@
 import * as React from 'react';
 import { CustomDropdown } from './';
 import { useApolloClient, useQuery } from '@apollo/react-hooks';
-import { GET_SPRINT_BOARDS } from '../../queries';
-import { connect } from 'react-redux';
+import { getBoardsBySprintId } from '../../queries';
+import { useSelector } from 'react-redux';
+import { selectCurrentSprint } from '../../redux/sprint/sprint.selector';
 
 export interface IBoardDropdownContainerProps {
   handleBoardSelect: any;
   selectedBoard?: any;
   name: string;
-  sprintId: string;
 }
 
 const BoardDropdownContainer: React.FC<IBoardDropdownContainerProps> = ({
   handleBoardSelect,
   selectedBoard,
-  name,
-  sprintId
+  name
 }) => {
+
+  const currentSprint = useSelector(selectCurrentSprint);
 
   const onSelectBoard = (e: any) => {
     handleBoardSelect(e);
@@ -24,14 +25,14 @@ const BoardDropdownContainer: React.FC<IBoardDropdownContainerProps> = ({
 
   const client = useApolloClient();
 
-  const { error, loading, data } = useQuery(GET_SPRINT_BOARDS, {
+  const { error, loading, data } = useQuery(getBoardsBySprintId, {
     client,
     variables: {
-      sprintId: +sprintId || 0,
+      sprintId: +currentSprint.sprintId || 0,
     }
   });
 
-  if(error) return <h1>Error loading users</h1>;
+  if(error) return <h1>Error loading boards</h1>;
   if(loading) return <h3>Loading...</h3>;
 
   const options: any[] = [];
@@ -61,8 +62,4 @@ const BoardDropdownContainer: React.FC<IBoardDropdownContainerProps> = ({
   );
 }
 
-const mapStateToProps = (store: any) => ({
-  sprintId: (store.sprint && store.sprint.currentSprint) ? store.sprint.currentSprint.id : '',
-});
-
-export default connect(mapStateToProps)(BoardDropdownContainer);
+export default BoardDropdownContainer;

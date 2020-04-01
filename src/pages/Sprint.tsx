@@ -2,20 +2,16 @@ import * as React from 'react';
 import { Grid, Popup, Icon } from 'semantic-ui-react';
 import { SprintDropdownContainer } from '../components/dropdowns';
 import SprintContainer from '../components/sprints/sprint.container';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
+import { useSelector } from 'react-redux';
 import { selectCurrentSprint } from '../redux/sprint/sprint.selector';
-import { ISprint, IBoard, ITask } from '../lib/types';
+import {  IBoard, ITask } from '../lib/types';
 import { AddSprintContainer } from '../components/add-sprint';
 import { DateService } from '../services';
 
-export interface ISprintProps {
-  sprint: ISprint;
-}
+export interface ISprintProps {}
  
-const Sprint: React.FC<ISprintProps> = ({
-  sprint,
-}) => {
+const Sprint: React.FC<ISprintProps> = ({}) => {
+  const sprint = useSelector(selectCurrentSprint)
 
   const [selectedSprint, onSelectedSprint] = React.useState(
     sprint ? sprint.id : ''
@@ -160,7 +156,7 @@ const Sprint: React.FC<ISprintProps> = ({
 
   return (
     <>
-      <h1>Sprints <span role="img" aria-label="rocket">📆</span></h1>
+      <h1>{(sprint && sprint.name) || 'Sprints'} <span role="img" aria-label="rocket">📆</span></h1>
       <Grid columns={4} padded>
         <Grid.Row>
           <Grid.Column>
@@ -177,6 +173,7 @@ const Sprint: React.FC<ISprintProps> = ({
                   >
                     <SprintDropdownContainer  
                       name={'sprintId'}
+                      selectedSprint={(sprint) ? sprint.id : ''}
                       onSelectSprint={handleSelectSprint}
                     />
                   </Grid.Column>
@@ -201,8 +198,4 @@ const Sprint: React.FC<ISprintProps> = ({
   );
 }
 
-const mapStateToProps = createStructuredSelector({
-  sprint: selectCurrentSprint,
-});
-
-export default connect(mapStateToProps)(Sprint);
+export default Sprint;

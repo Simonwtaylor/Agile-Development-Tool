@@ -1,6 +1,6 @@
 import { gql } from 'apollo-boost';
 
-export const GET_TASK = gql`
+export const getTask = gql`
   query getTask($id: Float!){
     task(id: $id) {
       id
@@ -32,7 +32,7 @@ export const GET_TASK = gql`
   }
 `;
 
-export const GET_ALL_TASKS = gql`
+export const getAllTasks = gql`
   query {
     tasks {
       id

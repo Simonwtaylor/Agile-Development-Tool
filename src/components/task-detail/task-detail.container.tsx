@@ -7,10 +7,9 @@ import {
 import { ITask } from '../../lib/types';
 import { useMutation, useQuery, useApolloClient } from '@apollo/react-hooks';
 import { Loader } from 'semantic-ui-react';
-import { GET_ALL_TASKS, GET_ALL_SPRINTS } from '../../queries/';
+import { getAllTasks, getAllSprints, getTask } from '../../queries/';
 import { CustomButton } from '../custom-button';
-import { COMPLETE_TASK, UPDATE_TASK, REMOVE_TASK } from '../../mutations';
-import { GET_TASK } from '../../queries';
+import { completeTask, updateTask, removeTask } from '../../mutations';
 
 export interface ITaskDetailContainerProps {
   match?: any;
@@ -24,27 +23,27 @@ const TaskDetailContainer: React.FC<ITaskDetailContainerProps> = ({
 
   const client = useApolloClient();
 
-  const [completeTask] = useMutation(COMPLETE_TASK, {
+  const [completeTaskMutation] = useMutation(completeTask, {
     client,
   });
 
-  const [updateTask] = useMutation(UPDATE_TASK, {
+  const [updateTaskMutation] = useMutation(updateTask, {
     client,
     refetchQueries: [
       {
-        query: GET_ALL_SPRINTS,
+        query: getAllSprints,
       }
     ]
   });
 
-  const [removeTask] = useMutation(REMOVE_TASK, {
+  const [removeTaskMutation] = useMutation(removeTask, {
     client,
     refetchQueries: [
       {
-        query: GET_ALL_SPRINTS,
+        query: getAllSprints,
       },
       {
-        query: GET_ALL_TASKS,
+        query: getAllTasks,
       }
     ]
   });
@@ -54,7 +53,7 @@ const TaskDetailContainer: React.FC<ITaskDetailContainerProps> = ({
   };
 
   const handleTaskComplete = async (id: number) => {
-    await completeTask({
+    await completeTaskMutation({
       variables: {
         id: +id,
       }
@@ -64,7 +63,7 @@ const TaskDetailContainer: React.FC<ITaskDetailContainerProps> = ({
   };
 
   const handleTaskSave = async (task: ITask) => {
-    await updateTask({
+    await updateTaskMutation({
       variables: {
         t: {...task},
       }
@@ -74,7 +73,7 @@ const TaskDetailContainer: React.FC<ITaskDetailContainerProps> = ({
   };
 
   const handleTaskDelete = async (id: number) => {
-    await removeTask({
+    await removeTaskMutation({
       variables: {
         id: +id,
       }
@@ -83,7 +82,7 @@ const TaskDetailContainer: React.FC<ITaskDetailContainerProps> = ({
     history.push('/board');
   };
 
-  const { loading, error, data } = useQuery(GET_TASK, {
+  const { loading, error, data } = useQuery(getTask, {
     variables: { 
       id: +match.params.id,
     },

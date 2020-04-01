@@ -62,7 +62,7 @@ describe('Boards - Component', () => {
       wrap
         .find(Card)
         .at(0)
-        .find('h3')
+        .find('h4')
         .at(0)
         .childAt(0)
         .text()
