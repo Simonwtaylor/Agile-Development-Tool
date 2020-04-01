@@ -27,7 +27,7 @@ const BoardDropdownContainer: React.FC<IBoardDropdownContainerProps> = ({
   const { error, loading, data } = useQuery(GET_SPRINT_BOARDS, {
     client,
     variables: {
-      sprintId: +sprintId,
+      sprintId: +sprintId || 0,
     }
   });
 
@@ -62,7 +62,7 @@ const BoardDropdownContainer: React.FC<IBoardDropdownContainerProps> = ({
 }
 
 const mapStateToProps = (store: any) => ({
-  sprintId: (store.sprint) ? store.sprint.currentSprint.id : '',
+  sprintId: (store.sprint && store.sprint.currentSprint) ? store.sprint.currentSprint.id : '',
 });
 
 export default connect(mapStateToProps)(BoardDropdownContainer);
