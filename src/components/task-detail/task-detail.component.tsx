@@ -107,7 +107,7 @@ const TaskDetail: React.FC<any> = ({
     if (!task.completed) {
       return 'Complete Task';
     }
-    return 'Mark as undone';
+    return 'Mark as incomplete';
   };
 
   const getIconFill = (completed: boolean): 'check circle' | 'check circle outline' => {
