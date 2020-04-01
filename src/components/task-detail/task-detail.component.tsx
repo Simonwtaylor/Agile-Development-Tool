@@ -1,13 +1,15 @@
 import * as React from 'react';
-import { Card, Form, Popup, Icon, Grid, Comment, Header, Button } from 'semantic-ui-react';
+import { Card, Form, Popup, Icon, Grid } from 'semantic-ui-react';
 import { CustomButton } from '../custom-button';
 import './task-detail.styles.scss';
 import { ITask } from '../../lib/types';
 import {
   BoardDropdownContainer,
   UserDropdownContainer,
+  SprintDropdownContainer,
 } from '../dropdowns';
 import { TaskDetailMode } from './task-detail.enum';
+import CommentsContainer from '../comments/comments.container';
 
 export interface ITaskDetailProps {
   taskDetail?: ITask;
@@ -35,6 +37,10 @@ const TaskDetail: React.FC<any> = ({
 
   const [selectedUser, onSelectedUser] = React.useState(
     (task && task.user && task.user.id) ? task.user.id : null
+  );
+
+  const [selectedSprint, onSelectedSprint] = React.useState(
+    (task && task.board && task.board.sprintId) ? task.board.sprintId : null
   );
 
   const handleFormChange = (e: any) => {
@@ -80,6 +86,11 @@ const TaskDetail: React.FC<any> = ({
     onSelectedBoard(value);
   };
 
+  const handleSprintChange = (selectItem: any) => {
+    let value = selectItem.value;
+    onSelectedSprint(value);
+  };
+
   const handleCompleteClick = () => {
     onTaskComplete(task.id);
   };
@@ -107,16 +118,30 @@ const TaskDetail: React.FC<any> = ({
   };
 
   return (
-    <Card className={'task-detail'}>
-      <Grid>
-        <Grid.Row columns={2}>
-          <Grid.Column width={10}>
-            <Form>
+    <Form>
+      <Card className={'task-detail'}>
+        <Grid>
+          <Grid.Row columns={1}>
+            <Grid.Column>
               <Card.Content>
                 <Card.Header>
                   {
+                    (mode === TaskDetailMode.ADD && 
+                      <Form.Field>
+                        <label>Title</label>
+                        <input 
+                          placeholder='Title...'
+                          value={task.title}
+                          name={'title'}
+                          onChange={handleFormChange}
+                        />
+                      </Form.Field>
+                    )
+                  }
+                  {
                     (mode === TaskDetailMode.EDIT &&
                       <>
+                        <span>{task.title}</span>
                         <Popup
                           content={getCompletedText}
                           key={`taskcompleteicon`}
@@ -158,94 +183,74 @@ const TaskDetail: React.FC<any> = ({
                   }
                 </Card.Header>
               </Card.Content>
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row columns={2}>
+            <Grid.Column width={10}>
               <Card.Content>
-                <Form.Field>
-                  <label>Title</label>
-                  <input 
-                    placeholder='Title...'
-                    value={task.title}
-                    name={'title'}
-                    onChange={handleFormChange}
-                  />
-                </Form.Field>
-                <Form.Field>
-                  <label>Description</label>
-                  <input 
-                    placeholder='Description...'
-                    value={task.description}
-                    name={'description'}
-                    onChange={handleFormChange}
-                  />
-                </Form.Field>
-                <Form.Field>
-                  <label>Story Points</label>
-                  <input 
-                    placeholder='Story Points...' 
-                    value={task!.storyPoints} 
-                    type='number' 
-                    name={'storyPoints'}
-                    onChange={handleFormChange}
-                  />
-                </Form.Field>
-                <Form.Field>
-                  <label>Board</label>
-                  <BoardDropdownContainer
-                    handleBoardSelect={handleBoardChange}
-                    selectedBoard={selectedBoard}
-                    name={'boardId'}
-                  />
-                </Form.Field>
-                <Form.Field>
-                  <label>User</label>
-                  <UserDropdownContainer
-                    onSelectUser={handleUserChange}
-                    selectedUser={selectedUser}
-                    name={'userId'}
-                  />
-                </Form.Field>
-                <CustomButton
-                  className={'submit'}
-                  color={'green'}
-                  inverted
-                  onClick={handleSubmitClick}
-                >
-                  <span role="img" aria-label="save">💾</span> {buttonText}
-                </CustomButton>
-              </Card.Content>
-            </Form>
-          </Grid.Column>
-          <Grid.Column width={6}>
-            <Comment.Group>
-              <Header as='h3' dividing>
-                Comments
-              </Header>
-              {
-                (task.comments && task.comments.map((comment: any) => {
-                  return (
-                  <Comment>
-                    <Comment.Avatar src={comment.user.photoURL} />
-                    <Comment.Content>
-                      <Comment.Author as='a'>{comment.user.displayName}</Comment.Author>
-                      <Comment.Metadata>
-                        <div>{comment.datePosted}</div>
-                      </Comment.Metadata>
-                      <Comment.Text>{comment.content}</Comment.Text>
-                    </Comment.Content>
-                  </Comment>
-                  )
-                }))
-              }
-              
-              <Form reply>
-                <Form.TextArea />
-                <Button content='Add Reply' labelPosition='left' icon='edit' primary />
-              </Form>
-            </Comment.Group>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
-      
-    </Card>
+                  
+                  <Form.Field>
+                    <label>Description</label>
+                    <input 
+                      placeholder='Description...'
+                      value={task.description}
+                      name={'description'}
+                      onChange={handleFormChange}
+                    />
+                  </Form.Field>
+                  <Form.Field>
+                    <label>Story Points</label>
+                    <input 
+                      placeholder='Story Points...' 
+                      value={task!.storyPoints} 
+                      type='number' 
+                      name={'storyPoints'}
+                      onChange={handleFormChange}
+                    />
+                  </Form.Field>
+                  <Form.Field>
+                    <label>Sprint</label>
+                    <SprintDropdownContainer
+                      onSelectSprint={handleSprintChange}
+                      selectedSprint={selectedSprint}
+                      name={'sprintId'}
+                    />
+                  </Form.Field>
+                  <Form.Field>
+                    <label>Board</label>
+                    <BoardDropdownContainer
+                      handleBoardSelect={handleBoardChange}
+                      selectedBoard={selectedBoard}
+                      name={'boardId'}
+                    />
+                  </Form.Field>
+                  <Form.Field>
+                    <label>User</label>
+                    <UserDropdownContainer
+                      onSelectUser={handleUserChange}
+                      selectedUser={selectedUser}
+                      name={'userId'}
+                    />
+                  </Form.Field>
+                  <CustomButton
+                    className={'submit'}
+                    color={'green'}
+                    inverted
+                    onClick={handleSubmitClick}
+                  >
+                    <span role="img" aria-label="save">💾</span> {buttonText}
+                  </CustomButton>
+                </Card.Content>
+            </Grid.Column>
+            <Grid.Column width={6}>
+              {(taskDetail && <CommentsContainer
+                taskId={taskDetail.id}
+              />)}
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </Card>
+    </Form>
   );
 };
 

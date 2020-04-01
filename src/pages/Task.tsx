@@ -21,7 +21,6 @@ const Task: React.FC<ITaskProps> = ({
   
   return (
     <div className={'task'}>
-      <h1>Task Detail <span role="img" aria-label="star">🌠</span></h1>
       <Grid padded>
         <Grid.Row stretched>
           <Grid.Column stretched>

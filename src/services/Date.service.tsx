@@ -11,4 +11,14 @@ export class DateService {
 
     return difference;
   }
+
+  public static formatDate(
+    date: Date|string,
+  ) {
+    if (typeof date === "string") {
+      const newDate = new Date(date);
+      return newDate.toUTCString();
+    }
+    return date.toUTCString();
+  }
 }
