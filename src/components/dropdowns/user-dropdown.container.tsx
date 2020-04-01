@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { CustomDropdown } from './';
-import { gql } from 'apollo-boost';
 import { useApolloClient, useQuery } from '@apollo/react-hooks';
+import { getAllUsers } from '../../queries';
 
 export interface IUserDropdownContainerProps {
   onSelectUser: any;
@@ -9,17 +9,6 @@ export interface IUserDropdownContainerProps {
   name: string;
 }
 
-export const GET_ALL_USERS = gql`
-{
-  users {
-    id
-    displayName
-    email
-    photoURL
-    uid 
-  }
-}
-`;
 
 const UserDropdownContainer: React.FC<IUserDropdownContainerProps> = ({
   onSelectUser,
@@ -29,7 +18,7 @@ const UserDropdownContainer: React.FC<IUserDropdownContainerProps> = ({
 
   const client = useApolloClient();
 
-  const { error, loading, data } = useQuery(GET_ALL_USERS, { client });
+  const { error, loading, data } = useQuery(getAllUsers, { client });
 
   if(error) return <h1>Error loading users</h1>;
   if(loading) return <h3>Loading...</h3>;

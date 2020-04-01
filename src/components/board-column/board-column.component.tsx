@@ -39,9 +39,9 @@ const BoardColumn: React.FC<IBoardColumnProps> = ({
   return (
     <div className="col card">
       <div className="card-body card-container">
-        <h3>{columnTitle}</h3>
+        <h4>{columnTitle}</h4>
         <Popup
-          content={'Add new task'}
+          content={`Add task to ${columnTitle}`}
           key={`boardaddtask`}
           trigger={
             <Icon

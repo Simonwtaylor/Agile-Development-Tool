@@ -47,7 +47,7 @@ describe('Board Column - Component', () => {
 
     expect(
       wrap
-        .find('h3')
+        .find('h4')
         .at(0)
         .childAt(0)
         .text()
@@ -58,7 +58,7 @@ describe('Board Column - Component', () => {
         .find(Popup)
         .at(0)
         .props()['content']
-    ).toBe('Add new task');
+    ).toBe(`Add task to ${props.columnTitle}`);
 
     expect(
       wrap

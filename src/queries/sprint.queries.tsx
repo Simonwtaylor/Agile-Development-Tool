@@ -1,6 +1,6 @@
 import { gql } from 'apollo-boost';
 
-export const GET_ALL_SPRINTS = gql`{
+export const getAllSprints = gql`{
   sprints {
     id
     name
@@ -11,7 +11,7 @@ export const GET_ALL_SPRINTS = gql`{
   }
 }`;
 
-export const GET_BOARDS_FOR_SPRINT = gql`
+export const getSprintById = gql`
   query sprint($id: Float!) {
     sprint(id: $id) {
       id

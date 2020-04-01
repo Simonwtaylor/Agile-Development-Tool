@@ -1,6 +1,17 @@
 import { gql } from 'apollo-boost';
 
-export const UPDATE_TASK = gql`
+export const addTask = gql`
+  mutation addTask($t: addTask!) {
+    addTask(addTask: $t) {
+      title
+      description
+      completed
+      storyPoints
+    }
+  }
+`;
+
+export const updateTask = gql`
   mutation updateTask($t: task!) {
     updateTask(task: $t) {
       id
@@ -12,7 +23,7 @@ export const UPDATE_TASK = gql`
   }
 `;
 
-export const COMPLETE_TASK = gql`
+export const completeTask = gql`
   mutation completeTask($id: Float!) {
     completeTask(id: $id) {
       id
@@ -25,7 +36,7 @@ export const COMPLETE_TASK = gql`
   }
 `;
 
-export const REMOVE_TASK = gql`
+export const removeTask = gql`
   mutation removeTask($id: Float!) {
     removeTask(id: $id) {
       id

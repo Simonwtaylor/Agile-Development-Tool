@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { CustomDropdown } from './';
 import { useApolloClient, useQuery } from '@apollo/react-hooks';
-import { GET_ALL_TASKS } from '../../queries';
+import { getAllTasks } from '../../queries';
 import { ITask } from '../../lib/types';
 
 export interface ITaskDropdownContainerProps {
@@ -18,7 +18,7 @@ const TaskDropdownContainer: React.FC<ITaskDropdownContainerProps> = ({
 
   const client = useApolloClient();
 
-  const { error, loading, data } = useQuery(GET_ALL_TASKS, { client });
+  const { error, loading, data } = useQuery(getAllTasks, { client });
 
   if(error) return <h1>Error loading tasks</h1>;
   if(loading) return <h3>Loading...</h3>;

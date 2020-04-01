@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { AddSprint } from '.';
 import { useApolloClient, useMutation } from '@apollo/react-hooks';
-import { GET_ALL_SPRINTS } from '../../queries';
-import { ADD_SPRINT } from '../../mutations/sprint.mutations';
+import { getAllSprints } from '../../queries';
+import { addSprint } from '../../mutations/sprint.mutations';
 
 export interface IAddSprintContainerProps {
   
@@ -12,17 +12,17 @@ const AddSprintContainer: React.FC<IAddSprintContainerProps> = () => {
 
   const client = useApolloClient();
   
-  const [addSprint] = useMutation(ADD_SPRINT, {
+  const [addSprintMutation] = useMutation(addSprint, {
     client,
     refetchQueries: [
       {
-        query: GET_ALL_SPRINTS,
+        query: getAllSprints,
       }
     ]
   });
 
   const handleAddSprint = (sprint: any) => {
-    addSprint({
+    addSprintMutation({
       variables: {
         sprint: { 
           ...sprint,
