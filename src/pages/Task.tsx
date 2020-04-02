@@ -1,23 +1,21 @@
 import * as React from 'react';
 import { Grid } from 'semantic-ui-react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setCurrentTask } from '../redux/tasks/tasks.action';
 import {
   TaskDetailContainer,
   TaskAddContainer,
 } from '../components/task-detail/';
 
-export interface ITaskProps extends RouteComponentProps<any>  {
-  setCurrentTask: (id: string) => void;
-}
+export interface ITaskProps extends RouteComponentProps<any> {}
 
 const Task: React.FC<ITaskProps> = ({
   match,
-  setCurrentTask,
 }) => {
+  const dispatch = useDispatch();
 
-  setCurrentTask(match.params.id);
+  dispatch(setCurrentTask(match.params.id));
   
   return (
     <div className={'task'}>
@@ -36,8 +34,4 @@ const Task: React.FC<ITaskProps> = ({
   );
 };
 
-const mapDispatchToProps = (dispatch: any) => ({
-  setCurrentTask: (taskId: any) => dispatch(setCurrentTask(taskId)),
-});
-
-export default connect(null, mapDispatchToProps)(withRouter(Task));
+export default withRouter(Task);
