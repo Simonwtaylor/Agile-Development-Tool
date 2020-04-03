@@ -49,7 +49,7 @@ const TaskDetailContainer: React.FC<ITaskDetailContainerProps> = ({
   });
 
   const handleBoardNavigation = () => {
-    history.push('/board');
+    history.push('/sprint');
   };
 
   const handleTaskComplete = async (id: number) => {
@@ -59,7 +59,7 @@ const TaskDetailContainer: React.FC<ITaskDetailContainerProps> = ({
       }
     });
 
-    history.push('/board');
+    history.push('/sprint');
   };
 
   const handleTaskSave = async (task: ITask) => {
@@ -69,7 +69,7 @@ const TaskDetailContainer: React.FC<ITaskDetailContainerProps> = ({
       }
     });
 
-    history.push('/board');
+    history.push('/sprint');
   };
 
   const handleTaskDelete = async (id: number) => {
@@ -79,7 +79,7 @@ const TaskDetailContainer: React.FC<ITaskDetailContainerProps> = ({
       }
     });
 
-    history.push('/board');
+    history.push('/sprint');
   };
 
   const { loading, error, data } = useQuery(getTask, {

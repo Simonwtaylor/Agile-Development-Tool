@@ -10,8 +10,6 @@ export interface INewTeamContainerProps {
 }
  
 const NewTeamContainer: React.FC<INewTeamContainerProps> = () => {
-
-  
   const client = useApolloClient();
   
   const handleNewTeamSubmit = (teamName: string) => {

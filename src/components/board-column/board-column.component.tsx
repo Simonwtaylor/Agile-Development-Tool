@@ -36,6 +36,11 @@ const BoardColumn: React.FC<IBoardColumnProps> = ({
     onBoardRemove(id);
   };
 
+  const getTasks = () => {
+    return tasks
+      .filter(a => !a.completed);
+  };
+
   return (
     <div className="col card">
       <div className="card-body card-container">
@@ -86,7 +91,8 @@ const BoardColumn: React.FC<IBoardColumnProps> = ({
           }
         />
         {
-          tasks.map((task, index) => {
+          getTasks()
+            .map((task, index) => {
             return(
               <TaskCard 
                 onTaskClick={handleTaskClick}
