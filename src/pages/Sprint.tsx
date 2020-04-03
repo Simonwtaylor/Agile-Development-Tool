@@ -10,7 +10,7 @@ import { DateService } from '../services';
 
 export interface ISprintProps {}
  
-const Sprint: React.FC<ISprintProps> = ({}) => {
+const Sprint: React.FC<ISprintProps> = () => {
   const sprint = useSelector(selectCurrentSprint)
 
   const [selectedSprint, onSelectedSprint] = React.useState(

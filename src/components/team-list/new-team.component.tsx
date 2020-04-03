@@ -66,11 +66,8 @@ const NewTeam: React.FC<INewTeamProps> = ({
     )
   };
 
-
   return (
-    <>
-    {renderNewTeam()}
-    </>
+    <>{renderNewTeam()}</>
   );
 }
  
