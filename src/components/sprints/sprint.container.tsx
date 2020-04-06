@@ -75,13 +75,11 @@ const SprintContainer: React.FC<ISprintContainerProps> = ({
   }
 
   return (
-    <>
-      <Boards
-        boards={data.sprint.boards}
-        onAddNewBoard={handleBoardSave}
-        onRemoveBoard={handleBoardRemove}
-      />
-    </>
+    <Boards
+      boards={data.sprint.boards}
+      onAddNewBoard={handleBoardSave}
+      onRemoveBoard={handleBoardRemove}
+    />
   );
 }
 

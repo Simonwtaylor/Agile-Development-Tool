@@ -41,3 +41,25 @@ export const getSprintById = gql`
     }
   }
 `;
+
+export const incompleteSprints = gql`{
+  incompleteSprints {
+    id
+    name
+    boards {
+      id
+      name
+    }
+  }
+}`;
+
+export const completeSprints = gql`{
+  completeSprints {
+    id
+    name
+    boards {
+      id
+      name
+    }
+  }
+}`;

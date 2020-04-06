@@ -7,6 +7,7 @@ import { selectCurrentSprint } from '../redux/sprint/sprint.selector';
 import {  IBoard, ITask } from '../lib/types';
 import { AddSprintContainer } from '../components/add-sprint';
 import { DateService } from '../services';
+import EndSprintContainer from '../components/sprints/end-sprint.container';
 
 export interface ISprintProps {}
  
@@ -27,7 +28,7 @@ const Sprint: React.FC<ISprintProps> = () => {
     if (!selectedSprint || selectedSprint === '') { 
       return (
         <h2>
-          Please select a Sprint
+          Please select a Sprint or add a new one
         </h2>
       );
     }
@@ -44,21 +45,24 @@ const Sprint: React.FC<ISprintProps> = () => {
   const getSprintToggleButton = () => {
     if (!addNewSprint) {
       return (
-        <Popup
-          content={'Add new sprint'}
-          key={`sprintaddnewsprint`}
-          trigger={
-            <Icon
-              color={'green'}
-              name={'plus circle'}
-              style={{
-                cursor: 'pointer',
-                marginTop: '5px'
-              }}
-              onClick={handleAddNewSprintClick}
-            />
-          }
-        />
+        <>
+          <Popup
+            content={'Add new sprint'}
+            key={`sprintaddnewsprint`}
+            trigger={
+              <Icon
+                color={'green'}
+                name={'plus circle'}
+                style={{
+                  cursor: 'pointer',
+                  marginTop: '5px'
+                }}
+                onClick={handleAddNewSprintClick}
+              />
+            }
+          />
+          {(sprint && <EndSprintContainer id={sprint.id} />)}
+        </>
       )
     }
 
