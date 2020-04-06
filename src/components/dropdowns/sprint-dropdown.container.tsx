@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { CustomDropdown } from './';
 import { useApolloClient, useQuery } from '@apollo/react-hooks';
-import { getAllSprints } from '../../queries';
+import { incompleteSprints } from '../../queries';
 import { ISprint } from '../../lib/types';
 
 export interface ISprintDropdownContainerProps {
@@ -18,14 +18,14 @@ const SprintDropdownContainer: React.FC<ISprintDropdownContainerProps> = ({
 
   const client = useApolloClient();
 
-  const { error, loading, data } = useQuery(getAllSprints, { client });
+  const { error, loading, data } = useQuery(incompleteSprints, { client });
 
   if(error) return <h1>Error loading sprints</h1>;
   if(loading) return <h3>Loading...</h3>;
 
   const options: any[] = [];
 
-  data.sprints.map((sprint: ISprint) => {
+  data.incompleteSprints.map((sprint: ISprint) => {
     return options.push(
       {
         key: sprint.id, 

@@ -15,3 +15,15 @@ export const addBoardToSprint = gql`
     }
   }
 `;
+
+export const completeSprint = gql`
+  mutation completeSprint($id: Float!) {
+    completeSprint(id: $id) {
+      id
+      name
+      startDate
+      endDate
+      completed
+    }
+  }
+`;

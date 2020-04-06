@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { AddSprint } from '.';
 import { useApolloClient, useMutation } from '@apollo/react-hooks';
-import { getAllSprints } from '../../queries';
+import { getAllSprints, incompleteSprints } from '../../queries';
 import { addSprint } from '../../mutations/sprint.mutations';
 
 export interface IAddSprintContainerProps {
@@ -17,7 +17,10 @@ const AddSprintContainer: React.FC<IAddSprintContainerProps> = () => {
     refetchQueries: [
       {
         query: getAllSprints,
-      }
+      },
+      {
+        query: incompleteSprints,
+      },
     ]
   });
 
