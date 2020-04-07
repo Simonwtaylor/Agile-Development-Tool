@@ -28,7 +28,7 @@ const BoardDropdownContainer: React.FC<IBoardDropdownContainerProps> = ({
   const { error, loading, data } = useQuery(getBoardsBySprintId, {
     client,
     variables: {
-      sprintId: +currentSprint.sprintId || 0,
+      sprintId: (currentSprint && +currentSprint.id) || 0,
     }
   });
 

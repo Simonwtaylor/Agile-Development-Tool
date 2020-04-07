@@ -188,7 +188,15 @@ const TaskDetail: React.FC<any> = ({
           <Grid.Row columns={2}>
             <Grid.Column width={10}>
               <Card.Content>
-                  
+                <Form.Field>
+                  <label>Title</label>
+                  <input 
+                    placeholder='Title...'
+                    value={task.title}
+                    name={'title'}
+                    onChange={handleFormChange}
+                  />
+                </Form.Field>
                   <Form.Field>
                     <label>Description</label>
                     <input 
