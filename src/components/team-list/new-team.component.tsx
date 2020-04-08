@@ -32,18 +32,12 @@ const NewTeam: React.FC<INewTeamProps> = ({
     if (!newTeam) {
       return (
         <Button
-          animated={true}
           color={'green'}
           inverted={true}
           size={'small'}
           onClick={handleNewTeamClick}
         >
-          <Button.Content visible>
-            <Icon name='plus' />
-          </Button.Content>
-          <Button.Content hidden>
-            Add
-          </Button.Content>
+          <Icon name='plus' /> Add Team
         </Button>
       )
     }
@@ -57,10 +51,9 @@ const NewTeam: React.FC<INewTeamProps> = ({
         />
         <CustomButton
           color={'green'}
-          inverted={true}
           onClick={handleNewTeamSubmit}
         >
-          Add
+          Save
         </CustomButton>
       </>
     )

@@ -3,17 +3,20 @@ import { CustomDropdown } from './';
 import { useApolloClient, useQuery } from '@apollo/react-hooks';
 import { incompleteSprints } from '../../queries';
 import { ISprint } from '../../lib/types';
+import { DropdownItemProps } from 'semantic-ui-react';
 
 export interface ISprintDropdownContainerProps {
   onSelectSprint: any;
   selectedSprint?: any;
   name: string;
+  placeholder?: string;
 }
 
 const SprintDropdownContainer: React.FC<ISprintDropdownContainerProps> = ({
   onSelectSprint,
   selectedSprint,
-  name
+  name,
+  placeholder,
 }) => {
 
   const client = useApolloClient();
@@ -23,7 +26,7 @@ const SprintDropdownContainer: React.FC<ISprintDropdownContainerProps> = ({
   if(error) return <h1>Error loading sprints</h1>;
   if(loading) return <h3>Loading...</h3>;
 
-  const options: any[] = [];
+  const options: DropdownItemProps[] = [];
 
   data.incompleteSprints.map((sprint: ISprint) => {
     return options.push(
@@ -41,6 +44,7 @@ const SprintDropdownContainer: React.FC<ISprintDropdownContainerProps> = ({
       onSelectItem={onSelectSprint}
       selectedItem={selectedSprint}
       name={name}
+      placeholder={placeholder}
     />
   );
 };
