@@ -6,6 +6,7 @@ export interface ICustomDropdownProps {
   onSelectItem: any;
   selectedItem?: any;
   name: string;
+  placeholder?: string;
 }
  
 class CustomDropdown extends React.Component<ICustomDropdownProps> {
@@ -26,6 +27,7 @@ class CustomDropdown extends React.Component<ICustomDropdownProps> {
     const {
       items,
       selectedItem,
+      placeholder,
     } = this.props;
 
     return (
@@ -36,6 +38,7 @@ class CustomDropdown extends React.Component<ICustomDropdownProps> {
         options={items}
         value={selectedItem}
         onChange={this.handleSelectChange}
+        placeholder={placeholder}
       />
     )
   }

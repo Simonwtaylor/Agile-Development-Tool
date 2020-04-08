@@ -6,7 +6,6 @@ import { ITask } from '../../lib/types';
 import {
   BoardDropdownContainer,
   UserDropdownContainer,
-  SprintDropdownContainer,
 } from '../dropdowns';
 import { TaskDetailMode } from './task-detail.enum';
 import CommentsContainer from '../comments/comments.container';
@@ -37,10 +36,6 @@ const TaskDetail: React.FC<any> = ({
 
   const [selectedUser, onSelectedUser] = React.useState(
     (task && task.user && task.user.id) ? task.user.id : null
-  );
-
-  const [selectedSprint, onSelectedSprint] = React.useState(
-    (task && task.board && task.board.sprintId) ? task.board.sprintId : null
   );
 
   const handleFormChange = (e: any) => {
@@ -84,11 +79,6 @@ const TaskDetail: React.FC<any> = ({
     });
 
     onSelectedBoard(value);
-  };
-
-  const handleSprintChange = (selectItem: any) => {
-    let value = selectItem.value;
-    onSelectedSprint(value);
   };
 
   const handleCompleteClick = () => {
@@ -214,14 +204,6 @@ const TaskDetail: React.FC<any> = ({
                       type='number' 
                       name={'storyPoints'}
                       onChange={handleFormChange}
-                    />
-                  </Form.Field>
-                  <Form.Field>
-                    <label>Sprint</label>
-                    <SprintDropdownContainer
-                      onSelectSprint={handleSprintChange}
-                      selectedSprint={selectedSprint}
-                      name={'sprintId'}
                     />
                   </Form.Field>
                   <Form.Field>

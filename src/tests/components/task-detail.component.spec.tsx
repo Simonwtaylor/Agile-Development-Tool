@@ -3,7 +3,7 @@ import { ITaskDetailProps, TaskDetailMode, TaskDetail } from '../../components/t
 import { ITask } from '../../lib/types';
 import { shallow } from 'enzyme';
 import { CustomButton } from '../../components/custom-button';
-import { BoardDropdownContainer, UserDropdownContainer, SprintDropdownContainer } from '../../components/dropdowns';
+import { BoardDropdownContainer, UserDropdownContainer } from '../../components/dropdowns';
 
 describe('Task Detail - Component', () => {
   let props: ITaskDetailProps;
@@ -127,27 +127,11 @@ describe('Task Detail - Component', () => {
         .props()['name']
     ).toBe('storyPoints');
 
-    // Sprint
-    expect(
-      wrap
-        .find('label')
-        .at(3)
-        .childAt(0)
-        .text()
-    ).toBe('Sprint');
-
-    expect(
-      wrap
-        .find(SprintDropdownContainer)
-        .at(0)
-        .props()['name']
-    ).toBe('sprintId');
-
     // Board
     expect(
       wrap
         .find('label')
-        .at(4)
+        .at(3)
         .childAt(0)
         .text()
     ).toBe('Board');
@@ -163,7 +147,7 @@ describe('Task Detail - Component', () => {
     expect(
       wrap
         .find('label')
-        .at(5)
+        .at(4)
         .childAt(0)
         .text()
     ).toBe('User');

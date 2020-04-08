@@ -5,3 +5,13 @@
     }
   }
 }
+
+.navbar {
+  .sprint {
+    &.dropdown {
+      .search {
+        border: none;
+      }
+    }
+  }
+}
