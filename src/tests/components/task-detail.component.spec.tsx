@@ -2,7 +2,6 @@ import * as React from 'react';
 import { ITaskDetailProps, TaskDetailMode, TaskDetail } from '../../components/task-detail';
 import { ITask } from '../../lib/types';
 import { shallow } from 'enzyme';
-import { CustomButton } from '../../components/custom-button';
 import { BoardDropdownContainer, UserDropdownContainer } from '../../components/dropdowns';
 
 describe('Task Detail - Component', () => {
@@ -10,7 +9,6 @@ describe('Task Detail - Component', () => {
 
   beforeEach(() => {
     props = {
-      buttonText: 'Save',
       mode: TaskDetailMode.EDIT,
       onTaskComplete: (task: string) => console.log(task),
       onTaskSave: (task: ITask) => console.log(task),
@@ -40,14 +38,6 @@ describe('Task Detail - Component', () => {
     // Title
     expect(
       wrap
-        .find('label')
-        .at(0)
-        .childAt(0)
-        .text()
-    ).toBe('Title');
-
-    expect(
-      wrap
         .find('input')
         .at(0)
         .props()['placeholder']
@@ -71,7 +61,7 @@ describe('Task Detail - Component', () => {
     expect(
       wrap
         .find('label')
-        .at(1)
+        .at(0)
         .childAt(0)
         .text()
     ).toBe('Description');
@@ -101,7 +91,7 @@ describe('Task Detail - Component', () => {
     expect(
       wrap
         .find('label')
-        .at(2)
+        .at(1)
         .childAt(0)
         .text()
     ).toBe('Story Points');
@@ -131,7 +121,7 @@ describe('Task Detail - Component', () => {
     expect(
       wrap
         .find('label')
-        .at(3)
+        .at(2)
         .childAt(0)
         .text()
     ).toBe('Board');
@@ -147,7 +137,7 @@ describe('Task Detail - Component', () => {
     expect(
       wrap
         .find('label')
-        .at(4)
+        .at(3)
         .childAt(0)
         .text()
     ).toBe('User');
@@ -158,42 +148,5 @@ describe('Task Detail - Component', () => {
         .at(0)
         .props()['name']
     ).toBe('userId');
-
-    // Button
-    expect(
-      wrap
-        .find(CustomButton)
-        .at(0)
-        .props()['color']
-    ).toBe('green');
-
-    expect(
-      wrap
-        .find(CustomButton)
-        .at(0)
-        .props()['inverted']
-    ).toBe(true);
-
-    expect(
-      wrap
-        .find('span')
-        .at(1)
-        .props()['role']
-    ).toBe('img');
-
-    expect(
-      wrap
-        .find('span')
-        .at(1)
-        .props()['aria-label']
-    ).toBe('save');
-
-    expect(
-      wrap
-        .find(CustomButton)
-        .at(0)
-        .childAt(2)
-        .text()
-    ).toBe('Save');
   });
 });

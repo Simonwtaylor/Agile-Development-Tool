@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Card, Form, Popup, Icon, Grid } from 'semantic-ui-react';
-import { CustomButton } from '../custom-button';
 import './task-detail.styles.scss';
 import { ITask } from '../../lib/types';
 import {
@@ -13,7 +12,6 @@ import CommentsContainer from '../comments/comments.container';
 export interface ITaskDetailProps {
   taskDetail?: ITask;
   onTaskSave: (task: ITask) => void;
-  buttonText: string;
   mode: TaskDetailMode;
   onTaskComplete?: (task: string) => void;
   onTaskDelete?: (id: number) => void;
@@ -22,7 +20,6 @@ export interface ITaskDetailProps {
 const TaskDetail: React.FC<any> = ({
   taskDetail,
   onTaskSave,
-  buttonText,
   mode,
   onTaskComplete,
   onTaskDelete,
@@ -114,7 +111,12 @@ const TaskDetail: React.FC<any> = ({
           <Grid.Row columns={1}>
             <Grid.Column>
               <Card.Content>
-                <Card.Header>
+                <Card.Header
+                  style={{
+                    borderBottom: '1px solid #d6d2d2',
+                    minHeight: '40px'
+                  }}
+                >
                   {
                     (mode === TaskDetailMode.ADD && 
                       <Form.Field>
@@ -131,7 +133,24 @@ const TaskDetail: React.FC<any> = ({
                   {
                     (mode === TaskDetailMode.EDIT &&
                       <>
-                        <span>{task.title}</span>
+                      <Popup
+                          content={'Save'}
+                          key={`taskcompleteicon`}
+                          trigger={
+                            <Icon
+                              color={'green'}
+                              name={'save'}
+                              size={'large'}
+                              style={{
+                                cursor: 'pointer',
+                                marginTop: '10px',
+                                marginLeft: '10px',
+                                float: 'left'
+                              }}
+                              onClick={handleSubmitClick}
+                            />
+                          }
+                        />
                         <Popup
                           content={getCompletedText}
                           key={`taskcompleteicon`}
@@ -144,7 +163,7 @@ const TaskDetail: React.FC<any> = ({
                                 cursor: 'pointer',
                                 marginTop: '10px',
                                 marginLeft: '10px',
-                                float: 'left'
+                                float: 'right'
                               }}
                               onClick={handleCompleteClick}
                             />
@@ -179,58 +198,53 @@ const TaskDetail: React.FC<any> = ({
             <Grid.Column width={10}>
               <Card.Content>
                 <Form.Field>
-                  <label>Title</label>
                   <input 
                     placeholder='Title...'
                     value={task.title}
                     name={'title'}
                     onChange={handleFormChange}
+                    style={{
+                      border: 'none',
+                      display: 'inline-block'
+                    }}
                   />
                 </Form.Field>
-                  <Form.Field>
-                    <label>Description</label>
-                    <input 
-                      placeholder='Description...'
-                      value={task.description}
-                      name={'description'}
-                      onChange={handleFormChange}
-                    />
-                  </Form.Field>
-                  <Form.Field>
-                    <label>Story Points</label>
-                    <input 
-                      placeholder='Story Points...' 
-                      value={task!.storyPoints} 
-                      type='number' 
-                      name={'storyPoints'}
-                      onChange={handleFormChange}
-                    />
-                  </Form.Field>
-                  <Form.Field>
-                    <label>Board</label>
-                    <BoardDropdownContainer
-                      handleBoardSelect={handleBoardChange}
-                      selectedBoard={selectedBoard}
-                      name={'boardId'}
-                    />
-                  </Form.Field>
-                  <Form.Field>
-                    <label>User</label>
-                    <UserDropdownContainer
-                      onSelectUser={handleUserChange}
-                      selectedUser={selectedUser}
-                      name={'userId'}
-                    />
-                  </Form.Field>
-                  <CustomButton
-                    className={'submit'}
-                    color={'green'}
-                    inverted
-                    onClick={handleSubmitClick}
-                  >
-                    <span role="img" aria-label="save">💾</span> {buttonText}
-                  </CustomButton>
-                </Card.Content>
+                <Form.Field>
+                  <label>Description</label>
+                  <input 
+                    placeholder='Description...'
+                    value={task.description}
+                    name={'description'}
+                    onChange={handleFormChange}
+                  />
+                </Form.Field>
+                <Form.Field>
+                  <label>Story Points</label>
+                  <input 
+                    placeholder='Story Points...' 
+                    value={task!.storyPoints} 
+                    type='number' 
+                    name={'storyPoints'}
+                    onChange={handleFormChange}
+                  />
+                </Form.Field>
+                <Form.Field>
+                  <label>Board</label>
+                  <BoardDropdownContainer
+                    handleBoardSelect={handleBoardChange}
+                    selectedBoard={selectedBoard}
+                    name={'boardId'}
+                  />
+                </Form.Field>
+                <Form.Field>
+                  <label>User</label>
+                  <UserDropdownContainer
+                    onSelectUser={handleUserChange}
+                    selectedUser={selectedUser}
+                    name={'userId'}
+                  />
+                </Form.Field>
+              </Card.Content>
             </Grid.Column>
             <Grid.Column width={6}>
               {(taskDetail && <CommentsContainer
