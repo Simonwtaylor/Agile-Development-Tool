@@ -18,4 +18,22 @@
       margin-bottom: 10px;
     }
   }
+
+  &.card {
+    &.ui {
+      .body {
+        padding: 15px;
+      }
+    }
+
+    .comments {
+      max-width: 100%;
+    }
+
+    .ui {
+      .description {
+        height: 8em;
+      }
+    }
+  }
 }

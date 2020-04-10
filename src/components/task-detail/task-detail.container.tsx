@@ -7,9 +7,11 @@ import {
 import { ITask } from '../../lib/types';
 import { useMutation, useQuery, useApolloClient } from '@apollo/react-hooks';
 import { Loader } from 'semantic-ui-react';
-import { getAllTasks, getAllSprints, getTask } from '../../queries/';
+import { getTask, getSprintById } from '../../queries/';
 import { CustomButton } from '../custom-button';
 import { completeTask, updateTask, removeTask } from '../../mutations';
+import { useSelector } from 'react-redux';
+import { selectCurrentSprint } from '../../redux/sprint/sprint.selector';
 
 export interface ITaskDetailContainerProps {
   match?: any;
@@ -22,6 +24,7 @@ const TaskDetailContainer: React.FC<ITaskDetailContainerProps> = ({
 }) => {
 
   const client = useApolloClient();
+  const currentSprint = useSelector(selectCurrentSprint);
 
   const [completeTaskMutation] = useMutation(completeTask, {
     client,
@@ -31,7 +34,10 @@ const TaskDetailContainer: React.FC<ITaskDetailContainerProps> = ({
     client,
     refetchQueries: [
       {
-        query: getAllSprints,
+        query: getSprintById,
+        variables: {
+          id: +currentSprint.id
+        }
       }
     ]
   });
@@ -40,10 +46,10 @@ const TaskDetailContainer: React.FC<ITaskDetailContainerProps> = ({
     client,
     refetchQueries: [
       {
-        query: getAllSprints,
-      },
-      {
-        query: getAllTasks,
+        query: getSprintById,
+        variables: {
+          id: +currentSprint.id
+        }
       }
     ]
   });

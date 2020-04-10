@@ -24,8 +24,11 @@ export const getTask = gql`
         content
         datePosted
         user {
+          id
           displayName
+          email
           photoURL
+          uid
         }
       }
     }

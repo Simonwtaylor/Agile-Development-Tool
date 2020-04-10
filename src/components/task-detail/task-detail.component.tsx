@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Card, Form, Popup, Icon, Grid } from 'semantic-ui-react';
+import { Card, Form, Popup, Icon, Grid, Image } from 'semantic-ui-react';
 import './task-detail.styles.scss';
 import { ITask } from '../../lib/types';
 import {
@@ -26,6 +26,8 @@ const TaskDetail: React.FC<any> = ({
 }) => {
 
   const [task, setTask] = React.useState(taskDetail);
+  const [showUser, setShowUser] = React.useState(false);
+  const [showBoard, setShowBoard] = React.useState(false);
 
   const [selectedBoard, onSelectedBoard] = React.useState(
     (task && task.board && task.board.id) ? task.board.id : null
@@ -104,6 +106,44 @@ const TaskDetail: React.FC<any> = ({
     return 'check circle';
   };
 
+  const getUserInput = () => {
+    if (showUser) {
+      return (
+        <Grid.Column>
+          <Form.Field>
+            <label>User</label>
+            <UserDropdownContainer
+              onSelectUser={handleUserChange}
+              selectedUser={selectedUser}
+              name={'userId'}
+            />
+          </Form.Field>
+        </Grid.Column>
+      )
+    }
+
+    return <></>;
+  };
+
+  const getBoardInput = () => {
+    if (showBoard) {
+      return (
+        <Grid.Column>
+          <Form.Field>
+            <label>Board</label>
+            <BoardDropdownContainer
+              handleBoardSelect={handleBoardChange}
+              selectedBoard={selectedBoard}
+              name={'boardId'}
+            />
+          </Form.Field>
+        </Grid.Column>
+      )
+    }
+
+    return <></>;
+  };
+
   return (
     <Form>
       <Card className={'task-detail'}>
@@ -134,20 +174,38 @@ const TaskDetail: React.FC<any> = ({
                     (mode === TaskDetailMode.EDIT &&
                       <>
                       <Popup
-                          content={'Save'}
-                          key={`taskcompleteicon`}
+                        content={'Save'}
+                        key={`taskcompleteicon`}
+                        trigger={
+                          <Icon
+                            color={'green'}
+                            name={'save'}
+                            size={'large'}
+                            style={{
+                              cursor: 'pointer',
+                              marginTop: '10px',
+                              marginLeft: '10px',
+                              float: 'left'
+                            }}
+                            onClick={handleSubmitClick}
+                          />
+                          }
+                        />
+                        <Popup
+                          content={'Change Board'}
+                          key={`iconchangeboard`}
                           trigger={
                             <Icon
-                              color={'green'}
-                              name={'save'}
+                              color={'blue'}
+                              name={'columns'}
                               size={'large'}
                               style={{
                                 cursor: 'pointer',
                                 marginTop: '10px',
                                 marginLeft: '10px',
-                                float: 'left'
+                                float: 'right'
                               }}
-                              onClick={handleSubmitClick}
+                              onClick={() => setShowBoard(!showBoard)}
                             />
                           }
                         />
@@ -194,62 +252,76 @@ const TaskDetail: React.FC<any> = ({
               </Card.Content>
             </Grid.Column>
           </Grid.Row>
-          <Grid.Row columns={2}>
-            <Grid.Column width={10}>
-              <Card.Content>
-                <Form.Field>
-                  <input 
-                    placeholder='Title...'
-                    value={task.title}
-                    name={'title'}
-                    onChange={handleFormChange}
-                    style={{
-                      border: 'none',
-                      display: 'inline-block'
-                    }}
-                  />
-                </Form.Field>
+          <Grid.Row columns={1}>
+            <Grid.Column width={16}>
+              <Card.Content className={'body'}>
+                <Grid>
+                  <Grid.Row>
+                    <Grid.Column width={3}>
+                      <Popup
+                        content={task.user.displayName}
+                        key={`taskuserphoto`}
+                        trigger={
+                          <Image
+                            src={task.user.photoURL}
+                            onClick={() => setShowUser(!showUser)}
+                            circular={true}
+                            size={'tiny'}
+                            style={{
+                              width: '60px'
+                            }}
+                          />
+                        }
+                      />
+                    </Grid.Column>
+                    <Grid.Column width={11}>
+                    <Form.Field>
+                      <label>Title</label>
+                      <input
+                        placeholder='Title...'
+                        value={task.title}
+                        name={'title'}
+                        onChange={handleFormChange}
+                      />
+                    </Form.Field>
+                    </Grid.Column>
+                    <Grid.Column width={2}>
+                      <Form.Field>
+                        <label>Story Points</label>
+                        <input 
+                          placeholder='Story Points...' 
+                          value={task!.storyPoints} 
+                          type='number' 
+                          name={'storyPoints'}
+                          onChange={handleFormChange}
+                        />
+                      </Form.Field>
+                    </Grid.Column>
+                  </Grid.Row>
+                  <Grid.Row
+                    columns={2}
+                  >
+                    {getUserInput()}
+                    {getBoardInput()}
+                  </Grid.Row>
+                </Grid>
+                  
                 <Form.Field>
                   <label>Description</label>
-                  <input 
+                  <textarea
+                    className={'description'}
                     placeholder='Description...'
                     value={task.description}
                     name={'description'}
                     onChange={handleFormChange}
                   />
                 </Form.Field>
-                <Form.Field>
-                  <label>Story Points</label>
-                  <input 
-                    placeholder='Story Points...' 
-                    value={task!.storyPoints} 
-                    type='number' 
-                    name={'storyPoints'}
-                    onChange={handleFormChange}
-                  />
-                </Form.Field>
-                <Form.Field>
-                  <label>Board</label>
-                  <BoardDropdownContainer
-                    handleBoardSelect={handleBoardChange}
-                    selectedBoard={selectedBoard}
-                    name={'boardId'}
-                  />
-                </Form.Field>
-                <Form.Field>
-                  <label>User</label>
-                  <UserDropdownContainer
-                    onSelectUser={handleUserChange}
-                    selectedUser={selectedUser}
-                    name={'userId'}
-                  />
-                </Form.Field>
+                {
+                  (taskDetail && <CommentsContainer
+                    taskId={taskDetail.id}
+                  />)
+                }
               </Card.Content>
-            </Grid.Column>
-            <Grid.Column width={6}>
-              {(taskDetail && <CommentsContainer
-                taskId={taskDetail.id}
-              />)}
             </Grid.Column>
           </Grid.Row>
         </Grid>

@@ -18,7 +18,12 @@ const Task: React.FC<ITaskProps> = ({
   dispatch(setCurrentTask(match.params.id));
   
   return (
-    <div className={'task'}>
+    <div
+      className={'task'}
+      style={{
+        padding: '10px 40px'
+      }}
+    >
       <Grid padded>
         <Grid.Row stretched>
           <Grid.Column stretched>
