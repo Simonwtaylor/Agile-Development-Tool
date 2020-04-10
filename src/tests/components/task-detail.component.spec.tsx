@@ -2,7 +2,6 @@ import * as React from 'react';
 import { ITaskDetailProps, TaskDetailMode, TaskDetail } from '../../components/task-detail';
 import { ITask } from '../../lib/types';
 import { shallow } from 'enzyme';
-import { BoardDropdownContainer, UserDropdownContainer } from '../../components/dropdowns';
 
 describe('Task Detail - Component', () => {
   let props: ITaskDetailProps;
@@ -17,7 +16,15 @@ describe('Task Detail - Component', () => {
         completed: false,
         description: 'Task Description 1',
         storyPoints: 5,
-        title: 'Task 1'
+        title: 'Task 1',
+        user: {
+          displayName: 'Simon Taylor',
+          email: 'ExampleEmail@gmail.com',
+          id: 1,
+          photoURL: 'exampleurl',
+          uid: '123',
+        },
+        comments: [],
       },
     };
   });
@@ -36,6 +43,14 @@ describe('Task Detail - Component', () => {
     // TODO: Add test in for new icons
 
     // Title
+    expect(
+      wrap
+        .find('label')
+        .at(0)
+        .childAt(0)
+        .text()
+    ).toBe('Title');
+
     expect(
       wrap
         .find('input')
@@ -57,36 +72,6 @@ describe('Task Detail - Component', () => {
         .props()['name']
     ).toBe('title');
 
-    // Description
-    expect(
-      wrap
-        .find('label')
-        .at(0)
-        .childAt(0)
-        .text()
-    ).toBe('Description');
-
-    expect(
-      wrap
-        .find('input')
-        .at(1)
-        .props()['placeholder']
-    ).toBe('Description...');
-
-    expect(
-      wrap
-        .find('input')
-        .at(1)
-        .props()['value']
-    ).toBe(props.taskDetail!.description);
-
-    expect(
-      wrap
-        .find('input')
-        .at(1)
-        .props()['name']
-    ).toBe('description');
-
     // Story Points
     expect(
       wrap
@@ -99,54 +84,52 @@ describe('Task Detail - Component', () => {
     expect(
       wrap
         .find('input')
-        .at(2)
+        .at(1)
         .props()['placeholder']
     ).toBe('Story Points...');
 
     expect(
       wrap
         .find('input')
-        .at(2)
+        .at(1)
         .props()['value']
     ).toBe(props.taskDetail!.storyPoints);
 
     expect(
       wrap
         .find('input')
-        .at(2)
+        .at(1)
         .props()['name']
     ).toBe('storyPoints');
 
-    // Board
+    // Description
     expect(
       wrap
         .find('label')
         .at(2)
         .childAt(0)
         .text()
-    ).toBe('Board');
+    ).toBe('Description');
 
     expect(
       wrap
-        .find(BoardDropdownContainer)
+        .find('textarea')
+        .at(0)
+        .props()['placeholder']
+    ).toBe('Description...');
+
+    expect(
+      wrap
+        .find('textarea')
+        .at(0)
+        .props()['value']
+    ).toBe(props.taskDetail!.description);
+
+    expect(
+      wrap
+        .find('textarea')
         .at(0)
         .props()['name']
-    ).toBe('boardId');
-
-    // User
-    expect(
-      wrap
-        .find('label')
-        .at(3)
-        .childAt(0)
-        .text()
-    ).toBe('User');
-
-    expect(
-      wrap
-        .find(UserDropdownContainer)
-        .at(0)
-        .props()['name']
-    ).toBe('userId');
+    ).toBe('description');
   });
 });
