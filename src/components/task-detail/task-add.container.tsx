@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { TaskDetail } from './';
+import { TaskAdd } from './';
 import { ITask } from '../../lib/types';
 import { useMutation, useApolloClient } from '@apollo/react-hooks';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
@@ -37,10 +37,8 @@ const TaskAddContainer: React.FC<ITaskAddContainerProps> = ({
   };
 
   return (
-    <TaskDetail 
+    <TaskAdd 
       onTaskSave={handleTaskSave}
-      taskDetail={{}}
-      buttonText={'Add Task'}
     />
   );
 };

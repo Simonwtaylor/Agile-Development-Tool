@@ -6,13 +6,11 @@ import {
   BoardDropdownContainer,
   UserDropdownContainer,
 } from '../dropdowns';
-import { TaskDetailMode } from './task-detail.enum';
 import CommentsContainer from '../comments/comments.container';
 
 export interface ITaskDetailProps {
   taskDetail?: ITask;
   onTaskSave: (task: ITask) => void;
-  mode: TaskDetailMode;
   onTaskComplete?: (task: string) => void;
   onTaskDelete?: (id: number) => void;
 }
@@ -20,7 +18,6 @@ export interface ITaskDetailProps {
 const TaskDetail: React.FC<any> = ({
   taskDetail,
   onTaskSave,
-  mode,
   onTaskComplete,
   onTaskDelete,
 }) => {
@@ -157,97 +154,80 @@ const TaskDetail: React.FC<any> = ({
                     minHeight: '40px'
                   }}
                 >
-                  {
-                    (mode === TaskDetailMode.ADD && 
-                      <Form.Field>
-                        <label>Title</label>
-                        <input 
-                          placeholder='Title...'
-                          value={task.title}
-                          name={'title'}
-                          onChange={handleFormChange}
+                  <>
+                    <Popup
+                      content={'Save'}
+                      key={`taskcompleteicon`}
+                      trigger={
+                        <Icon
+                          color={'green'}
+                          name={'save'}
+                          size={'large'}
+                          style={{
+                            cursor: 'pointer',
+                            marginTop: '10px',
+                            marginLeft: '10px',
+                            float: 'left'
+                          }}
+                          onClick={handleSubmitClick}
                         />
-                      </Form.Field>
-                    )
-                  }
-                  {
-                    (mode === TaskDetailMode.EDIT &&
-                      <>
-                      <Popup
-                        content={'Save'}
-                        key={`taskcompleteicon`}
-                        trigger={
-                          <Icon
-                            color={'green'}
-                            name={'save'}
-                            size={'large'}
-                            style={{
-                              cursor: 'pointer',
-                              marginTop: '10px',
-                              marginLeft: '10px',
-                              float: 'left'
-                            }}
-                            onClick={handleSubmitClick}
-                          />
-                          }
+                      }
+                    />
+                    <Popup
+                      content={'Change Board'}
+                      key={`iconchangeboard`}
+                      trigger={
+                        <Icon
+                          color={'blue'}
+                          name={'columns'}
+                          size={'large'}
+                          style={{
+                            cursor: 'pointer',
+                            marginTop: '10px',
+                            marginLeft: '10px',
+                            float: 'right'
+                          }}
+                          onClick={() => setShowBoard(!showBoard)}
                         />
-                        <Popup
-                          content={'Change Board'}
-                          key={`iconchangeboard`}
-                          trigger={
-                            <Icon
-                              color={'blue'}
-                              name={'columns'}
-                              size={'large'}
-                              style={{
-                                cursor: 'pointer',
-                                marginTop: '10px',
-                                marginLeft: '10px',
-                                float: 'right'
-                              }}
-                              onClick={() => setShowBoard(!showBoard)}
-                            />
-                          }
+                      }
+                    />
+                    <Popup
+                      content={getCompletedText}
+                      key={`taskcompleteicon`}
+                      trigger={
+                        <Icon
+                          color={'green'}
+                          name={getIconFill(task.completed)}
+                          size={'large'}
+                          style={{
+                            cursor: 'pointer',
+                            marginTop: '10px',
+                            marginLeft: '10px',
+                            float: 'right'
+                          }}
+                          onClick={handleCompleteClick}
                         />
-                        <Popup
-                          content={getCompletedText}
-                          key={`taskcompleteicon`}
-                          trigger={
-                            <Icon
-                              color={'green'}
-                              name={getIconFill(task.completed)}
-                              size={'large'}
-                              style={{
-                                cursor: 'pointer',
-                                marginTop: '10px',
-                                marginLeft: '10px',
-                                float: 'right'
-                              }}
-                              onClick={handleCompleteClick}
-                            />
-                          }
+                      }
+                    />
+                    <Popup
+                      content={'Delete Task '}
+                      key={`taskdeleteicon`}
+                      trigger={
+                        <Icon
+                          color={'red'}
+                          name={'trash'}
+                          size={'large'}
+                          style={{
+                            cursor: 'pointer',
+                            marginTop: '10px',
+                            marginRight: '10px',
+                            float: 'right'
+                          }}
+                          onClick={handleDeleteClick}
                         />
-                        <Popup
-                          content={'Delete Task '}
-                          key={`taskdeleteicon`}
-                          trigger={
-                            <Icon
-                              color={'red'}
-                              name={'trash'}
-                              size={'large'}
-                              style={{
-                                cursor: 'pointer',
-                                marginTop: '10px',
-                                marginRight: '10px',
-                                float: 'right'
-                              }}
-                              onClick={handleDeleteClick}
-                            />
-                          }
-                        />
-                      </>
-                    )
-                  }
+                      }
+                    />
+                  </>
                 </Card.Header>
               </Card.Content>
             </Grid.Column>
@@ -305,7 +285,6 @@ const TaskDetail: React.FC<any> = ({
                     {getBoardInput()}
                   </Grid.Row>
                 </Grid>
-                  
                 <Form.Field>
                   <label>Description</label>
                   <textarea
@@ -317,7 +296,7 @@ const TaskDetail: React.FC<any> = ({
                   />
                 </Form.Field>
                 {
-                  (taskDetail && <CommentsContainer
+                  (taskDetail.comments && <CommentsContainer
                     taskId={taskDetail.id}
                   />)
                 }
