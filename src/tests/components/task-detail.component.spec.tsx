@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ITaskDetailProps, TaskDetailMode, TaskDetail } from '../../components/task-detail';
+import { ITaskDetailProps, TaskDetail } from '../../components/task-detail';
 import { ITask } from '../../lib/types';
 import { shallow } from 'enzyme';
 
@@ -8,7 +8,6 @@ describe('Task Detail - Component', () => {
 
   beforeEach(() => {
     props = {
-      mode: TaskDetailMode.EDIT,
       onTaskComplete: (task: string) => console.log(task),
       onTaskSave: (task: ITask) => console.log(task),
       taskDetail: {
