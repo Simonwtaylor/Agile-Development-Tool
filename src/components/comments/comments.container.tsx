@@ -23,8 +23,6 @@ const CommentsContainer: React.FC<ICommentsContainerProps> = ({
 
     const user: any = useSelector(selectCurrentUser);
 
-    console.log(user);
-
     const handleAddComment = (content: string) => {
       addCommentMutation({
         variables: {
