@@ -71,7 +71,6 @@ const BoardColumn: React.FC<IBoardColumnProps> = ({
                 cursor: 'pointer',
                 marginTop: '5px'
               }}
-              onClick={() => console.log('settings')}
             />
           }
         />
