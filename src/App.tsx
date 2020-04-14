@@ -11,6 +11,7 @@ import {
   Backlog,
   Task,
   Sprint,
+  AddSprintPage,
 } from './pages/';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -88,8 +89,13 @@ class App extends React.Component<IAppProps, IAppState> {
               component={Task}
             />
             <Route
+              path='/sprint/add'
+              component={AddSprintPage}
+            />
+            <Route
               path='/sprint'
               component={Sprint}
+              
             />
             {
               (!currentUser)

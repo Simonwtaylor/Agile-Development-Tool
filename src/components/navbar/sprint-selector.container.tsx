@@ -7,8 +7,9 @@ import { setCurrentSprint } from '../../redux/sprint/sprint.action';
 import { ISprint } from '../../lib/types';
 import { Popup, Icon } from 'semantic-ui-react';
 import { EndSprintContainer } from '../sprints/';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 
-export interface ISprintSelectorContainerProps {
+export interface ISprintSelectorContainerProps extends RouteComponentProps<any> {
   currentSprint?: ISprint;
   addNewSprint: boolean;
 }
@@ -16,6 +17,7 @@ export interface ISprintSelectorContainerProps {
 const SprintSelectorContainer: React.FC<ISprintSelectorContainerProps> = ({
   currentSprint,
   addNewSprint,
+  history,
 }) => {
   const dispatch = useDispatch();
   const client = useApolloClient();
@@ -29,7 +31,7 @@ const SprintSelectorContainer: React.FC<ISprintSelectorContainerProps> = ({
   };
 
   const handleAddNewSprintClick = () => {
-    console.log('asdasd');
+    history.push('/sprint/add');
   }
 
   const getSprintToggleButton = () => {
@@ -95,5 +97,5 @@ const SprintSelectorContainer: React.FC<ISprintSelectorContainerProps> = ({
     </div>
   );
 }
- 
-export default SprintSelectorContainer;
+
+export default withRouter(SprintSelectorContainer);

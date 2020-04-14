@@ -12,3 +12,5 @@ export * from './User';
 export { default as User } from './User';
 export * from './Sprint';
 export { default as Sprint } from './Sprint';
+export * from './AddSprint';
+export { default as AddSprintPage } from './AddSprint';
