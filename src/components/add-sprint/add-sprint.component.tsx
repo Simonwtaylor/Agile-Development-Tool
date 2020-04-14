@@ -21,10 +21,13 @@ const AddSprint: React.FC<IAddSprintProps> = ({
   const [focusedDate, setfocusedDate] = React.useState<'startDate'|'endDate'|null>(null);
   const [endDate, setEndDate] = React.useState<moment.Moment|null>(null);
   const [name, setName] = React.useState('');
+  const [prefix, setPrefix] = React.useState('');
+
   const handleSubmit = () => {
     if (startDate && endDate) {
       onAddSprint({
         name,
+        prefix,
         startDate: startDate.toDate(),
         endDate: endDate.toDate(),
       });
@@ -67,6 +70,15 @@ const AddSprint: React.FC<IAddSprintProps> = ({
           }
         }}
 
+      />
+      <Input
+        placeholder={'Prefix'}
+        style={{
+          paddingLeft: '5px',
+          paddingRight: '5px'
+        }}
+        value={prefix}
+        onChange={(e) => setPrefix(e.target.value)}
       />
       <Button
         style={{
